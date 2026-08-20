@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CBSE Admin Dashboard - HANU</title>
+    
+    <!-- External styles -->
+    <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/home.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+    <style>
+        .dashboard-container {
+            margin: 40px auto;
+            max-width: 1200px;
+            padding: 20px;
+            background: #ffffff;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-radius: 8px;
+        }
+        .header-title {
+            border-bottom: 2px solid #eaeaea;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+        .table th {
+            background-color: #f7f7f7;
+            color: #333;
+        }
+        .role-badge {
+            font-size: 0.85em;
+            padding: 3px 8px;
+            background-color: #eef2f7;
+            border-radius: 4px;
+            color: #495057;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Main Wrapper -->
+    <div id="wrapper">
+        
+        <!-- Header -->
+        <header class="header header-normal">
+            <div class="topbar clearfix">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 text-left">
+                            <p><strong><i class="fa fa-university"></i></strong> CBSE Affiliated School ERP Portal</p>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <a th:href="@{/home}" class="btn btn-sm btn-outline-secondary">Go to Home</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Banner section -->
+        <section class="section db p120" style="background: #2a3547; color: white; padding: 40px 0;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <h2>CBSE School Administration</h2>
+                        <p class="lead">Manage classroom structures, assign roles, and configure class timetables</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dashboard Content -->
+        <div class="container">
+            <div class="dashboard-container">
+                
+                <div class="header-title">
+                    <h3>Classroom & Roles Matrix</h3>
+                    <p class="text-muted">Allocate Class Teachers, Captains, and view scheduling information.</p>
+                </div>
+
+                <!-- Success messages -->
+                <div th:if="${param.assignSuccess}" class="alert alert-success">
+                    Roles assigned successfully!
+                </div>
+
+                <!-- Table listing classrooms -->
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped align-middle">
+                        <thead>
+                            <tr>
+                                <th>Class & Section</th>
+                                <th>Class Teacher</th>
+                                <th>Class Captain</th>
+                                <th>Sports Captain</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="cs : ${classSections}">
+                                <td class="font-weight-bold" th:text="${cs.getDisplayName()}">Class 10 - A</td>
+                                <td>
+                                    <span th:if="${cs.classTeacher != null}" th:text="${cs.classTeacher.name}" class="role-badge">Teacher Name</span>
+                                    <span th:if="${cs.classTeacher == null}" class="text-muted small">Not Assigned</span>
+                                </td>
+                                <td>
+                                    <span th:if="${cs.classCaptain != null}" th:text="${cs.classCaptain.name}" class="role-badge">Captain Name</span>
+                                    <span th:if="${cs.classCaptain == null}" class="text-muted small">Not Assigned</span>
+                                </td>
+                                <td>
+                                    <span th:if="${cs.sportsCaptain != null}" th:text="${cs.sportsCaptain.name}" class="role-badge">Sports Captain</span>
+                                    <span th:if="${cs.sportsCaptain == null}" class="text-muted small">Not Assigned</span>
+                                </td>
+                                <td>
+                                    <!-- Edit Roles Button triggers inline configuration -->
+                                    <button class="btn btn-sm btn-primary" data-toggle="collapse" th:data-target="'#assignForm-' + ${cs.id}">
+                                        <i class="fa fa-edit"></i> Edit Roles
+                                    </button>
+                                    
+                                    <!-- Manage Timetable Link -->
+                                    <a th:href="@{/cbse/timetable/{id}(id=${cs.id})}" class="btn btn-sm btn-info text-white">
+                                        <i class="fa fa-calendar"></i> Timetable
+                                    </a>
+                                </td>
+                            </tr>
+                            <!-- Collapsible assign forms for each class section -->
+                            <tr th:each="cs : ${classSections}" th:id="'assignForm-' + ${cs.id}" class="collapse bg-light">
+                                <td colspan="5">
+                                    <form th:action="@{/cbse/assign}" method="post" class="row p-3">
+                                        <input type="hidden" name="classSectionId" th:value="${cs.id}">
+                                        
+                                        <div class="col-md-3">
+                                            <label class="small font-weight-bold">Class Teacher</label>
+                                            <select name="teacherUsername" class="form-control form-control-sm">
+                                                <option value="">-- Select Teacher --</option>
+                                                <option th:each="t : ${teachers}" th:value="${t.username}" th:text="${t.name}"
+                                                        th:selected="${cs.classTeacher != null && cs.classTeacher.username == t.username}">Teacher</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <label class="small font-weight-bold">Class Captain</label>
+                                            <select name="captainUsername" class="form-control form-control-sm">
+                                                <option value="">-- Select Student --</option>
+                                                <option th:each="s : ${students}" th:value="${s.username}" th:text="${s.name}"
+                                                        th:selected="${cs.classCaptain != null && cs.classCaptain.username == s.username}">Student</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <label class="small font-weight-bold">Sports Captain</label>
+                                            <select name="sportsCaptainUsername" class="form-control form-control-sm">
+                                                <option value="">-- Select Student --</option>
+                                                <option th:each="s : ${students}" th:value="${s.username}" th:text="${s.name}"
+                                                        th:selected="${cs.sportsCaptain != null && cs.sportsCaptain.username == s.username}">Student</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-3 align-self-end">
+                                            <button type="submit" class="btn btn-sm btn-success w-100">Save Assignments</button>
+                                        </div>
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Bootstrap dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+    <script th:src="@{/vendor/jquery/jquery-3.2.1.min.js}"></script>
+    <script th:src="@{/vendor/bootstrap/js/bootstrap.min.js}"></script>
+</body>
+</html>

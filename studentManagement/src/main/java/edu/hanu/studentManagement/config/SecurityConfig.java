@@ -47,6 +47,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/api/**").hasAuthority("USER")
 			.antMatchers("/home").hasAuthority("TEACHER")
 			.antMatchers("/student/home").hasAnyAuthority("USER", "TEACHER")
+			.antMatchers("/cbse/dashboard", "/cbse/assign", "/cbse/timetable/add", "/cbse/timetable/delete/**", "/cbse/calendar/add", "/cbse/calendar/delete/**").hasAuthority("TEACHER")
+			.antMatchers("/cbse/timetable/**", "/cbse/calendar").hasAnyAuthority("USER", "TEACHER")
 			/////
 			.anyRequest().authenticated()
 			.and()
