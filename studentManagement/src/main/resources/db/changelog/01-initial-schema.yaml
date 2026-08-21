@@ -1,0 +1,415 @@
+databaseChangeLog:
+  - changeSet:
+      id: 01-create-users-table
+      author: academia
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: users
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: username
+                  type: varchar(20)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_type
+                  type: varchar(31)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: password
+                  type: varchar(255)
+              - column:
+                  name: enabled
+                  type: boolean
+                  defaultValueBoolean: true
+                  constraints:
+                    nullable: false
+              - column:
+                  name: email
+                  type: varchar(100)
+              - column:
+                  name: description
+                  type: clob
+              - column:
+                  name: student_name
+                  type: varchar(50)
+              - column:
+                  name: gender
+                  type: varchar(30)
+              - column:
+                  name: dateOfBirth
+                  type: varchar(50)
+              - column:
+                  name: major
+                  type: varchar(50)
+              - column:
+                  name: department
+                  type: varchar(50)
+              - column:
+                  name: cohort
+                  type: varchar(50)
+              - column:
+                  name: academicAdvior
+                  type: varchar(50)
+              - column:
+                  name: teacher_name
+                  type: varchar(50)
+              - column:
+                  name: employeeId
+                  type: varchar(30)
+              - column:
+                  name: designation
+                  type: varchar(50)
+              - column:
+                  name: specialization
+                  type: varchar(50)
+
+  - changeSet:
+      id: 01-create-authorities-table
+      author: academia
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: authorities
+      changes:
+        - createTable:
+            tableName: authorities
+            columns:
+              - column:
+                  name: users_username
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_authorities_users
+                    references: users(username)
+              - column:
+                  name: authorities
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: 01-create-course-table
+      author: academia
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: course
+      changes:
+        - createTable:
+            tableName: course
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: code
+                  type: varchar(50)
+              - column:
+                  name: name
+                  type: varchar(255)
+              - column:
+                  name: credit
+                  type: int
+              - column:
+                  name: description
+                  type: varchar(255)
+              - column:
+                  name: reference
+                  type: varchar(255)
+
+  - changeSet:
+      id: 01-create-user-course-table
+      author: academia
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: user_course
+      changes:
+        - createTable:
+            tableName: user_course
+            columns:
+              - column:
+                  name: username
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_user_course_users
+                    references: users(username)
+              - column:
+                  name: course_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_user_course_course
+                    references: course(id)
+
+  - changeSet:
+      id: 01-create-files-table
+      author: academia
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: files
+      changes:
+        - createTable:
+            tableName: files
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: fileName
+                  type: varchar(255)
+              - column:
+                  name: fileType
+                  type: varchar(100)
+              - column:
+                  name: url
+                  type: varchar(255)
+              - column:
+                  name: data
+                  type: binary large object
+              - column:
+                  name: username
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_files_users
+                    references: users(username)
+
+  - changeSet:
+      id: 01-create-password-reset-token-table
+      author: academia
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: password_reset_token
+      changes:
+        - createTable:
+            tableName: password_reset_token
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: token
+                  type: varchar(255)
+              - column:
+                  name: expiryDate
+                  type: timestamp
+              - column:
+                  name: user_id
+                  type: varchar(20)
+                  constraints:
+                    foreignKeyName: fk_password_reset_token_users
+                    references: users(username)
+
+  - changeSet:
+      id: 01-create-academic-tables
+      author: academia
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: school_classes
+      changes:
+        - createTable:
+            tableName: school_classes
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: className
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+                    unique: true
+
+        - createTable:
+            tableName: sections
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: sectionName
+                  type: varchar(10)
+                  constraints:
+                    nullable: false
+                    unique: true
+
+        - createTable:
+            tableName: subjects
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: code
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
+                    unique: true
+
+        - createTable:
+            tableName: class_sections
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: class_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_class_sections_class
+                    references: school_classes(id)
+              - column:
+                  name: section_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_class_sections_section
+                    references: sections(id)
+              - column:
+                  name: class_teacher_username
+                  type: varchar(20)
+                  constraints:
+                    foreignKeyName: fk_class_sections_teacher
+                    references: users(username)
+              - column:
+                  name: class_captain_username
+                  type: varchar(20)
+                  constraints:
+                    foreignKeyName: fk_class_sections_captain
+                    references: users(username)
+              - column:
+                  name: sports_captain_username
+                  type: varchar(20)
+                  constraints:
+                    foreignKeyName: fk_class_sections_sports_captain
+                    references: users(username)
+
+        - createTable:
+            tableName: school_calendar_events
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: eventDate
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: title
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(255)
+              - column:
+                  name: type
+                  type: varchar(30)
+                  constraints:
+                    nullable: false
+
+        - createTable:
+            tableName: timetable_slots
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: class_section_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_timetable_slots_class_section
+                    references: class_sections(id)
+              - column:
+                  name: subject_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_timetable_slots_subject
+                    references: subjects(id)
+              - column:
+                  name: teacher_username
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_timetable_slots_teacher
+                    references: users(username)
+              - column:
+                  name: dayOfWeek
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: periodNumber
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: startTime
+                  type: varchar(10)
+              - column:
+                  name: endTime
+                  type: varchar(10)

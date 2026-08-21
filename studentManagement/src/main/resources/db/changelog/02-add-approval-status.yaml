@@ -1,0 +1,23 @@
+databaseChangeLog:
+  - changeSet:
+      id: 02-add-approval-columns-to-users
+      author: academia
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - columnExists:
+                tableName: users
+                columnName: approval_status
+      changes:
+        - addColumn:
+            tableName: users
+            columns:
+              - column:
+                  name: approval_status
+                  type: varchar(20)
+                  defaultValue: "APPROVED"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: registration_date
+                  type: timestamp

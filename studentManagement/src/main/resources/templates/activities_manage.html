@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Activities - Academia</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="bg-[#0f172a] text-[#f8fafc] min-h-screen font-sans">
+
+    <!-- Header Navbar -->
+    <header class="bg-[#1e293b] border-b border-slate-700 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-3">
+                    <span class="font-bold text-lg tracking-wider text-rose-400">ACADEMIA</span>
+                    <span class="ml-2 px-2 py-0.5 bg-rose-950 text-rose-300 border border-rose-800 rounded text-[10px] font-bold uppercase tracking-wider">Activity Coordinator</span>
+                </div>
+
+                <nav class="hidden md:flex items-center gap-1">
+                    <a th:href="@{/home}" class="px-3.5 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition">Home</a>
+                    <a th:href="@{/activities}" class="px-3.5 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition">Catalog</a>
+                    <a th:href="@{/activities/manage}" class="px-3.5 py-2 text-sm font-semibold text-rose-400 bg-slate-800/80 rounded-lg">Manage</a>
+                </nav>
+
+                <a th:href="@{/logout}" class="px-3.5 py-1.5 text-xs font-semibold bg-rose-950/60 hover:bg-rose-900/80 border border-rose-800 text-rose-300 rounded-lg transition">
+                    Sign Out
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+        
+        <div class="flex justify-between items-center">
+            <div>
+                <h1 class="text-2xl font-extrabold text-white">Extra-Curricular Program Coordinator</h1>
+                <p class="text-xs text-slate-400 mt-1">Schedule new institutional events, assign faculty leads, and configure registration timelines.</p>
+            </div>
+            <a th:href="@{/activities}" class="text-xs font-semibold text-slate-400 hover:text-white transition">
+                &larr; View Catalog
+            </a>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <!-- Left: Create Activity Form -->
+            <div class="bg-[#1e293b] border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
+                <h2 class="text-base font-bold text-white flex items-center gap-2">
+                    <svg class="w-5 h-5 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                    New Campus Activity
+                </h2>
+
+                <form th:action="@{/activities/create}" method="post" class="space-y-3.5 text-xs">
+                    <div>
+                        <label class="block font-semibold text-slate-300 mb-1">Activity Name</label>
+                        <input type="text" name="name" placeholder="e.g. Annual Sports Meet, Farewell Gala, Pom Dance" required 
+                               class="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-xl text-white font-semibold">
+                    </div>
+
+                    <div>
+                        <label class="block font-semibold text-slate-300 mb-1">Category</label>
+                        <select name="category" required class="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-xl text-white font-semibold">
+                            <option th:each="cat : ${categories}" th:value="${cat}" th:text="${cat}">SPORTS</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block font-semibold text-slate-300 mb-1">Event Date</label>
+                        <input type="date" name="eventDate" required 
+                               class="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-xl text-white">
+                    </div>
+
+                    <div>
+                        <label class="block font-semibold text-slate-300 mb-1">Registration Deadline (Optional)</label>
+                        <input type="date" name="registrationDeadline" 
+                               class="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-xl text-white">
+                    </div>
+
+                    <div>
+                        <label class="block font-semibold text-slate-300 mb-1">Venue / Ground</label>
+                        <input type="text" name="venue" placeholder="e.g. Sports Stadium, Main Auditorium" required 
+                               class="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-xl text-white">
+                    </div>
+
+                    <div>
+                        <label class="block font-semibold text-slate-300 mb-1">Faculty Coordinator</label>
+                        <select name="coordinatorUsername" class="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-xl text-white font-semibold">
+                            <option value="">-- Select Faculty Lead --</option>
+                            <option th:each="t : ${teachers}" th:value="${t.username}" th:text="${t.name != null ? t.name : t.username}">Prof</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block font-semibold text-slate-300 mb-1">Description & Guidelines</label>
+                        <textarea name="description" rows="3" placeholder="Rules, house team divisions, competition criteria..." 
+                                  class="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-xl text-white"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full py-2.5 bg-rose-600 hover:bg-rose-500 text-white font-bold rounded-xl transition shadow-lg shadow-rose-500/20">
+                        Publish Campus Activity
+                    </button>
+                </form>
+            </div>
+
+            <!-- Right 2 Cols: Activity List with Status Changers -->
+            <div class="lg:col-span-2 space-y-4">
+                <div th:each="act : ${activities}" class="bg-[#1e293b] border border-slate-800 rounded-2xl p-5 shadow-xl space-y-3">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <span class="px-2 py-0.5 bg-slate-800 text-slate-300 border border-slate-700 rounded text-[10px] font-bold uppercase" th:text="${act.category}">SPORTS</span>
+                                <h3 class="text-base font-bold text-white" th:text="${act.name}">Sports Meet</h3>
+                            </div>
+                            <p class="text-xs text-slate-400 mt-1">
+                                Date: <span class="text-white font-semibold" th:text="${act.eventDate}">2026-10-15</span> &bull; Venue: <span class="text-white font-semibold" th:text="${act.venue}">Stadium</span>
+                            </p>
+                        </div>
+
+                        <a th:href="@{/activities/{id}(id=${act.id})}" class="px-3 py-1 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-rose-400 rounded-lg text-xs font-bold transition">
+                            View & Record &rarr;
+                        </a>
+                    </div>
+
+                    <!-- Status Update Bar -->
+                    <div class="pt-3 border-t border-slate-800 flex items-center justify-between text-xs">
+                        <span class="text-slate-400">Current Status: <strong class="text-white" th:text="${act.status}">PLANNING</strong></span>
+
+                        <form th:action="@{/activities/{id}/status(id=${act.id})}" method="post" class="flex items-center gap-2">
+                            <select name="status" class="px-2 py-1 bg-slate-900 border border-slate-700 rounded-lg text-xs text-white">
+                                <option value="PLANNING" th:selected="${act.status.name() == 'PLANNING'}">PLANNING</option>
+                                <option value="REGISTRATION_OPEN" th:selected="${act.status.name() == 'REGISTRATION_OPEN'}">REGISTRATION_OPEN</option>
+                                <option value="IN_PROGRESS" th:selected="${act.status.name() == 'IN_PROGRESS'}">IN_PROGRESS</option>
+                                <option value="COMPLETED" th:selected="${act.status.name() == 'COMPLETED'}">COMPLETED</option>
+                                <option value="CANCELLED" th:selected="${act.status.name() == 'CANCELLED'}">CANCELLED</option>
+                            </select>
+                            <button type="submit" class="px-2.5 py-1 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg font-bold text-xs">
+                                Update
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+</body>
+</html>

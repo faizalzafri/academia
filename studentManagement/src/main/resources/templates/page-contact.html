@@ -1,426 +1,145 @@
 <!doctype html>
-<!--[if IE 9]> <html class="no-js ie9 fixed-layout" lang="en"> <![endif]-->
-<!--[if gt IE 9]><!-->
-<html class="no-js " lang="en" xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
-<!--<![endif]-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-<script src="https://kit.fontawesome.com/a076d05399.js"></script>
-<!-- Basic -->
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-<!-- Mobile Meta -->
-<meta name="viewport"
-	content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-<!-- Site Meta -->
-<title>HANU</title>
-<meta name="keywords" content="">
-<meta name="description" content="">
-<meta name="author" content="">
-
-<!-- Site Icons -->
-<link rel="shortcut icon" href="images/Hanu_logo.jpg"
-	type="image/x-icon" />
-<link rel="apple-touch-icon" href="images/Hanu_logo.jpg">
-
-<!-- Google Fonts -->
-<link
-	href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700,900"
-	rel="stylesheet">
-<link
-	href="https://fonts.googleapis.com/css?family=Droid+Serif:400,400i,700,700i"
-	rel="stylesheet">
-
-<!-- Custom & Default Styles -->
-<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="css/carousel.css">
-<link rel="stylesheet" href="css/animate.css">
-<link rel="stylesheet" href="css/home.css">
-
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Academia</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Font Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
 </head>
-<body>
+<body class="bg-[#0f172a] text-[#f8fafc] min-h-screen font-sans">
 
-	<!-- LOADER -->
-	<!-- <div id="preloader">
-        <img class="preloader" src="images/loader.gif" alt="">
-    </div>end loader -->
-	<!-- END LOADER -->
+    <!-- Header Navbar -->
+    <header class="bg-[#1e293b] border-b border-slate-700 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-3">
+                    <svg class="w-6 h-6 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                    </svg>
+                    <span class="font-bold text-lg tracking-wider text-teal-400">ACADEMIA ACADEMY</span>
+                </div>
+                <div class="flex gap-4">
+                    <a th:href="${#authorization.expression('hasAuthority(''TEACHER'')') ? '/home' : '/student/home'}" 
+                       class="px-4 py-2 text-sm font-medium bg-slate-800 hover:bg-slate-700 border border-slate-600 rounded-lg transition flex items-center gap-2">
+                        <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                        Back to Home
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
 
-	<div id="wrapper">
-		<!-- BEGIN # MODAL LOGIN -->
-		<div class="modal fade" id="login-modal" tabindex="-1" role="dialog"
-			aria-hidden="true" style="display: none;">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<!-- Begin # DIV Form -->
-					<div id="div-forms">
-						<form id="login-form">
-							<button type="button" class="close" data-dismiss="modal"
-								aria-label="Close">
-								<span class="flaticon-add" aria-hidden="true"></span>
-							</button>
-							<div class="modal-body">
-								<input class="form-control" type="text"
-									placeholder="What you are looking for?" required>
-							</div>
-						</form>
-						<!-- End # Login Form -->
-					</div>
-					<!-- End # DIV Form -->
-				</div>
-			</div>
-		</div>
-		<!-- END # MODAL LOGIN -->
+    <!-- Main Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- Page Title -->
+        <div class="mb-8">
+            <h1 class="text-3xl font-extrabold text-white tracking-tight">Contact Administration</h1>
+            <p class="mt-2 text-slate-400">Reach out to school coordinators, support desk, and regional representatives</p>
+        </div>
 
-		<header class="header header-normal" th:fragment="header">
-			<div class="topbar clearfix">
-				<div class="container">
-					<div class="row-fluid">
-						<div class="col-md-6 col-sm-6 text-left">
-							<p>
-								<strong><i class="fa fa-phone"></i></strong> +90 543 123 45 67
-								&nbsp;&nbsp; <strong><i class="fa fa-envelope"></i></strong> <a
-									href="mailto:#">info@yoursite.com</a>
-							</p>
-							<a href="#" th:href="@{/chat}"><i
-								class="far fa-comments icon">Chat room</i></a>
-						</div>
-						<div class="col-md-6 col-sm-6 hidden-xs text-right">
-							<div class="social">
-								<a class="facebook" href="#" data-tooltip="tooltip"
-									data-placement="bottom" title="Facebook"><i
-									class="fa fa-facebook"></i></a> <a class="twitter" href="#"
-									data-tooltip="tooltip" data-placement="bottom" title="Twitter"><i
-									class="fa fa-twitter"></i></a> <a class="google" href="#"
-									data-tooltip="tooltip" data-placement="bottom"
-									title="Google Plus"><i class="fa fa-google-plus"></i></a> <a
-									class="linkedin" href="#" data-tooltip="tooltip"
-									data-placement="bottom" title="Linkedin"><i
-									class="fa fa-linkedin"></i></a> <a class="pinterest" href="#"
-									data-tooltip="tooltip" data-placement="bottom"
-									title="Pinterest"><i class="fa fa-pinterest"></i> </a>
-							</div>
-							<!-- <a href = "#"><i class="fas fa-user-graduate icon">1701040163</i></a> -->
-							<li class="dropdown yamm-fw  profile"><a href="#"><i
-									class="fas fa-user-graduate icon">1701040163</i></a>
-								<ul class="dropdown-menu menu">
-									<li>
-										<h5>Vu Van Tung</h5>
-										<ul class="com">
-											<li><a th:href="@{/user/account}">Profile</a></li>
-											<li><a th:href="@{/forgotPassword}">Change password</a></li>
-											<li><a th:href="@{/logout}">Logout</a></li>
-										</ul>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <!-- Left: Contact Information Cards -->
+            <div class="space-y-6">
+                
+                <!-- Contact info cards -->
+                <div class="bg-[#1e293b] border border-slate-800 p-6 rounded-2xl shadow-xl flex items-center gap-4">
+                    <span class="text-teal-400 bg-teal-950/50 p-4 rounded-xl text-2xl flex items-center justify-center">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                    </span>
+                    <div>
+                        <h4 class="font-bold text-white text-sm">Call Support</h4>
+                        <p class="text-xs text-slate-400 mt-1">Direct: +90 987 665 55 44</p>
+                        <p class="text-xs text-slate-400">Fax Desk: +90 987 665 55 45</p>
+                    </div>
+                </div>
 
-									</li>
-								</ul></li> </a>
-						</div>
-					</div>
-				</div>
-			</div>
-	</div>
-	</div>
-	<!-- end topbar -->
+                <div class="bg-[#1e293b] border border-slate-800 p-6 rounded-2xl shadow-xl flex items-center gap-4">
+                    <span class="text-teal-400 bg-teal-950/50 p-4 rounded-xl text-2xl flex items-center justify-center">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L22 8m-9 11h-3a2 2 0 01-2-2V8.67l-3.33-2.22A2 2 0 002 8.11v8.88a2 2 0 002 2h16a2 2 0 002-2V8.11a2 2 0 00-1-1.67l-3.33 2.22V17a2 2 0 01-2 2z"></path></svg>
+                    </span>
+                    <div>
+                        <h4 class="font-bold text-white text-sm">Mail Support</h4>
+                        <p class="text-xs text-slate-400 mt-1"><a href="mailto:info@yoursite.com" class="text-teal-400 hover:text-teal-300 font-semibold transition">info@yoursite.com</a></p>
+                    </div>
+                </div>
 
-	<nav class="navbar navbar-expand-xl navbar-light bg-light">
-		<a class="navbar-brand" href="#"><img
-			src="../images/Hanu_logo.jpg" alt="" width="60" height="60"></a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse"
-			data-target="#navbarTogglerDemo02"
-			aria-controls="navbarTogglerDemo02" aria-expanded="false"
-			aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
+                <div class="bg-[#1e293b] border border-slate-800 p-6 rounded-2xl shadow-xl flex items-center gap-4">
+                    <span class="text-teal-400 bg-teal-950/50 p-4 rounded-xl text-2xl flex items-center justify-center">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    </span>
+                    <div>
+                        <h4 class="font-bold text-white text-sm">Campus Address</h4>
+                        <p class="text-xs text-slate-400 mt-1">Academia Platform Headquarters, Innovation Campus</p>
+                    </div>
+                </div>
 
-		<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-				<li class="nav-item active"><a href="#" class="nav-link"
-					th:href="@{/home}">Home <span class="sr-only">(current)</span>
-				</a></li>
-				<li class="nav-item"><a href="#" class="nav-link"
-					th:href="@{/news}">New</a></li>
-				<li class="nav-item"><a href="#" class="nav-link"
-					th:href="@{/contact}">Contact</a></li>
-				<li class="dropdown yamm-fw yamm-half"><a href="#"
-					data-toggle="dropdown" class="dropdown-toggle active">Mega Menu
-						<b class="fa fa-angle-down"></b>
-				</a>
-					<ul class="dropdown-menu">
-						<li>
-							<div class="yamm-content clearfix">
-								<div class="row-fluid">
-									<div class="col-md-6 col-sm-6">
-										<h4>Course Pages</h4>
-										<ul>
-											<li><a href="#">Courses Name 01</a></li>
-											<li><a href="#">Courses Name 02</a></li>
-											<li><a href="#">Courses Name 03</a></li>
-											<li><a href="#">Courses Name 04</a></li>
-											<li><a href="#">Courses Name 05</a></li>
-											<li><a href="#">Courses Name 06</a></li>
-											<li><a href="#">Courses Name 07</a></li>
-											<li><a href="#">Courses Name 08</a></li>
-											<li><a href="#">Courses Name 09</a></li>
-										</ul>
-									</div>
-									<div class="col-md-6 col-sm-6">
-										<div class="menu-widget text-center">
-											<div class="image-wrap entry">
-												<img src="upload/course_01.jpg" alt=""
-													class="img-responsive">
-												<div class="magnifier">
-													<a href="#" title=""><i class="flaticon-add"></i></a>
-												</div>
-											</div>
-											<!-- end image-wrap -->
-											<h5>
-												<a href="#">Learning Bootstrap Framework</a>
-											</h5>
-											<small>$22.00</small> <a href="#" class="menu-button">View
-												Course</a>
-										</div>
-										<!-- end widget -->
-									</div>
-								</div>
-							</div>
-						</li>
-					</ul></li>
-			</ul>
-			<form class="form-inline my-2 my-lg-0">
-				<input class="form-control mr-sm-2" type="search"
-					placeholder="Search">
-				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-			</form>
-		</div>
-	</nav>
-	</header>
-	<section class="section db p120">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="tagline-message page-title text-center">
-						<h3>Get In Touch</h3>
-						<ul class="breadcrumb">
-							<li><a href="javascript:void(0)">HANU</a></li>
-							<i i class="fas fa-id-card-alt" id="icon-book"></i>
-							<p>Contact</p>
-						</ul>
-					</div>
-				</div>
-				<!-- end col -->
-			</div>
-			<!-- end row -->
-		</div>
-		<!-- end container -->
-	</section>
-	<!-- end section -->
+            </div>
 
+            <!-- Right: Contact Form -->
+            <div class="lg:col-span-2 bg-[#1e293b] border border-slate-800 p-6 rounded-2xl shadow-2xl">
+                <h2 class="text-xl font-bold text-white mb-6 border-b border-slate-700 pb-3 flex items-center gap-2">
+                    <svg class="w-5 h-5 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-2m-4-1v8m0 0l3-3m-3 3L9 8m-5 5h2.586a1 1 0 01.707.293l2.414 2.414a1 1 0 00.707.293h3.172a1 1 0 00.707-.293l2.414-2.414a1 1 0 01.707-.293H20"></path></svg>
+                    Send us a message
+                </h2>
 
-	<section class="section gb nopadtop">
-		<div class="container">
-			<div class="boxed boxedp4">
+                <form class="space-y-4" onsubmit="event.preventDefault(); alert('Message sent successfully!');">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Your Name</label>
+                            <input type="text" class="w-full bg-[#0f172a] border border-slate-700 focus:border-teal-500 text-white px-4 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-teal-500 transition" placeholder="John Doe" required>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Email Address</label>
+                            <input type="email" class="w-full bg-[#0f172a] border border-slate-700 focus:border-teal-500 text-white px-4 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-teal-500 transition" placeholder="john@example.com" required>
+                        </div>
+                    </div>
 
-				<div id="map" class="wow slideInUp"></div>
-				<div class="col-md-2">
-					<div class="small-box">
-						<iframe width="1000" height="650"
-							src="https://www.youtube.com/embed/DhtUSmBp1Zg" frameborder="1"
-							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-							allowfullscreen></iframe>
-					</div>
-					<!-- end small-box -->
-				</div>
-				<br>
-				<!-- end col -->
-				<div class="col-md-2">
-					<div class="small-box">
-						<iframe width="1000" height="850" frameborder="1"
-							style="border: 0"
-							src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJ0-nia6WtNTEROA-3Y7vDtkY&key=AIzaSyCVfVL83gNL0Cpc8eu3OZoct4gu6NrUtkM"
-							allowfullscreen></iframe>
-					</div>
-					<!-- end small-box -->
-				</div>
-				<!-- end col -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Phone Number</label>
+                            <input type="text" class="w-full bg-[#0f172a] border border-slate-700 focus:border-teal-500 text-white px-4 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-teal-500 transition" placeholder="+84...">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Subject</label>
+                            <input type="text" class="w-full bg-[#0f172a] border border-slate-700 focus:border-teal-500 text-white px-4 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-teal-500 transition" placeholder="e.g. Admission Inquiry" required>
+                        </div>
+                    </div>
 
-				<div class="row contactv2 text-center">
-					<div class="col-md-6">
-						<div class="small-box">
-							<i class="flaticon-email wow fadeIn"></i>
-							<h4>Contact us today</h4>
-							<small>Phone: +90 987 665 55 44</small> <small>Fax: +90
-								987 665 55 45</small>
-							<p>
-								<a href="mail:to">info@yoursite.com</a>
-							</p>
-						</div>
-						<!-- end small-box -->
-					</div>
-					<!-- end col -->
-					<div class="col-md-6">
-						<div class="small-box">
-							<i class="flaticon-share wow fadeIn"></i>
-							<h4>Be Social</h4>
-							<small>Twitter: @yourhandle</small> <small>Facebook:
-								facebook.com/yourhandle</small>
-							<p>
-								<a href="#">Email Newsletter</a>
-							</p>
-						</div>
-						<!-- end small-box -->
-					</div>
-					<!-- end col -->
-				</div>
-				<!-- end contactv2 -->
+                    <div>
+                        <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Message</label>
+                        <textarea rows="4" class="w-full bg-[#0f172a] border border-slate-700 focus:border-teal-500 text-white px-4 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-teal-500 transition" placeholder="Type your message..." required></textarea>
+                    </div>
 
-				<div class="row">
-					<div class="col-md-12">
-						<div class="section-title text-center">
-							<h3>Contact Form</h3>
-							<p>Maecenas sit amet tristique turpis. Quisque porttitor eros
-								quis leo pulvinar, at hendrerit sapien iaculis.</p>
-						</div>
-						<!-- end title -->
+                    <div class="flex justify-end pt-4 border-t border-slate-700">
+                        <button type="submit" class="px-6 py-2.5 bg-teal-600 hover:bg-teal-500 text-white rounded-xl text-sm font-semibold transition shadow-lg shadow-teal-555/10 flex items-center gap-1.5">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+                            Submit Form
+                        </button>
+                    </div>
+                </form>
+            </div>
 
-						<form class="big-contact-form" role="search">
-							<input type="text" class="form-control"
-								placeholder="Enter your name.."> <input type="email"
-								class="form-control" placeholder="Enter email.."> <input
-								type="text" class="form-control" placeholder="Your phone..">
-							<input type="text" class="form-control" placeholder="Subject..">
-							<textarea class="form-control" placeholder="Message goes here.."></textarea>
-							<button type="submit" class="btn btn-primary">Submit</button>
-						</form>
-					</div>
-					<!-- end col -->
-				</div>
-				<!-- end row -->
-			</div>
-			<!-- end container -->
-		</div>
-	</section>
+        </div>
 
-	<footer class="section footer noover">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-4 col-md-4">
-					<div class="widget clearfix">
-						<h3 class="widget-title">Subscribe Our Newsletter</h3>
-						<div class="newsletter-widget">
-							<p>
-								You can opt out of our newsletters at any time.<br> See our
-								<a href="#">privacy policy</a>.
-							</p>
-							<form class="form-inline" role="search">
-								<div class="form-1">
-									<input type="text" class="form-control"
-										placeholder="Enter email here..">
-									<button type="submit" class="btn btn-primary">
-										<i class="fa fa-paper-plane-o"></i>
-									</button>
-								</div>
-							</form>
-							<img src="images/payments.png" alt="" class="img-responsive">
-						</div>
-						<!-- end newsletter -->
-					</div>
-					<!-- end widget -->
-				</div>
-				<!-- end col -->
-
-				<div class="col-lg-3 col-md-3">
-					<div class="widget clearfix">
-						<h3 class="widget-title">Join us today</h3>
-						<p>Would you like to earn your profits by joining our team?
-							Join us without losing time.</p>
-						<a href="#" class="readmore">Became a Teacher</a>
-					</div>
-					<!-- end widget -->
-				</div>
-				<!-- end col -->
-
-				<div class="col-lg-3 col-md-3">
-					<div class="widget clearfix">
-						<h3 class="widget-title">Popular Tags</h3>
-						<div class="tags-widget">
-							<ul class="list-inline">
-								<li><a href="#">course</a></li>
-								<li><a href="#">web design</a></li>
-								<li><a href="#">development</a></li>
-								<li><a href="#">language</a></li>
-								<li><a href="#">teacher</a></li>
-								<li><a href="#">speaking</a></li>
-								<li><a href="#">material</a></li>
-								<li><a href="#">css3</a></li>
-								<li><a href="#">html</a></li>
-								<li><a href="#">learning</a></li>
-							</ul>
-						</div>
-						<!-- end list-widget -->
-					</div>
-					<!-- end widget -->
-				</div>
-				<!-- end col -->
-
-				<div class="col-lg-2 col-md-2">
-					<div class="widget clearfix">
-						<h3 class="widget-title">Support</h3>
-						<div class="list-widget">
-							<ul>
-								<li><a href="#">Terms of Use</a></li>
-								<li><a href="#">Copyrights</a></li>
-								<li><a href="#">Create a Ticket</a></li>
-								<li><a href="#">Pricing & Plans</a></li>
-								<li><a href="#">Carrier</a></li>
-								<li><a href="#">Trademark</a></li>
-							</ul>
-						</div>
-						<!-- end list-widget -->
-					</div>
-					<!-- end widget -->
-				</div>
-				<!-- end col -->
-			</div>
-			<!-- end row -->
-		</div>
-		<!-- end container -->
-	</footer>
-	<!-- end footer -->
-
-	<div class="copyrights">
-		<div class="container">
-			<div class="clearfix">
-				<div class="pull-left">
-					<div class="cop-logo"></div>
-				</div>
-
-				<div class="pull-right">
-					<div class="footer-links">
-						<ul class="list-inline">
-							<li>Design : TungVu</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- end container -->
-	</div>
-	<!-- end copy -->
-	</div>
-	<!-- end wrapper -->
-
-	<!-- jQuery Files -->
-	<script src="vendor/jquery/jquery.min.js"></script>
-	<script src="vendor/bootstrap/bootstrap.min.js"></script>
-	<script src="js/animate.js"></script>
-	<script src="js/custom.js"></script>
-	<!-- VIDEO BG PLUGINS -->
-	<script
-		src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyAkADq7R0xf6ami9YirAM1N-yl7hdnYBhM "></script>
-
+    </main>
 </body>
 </html>

@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic Holiday Calendar - Academia</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Font Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-[#0f172a] text-[#f8fafc] min-h-screen font-sans">
+
+    <!-- Navbar -->
+    <header class="bg-[#1e293b] border-b border-slate-700 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-3">
+                    <svg class="w-6 h-6 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"></path>
+                    </svg>
+                    <span class="font-bold text-lg tracking-wider text-teal-400">ACADEMIC CALENDAR PORTAL</span>
+                </div>
+                <div class="flex gap-4">
+                    <a th:href="${#authorization.expression('hasAuthority(''TEACHER'')') ? '/home' : '/student/home'}" 
+                       class="px-4 py-2 text-sm font-medium bg-slate-800 hover:bg-slate-700 border border-slate-600 rounded-lg transition flex items-center gap-2">
+                        <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                        Back to Home
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- Page Title -->
+        <div class="mb-8">
+            <h1 class="text-3xl font-extrabold text-white tracking-tight">Academic Holiday & Event Scheduler</h1>
+            <p class="mt-2 text-slate-400">Review official school events, regional holidays, and academic calendar deadlines</p>
+        </div>
+
+        <!-- Success Alert -->
+        <div th:if="${param.success}" class="mb-6 p-4 bg-emerald-950 border border-emerald-500 text-emerald-200 rounded-xl flex items-center gap-3">
+            <svg class="w-5 h-5 text-emerald-455 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <span>Event published successfully on the calendar!</span>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <!-- Left Column: Scheduler Panel (Only for teachers/admin) -->
+            <div class="bg-[#1e293b] border border-slate-800 p-6 rounded-2xl shadow-2xl h-fit"
+                 th:if="${#authorization.expression('hasAuthority(''TEACHER'')')}">
+                
+                <h2 class="text-xl font-bold text-white mb-6 border-b border-slate-700 pb-3 flex items-center gap-2">
+                    <svg class="w-5 h-5 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path></svg>
+                    Publish Event
+                </h2>
+
+                <form th:action="@{/academic/calendar/add}" method="post" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Event Title</label>
+                        <input type="text" name="title" class="w-full bg-[#0f172a] border border-slate-700 text-white rounded-lg p-2.5 text-sm focus:outline-none focus:border-teal-500" placeholder="e.g. Independence Day Break" required>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Event Description</label>
+                        <textarea name="description" rows="3" class="w-full bg-[#0f172a] border border-slate-700 text-white rounded-lg p-2.5 text-sm focus:outline-none focus:border-teal-500" placeholder="Provide extra event details..." required></textarea>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Event Type</label>
+                        <select name="type" class="w-full bg-[#0f172a] border border-slate-700 text-white rounded-lg p-2.5 text-sm focus:outline-none focus:border-teal-500" required>
+                            <option th:each="t : ${eventTypes}" th:value="${t}" th:text="${t}"></option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Calendar Date</label>
+                        <input type="date" name="eventDate" class="w-full bg-[#0f172a] border border-slate-700 text-white rounded-lg p-2.5 text-sm focus:outline-none focus:border-teal-500" required>
+                    </div>
+
+                    <button type="submit" class="w-full bg-teal-600 hover:bg-teal-500 text-white font-semibold py-3 px-4 rounded-lg text-sm transition mt-6 flex items-center justify-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                        <span>Publish on Calendar</span>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Right Column: Timeline / List representation -->
+            <div class="col-span-2 bg-[#1e293b] border border-slate-800 p-6 rounded-2xl shadow-2xl">
+                <h2 class="text-xl font-bold text-white mb-6 border-b border-slate-700 pb-3 flex items-center gap-2">
+                    <svg class="w-5 h-5 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 4a2 2 0 002-2v-1a2 2 0 00-2-2m-2 4h4m-6 4h4m-6 4h4m-6 4h4"></path></svg>
+                    Timeline Events List
+                </h2>
+
+                <div class="relative border-l border-slate-700 ml-4 space-y-6">
+                    <th:block th:each="ev : ${events}">
+                        <div class="relative pl-6 group">
+                            <!-- Bullet indicator -->
+                            <span class="absolute -left-2.5 top-1.5 w-5 h-5 bg-[#0f172a] border-2 border-teal-500 rounded-full flex items-center justify-center">
+                                <span class="w-2.5 h-2.5 bg-teal-500 rounded-full"></span>
+                            </span>
+                            
+                            <div class="bg-[#161e29] border border-slate-850 p-5 rounded-xl hover:border-slate-750 transition flex justify-between items-start">
+                                <div class="flex-1">
+                                    <span class="text-teal-400 text-xs font-bold uppercase tracking-wider block" th:text="${ev.eventDate}">August 15, 2026</span>
+                                    <h3 class="text-lg font-bold text-white mt-1" th:text="${ev.title}">Event Title</h3>
+                                    <p class="text-sm text-slate-400 mt-2 leading-relaxed" th:text="${ev.description}">Detailed explanation of the holiday schedule.</p>
+                                    <span class="inline-block mt-3 px-2 py-0.5 bg-slate-800 text-[10px] font-semibold text-slate-300 rounded border border-slate-700" th:text="${ev.type}">HOLIDAY</span>
+                                </div>
+                                <a th:if="${#authorization.expression('hasAuthority(''TEACHER'')')}"
+                                   th:href="@{/academic/calendar/delete/{id}(id=${ev.id})}"
+                                   class="text-red-400 hover:text-red-300 p-1 rounded hover:bg-red-500/10 transition ml-4">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </th:block>
+
+                    <!-- Empty State -->
+                    <div th:if="${#lists.isEmpty(events)}" class="text-center py-16 ml-0">
+                        <svg class="w-12 h-12 text-slate-600 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                        <p class="text-slate-500 italic text-sm">No holidays or breaks scheduled yet.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+</body>
+</html>

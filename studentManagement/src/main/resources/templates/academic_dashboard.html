@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic Administrative Panel - Academia</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Font Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-[#0f172a] text-[#f8fafc] min-h-screen font-sans">
+
+    <!-- Navbar -->
+    <header class="bg-[#1e293b] border-b border-slate-700 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-3">
+                    <svg class="w-6 h-6 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"></path>
+                    </svg>
+                    <span class="font-bold text-lg tracking-wider text-teal-400">ACADEMIC ADMIN PORTAL</span>
+                </div>
+                <div class="flex gap-4">
+                    <a th:href="@{/home}" class="px-4 py-2 text-sm font-medium bg-slate-800 hover:bg-slate-700 border border-slate-600 rounded-lg transition flex items-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                        Home
+                    </a>
+                    <a th:href="@{/academic/calendar}" class="px-4 py-2 text-sm font-medium bg-slate-800 hover:bg-slate-700 border border-slate-600 rounded-lg transition flex items-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                        Calendar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- Page Title -->
+        <div class="mb-8">
+            <h1 class="text-3xl font-extrabold text-white tracking-tight">Academic Configurations</h1>
+            <p class="mt-2 text-slate-400">Manage class cohorts, assign teachers & captains, and schedule school timetables</p>
+        </div>
+
+        <!-- Success/Error Alerts -->
+        <div th:if="${param.success}" class="mb-6 p-4 bg-emerald-950 border border-emerald-500 text-emerald-200 rounded-xl flex items-center gap-3">
+            <svg class="w-5 h-5 text-emerald-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <span>Assignments saved successfully!</span>
+        </div>
+
+        <!-- Quick Metrics Widgets -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-[#1e293b] border border-slate-800 p-6 rounded-2xl shadow-xl flex items-center justify-between">
+                <div>
+                    <p class="text-slate-400 text-sm font-semibold uppercase tracking-wider">Academic Classes</p>
+                    <h3 class="text-3xl font-bold mt-1 text-teal-400" th:text="${classSections != null ? #lists.size(classSections) : 0}">12</h3>
+                </div>
+                <div class="text-teal-400 bg-teal-950/50 p-4 rounded-xl">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="bg-[#1e293b] border border-slate-800 p-6 rounded-2xl shadow-xl flex items-center justify-between">
+                <div>
+                    <p class="text-slate-400 text-sm font-semibold uppercase tracking-wider">Registered Teachers</p>
+                    <h3 class="text-3xl font-bold mt-1 text-violet-400" th:text="${teachers != null ? #lists.size(teachers) : 0}">15</h3>
+                </div>
+                <div class="text-violet-400 bg-violet-950/50 p-4 rounded-xl">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="bg-[#1e293b] border border-slate-800 p-6 rounded-2xl shadow-xl flex items-center justify-between">
+                <div>
+                    <p class="text-slate-400 text-sm font-semibold uppercase tracking-wider">Curriculum Subjects</p>
+                    <h3 class="text-3xl font-bold mt-1 text-cyan-400" th:text="${subjects != null ? #lists.size(subjects) : 0}">6</h3>
+                </div>
+                <div class="text-cyan-400 bg-cyan-950/50 p-4 rounded-xl">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.168.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table Card -->
+        <div class="bg-[#1e293b] border border-slate-800 rounded-2xl shadow-2xl overflow-hidden">
+            <div class="px-6 py-5 border-b border-slate-800 flex justify-between items-center">
+                <h2 class="text-xl font-bold text-white">Class Section Matrix</h2>
+                <span class="px-3 py-1 bg-slate-800 border border-slate-700 rounded-full text-xs font-semibold tracking-wider text-slate-400">Institutional Cohorts</span>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-[#161e29] text-slate-400 text-xs font-bold uppercase tracking-wider border-b border-slate-800">
+                            <th class="px-6 py-4">Standard & Section</th>
+                            <th class="px-6 py-4">Class Teacher</th>
+                            <th class="px-6 py-4">Class Captain</th>
+                            <th class="px-6 py-4">Sports Captain</th>
+                            <th class="px-6 py-4 text-right">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-850">
+                        <th:block th:each="cs : ${classSections}">
+                            <tr class="hover:bg-slate-800/30 transition">
+                                <td class="px-6 py-4 font-semibold text-white">
+                                    <span th:text="${cs.schoolClass.className}">Class 10</span> - <span th:text="${cs.section.sectionName}">A</span>
+                                </td>
+                                <td class="px-6 py-4 text-slate-300">
+                                    <span th:if="${cs.classTeacher != null}" class="flex items-center gap-1">
+                                        <svg class="w-4 h-4 text-teal-400 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                                        <span th:text="${cs.classTeacher.name}">Teacher</span>
+                                    </span>
+                                    <span th:if="${cs.classTeacher == null}" class="text-slate-500 italic">Not Assigned</span>
+                                </td>
+                                <td class="px-6 py-4 text-slate-300">
+                                    <span th:if="${cs.classCaptain != null}" th:text="${cs.classCaptain.name}">Captain</span>
+                                    <span th:if="${cs.classCaptain == null}" class="text-slate-500 italic">Not Assigned</span>
+                                </td>
+                                <td class="px-6 py-4 text-slate-300">
+                                    <span th:if="${cs.sportsCaptain != null}" th:text="${cs.sportsCaptain.name}">Sports Captain</span>
+                                    <span th:if="${cs.sportsCaptain == null}" class="text-slate-500 italic">Not Assigned</span>
+                                </td>
+                                <td class="px-6 py-4 text-right flex justify-end gap-2">
+                                    <button class="px-3 py-1.5 text-xs font-semibold bg-teal-600 hover:bg-teal-500 text-white rounded-lg transition flex items-center gap-1"
+                                            th:onclick="'toggleEditForm(' + ${cs.id} + ')'">
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+                                        Edit Roles
+                                    </button>
+                                    <a th:href="@{/academic/timetable/{id}(id=${cs.id})}" 
+                                       class="px-3 py-1.5 text-xs font-semibold bg-slate-800 hover:bg-slate-700 border border-slate-600 rounded-lg transition text-slate-200 flex items-center gap-1">
+                                        <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                        Timetable
+                                    </a>
+                                </td>
+                            </tr>
+                            
+                            <!-- Inline Collapse Edit Roles Form -->
+                            <tr th:id="'assignForm-' + ${cs.id}" class="hidden bg-[#161e29]/50 border-t border-slate-850">
+                                <td colspan="5" class="px-6 py-6">
+                                    <form th:action="@{/academic/assign}" method="post" class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
+                                        <input type="hidden" name="classSectionId" th:value="${cs.id}">
+                                        
+                                        <div>
+                                            <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Class Teacher</label>
+                                            <select name="teacherUsername" class="w-full bg-[#1e293b] border border-slate-700 text-white rounded-lg p-2 text-sm focus:outline-none focus:border-teal-500">
+                                                <option value="">-- Select Teacher --</option>
+                                                <option th:each="t : ${teachers}" th:value="${t.username}" th:text="${t.name}"
+                                                        th:selected="${cs.classTeacher != null && cs.classTeacher.username == t.username}">Teacher</option>
+                                            </select>
+                                        </div>
+
+                                        <div>
+                                            <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Class Captain</label>
+                                            <select name="captainUsername" class="w-full bg-[#1e293b] border border-slate-700 text-white rounded-lg p-2 text-sm focus:outline-none focus:border-teal-500">
+                                                <option value="">-- Select Student --</option>
+                                                <option th:each="s : ${students}" th:value="${s.username}" th:text="${s.name}"
+                                                        th:selected="${cs.classCaptain != null && cs.classCaptain.username == s.username}">Student</option>
+                                            </select>
+                                        </div>
+
+                                        <div>
+                                            <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Sports Captain</label>
+                                            <select name="sportsCaptainUsername" class="w-full bg-[#1e293b] border border-slate-700 text-white rounded-lg p-2 text-sm focus:outline-none focus:border-teal-500">
+                                                <option value="">-- Select Student --</option>
+                                                <option th:each="s : ${students}" th:value="${s.username}" th:text="${s.name}"
+                                                        th:selected="${cs.sportsCaptain != null && cs.sportsCaptain.username == s.username}">Student</option>
+                                            </select>
+                                        </div>
+
+                                        <div>
+                                            <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-semibold py-2 px-4 rounded-lg text-sm transition flex items-center justify-center gap-1.5">
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                                Save
+                                            </button>
+                                        </div>
+                                    </form>
+                                </td>
+                            </tr>
+                        </th:block>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        function toggleEditForm(id) {
+            const formRow = document.getElementById('assignForm-' + id);
+            if (formRow.classList.contains('hidden')) {
+                formRow.classList.remove('hidden');
+            } else {
+                formRow.classList.add('hidden');
+            }
+        }
+    </script>
+</body>
+</html>

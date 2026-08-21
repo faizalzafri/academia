@@ -1,632 +1,205 @@
 <!doctype html>
-
-<html class="no-js " lang="en" xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-<script src="https://kit.fontawesome.com/a076d05399.js"></script>
-<!-- Basic -->
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-<!-- Mobile Meta -->
-<meta name="viewport"
-	content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-<!-- Site Meta -->
-<title>HANU</title>
-<meta name="keywords" content="">
-<meta name="description" content="">
-<meta name="author" content="">
-
-<!-- Site Icons -->
-<link rel="shortcut icon" href="../images/Hanu_logo.jpg"
-	type="image/x-icon" />
-<link rel="apple-touch-icon" href="../images/Hanu_logo.jpg">
-
-<!-- Google Fonts -->
-<link
-	href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700,900"
-	rel="stylesheet">
-<link
-	href="https://fonts.googleapis.com/css?family=Droid+Serif:400,400i,700,700i"
-	rel="stylesheet">
-
-<!-- Custom & Default Styles -->
-<link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="../fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="../css/carousel.css">
-<link rel="stylesheet" href="../css/animate.css">
-<link rel="stylesheet" href="../css/home.css">
-
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Task Center - Academia</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Font Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
 </head>
-<body>
+<body class="bg-[#0f172a] text-[#f8fafc] min-h-screen font-sans">
 
-	<!-- LOADER -->
-	<!-- <div id="preloader">
-        <img class="preloader" src="images/loader.gif" alt="">
-    </div>end loader -->
-	<!-- END LOADER -->
+    <!-- Header Navbar -->
+    <header class="bg-[#1e293b] border-b border-slate-700 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                
+                <div class="flex items-center gap-3">
+                    <div class="p-2 bg-teal-500/10 border border-teal-500/30 text-teal-400 rounded-xl">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <span class="font-bold text-lg tracking-wider text-teal-400">ACADEMIA</span>
+                        <span class="ml-2 px-2 py-0.5 bg-teal-950 text-teal-300 border border-teal-800 rounded text-[10px] font-bold uppercase tracking-wider">Student Portal</span>
+                    </div>
+                </div>
 
-	<div id="wrapper">
-		<!-- BEGIN # MODAL LOGIN -->
-		<div class="modal fade" id="login-modal" tabindex="-1" role="dialog"
-			aria-hidden="true" style="display: none;">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<!-- Begin # DIV Form -->
-					<div id="div-forms">
-						<form id="login-form">
-							<button type="button" class="close" data-dismiss="modal"
-								aria-label="Close">
-								<span class="flaticon-add" aria-hidden="true"></span>
-							</button>
-							<div class="modal-body">
-								<input class="form-control" type="text"
-									placeholder="What you are looking for?" required>
-							</div>
-						</form>
-						<!-- End # Login Form -->
-					</div>
-					<!-- End # DIV Form -->
-				</div>
-			</div>
-		</div>
-		<!-- END # MODAL LOGIN -->
+                <nav class="hidden md:flex items-center gap-1">
+                    <a th:href="@{/home}" class="px-3 py-2 text-sm font-semibold text-teal-400 bg-slate-800/80 rounded-lg">Dashboard</a>
+                    <a th:href="@{/activities}" class="px-3 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition">Activities</a>
+                    <a th:href="@{/listCourse}" class="px-3 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition">Courses</a>
+                    <a th:href="@{/academic/timetable/1}" class="px-3 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition">Timetable</a>
+                    <a th:href="@{/academic/calendar}" class="px-3 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition">Calendar</a>
+                    <a th:href="@{/chat}" class="px-3 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition">Chat</a>
+                    <a th:href="@{/user/account}" class="px-3 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition">Profile</a>
+                </nav>
 
-		<header class="header header-normal" th:fragment="header">
-			<div class="topbar clearfix">
-				<div class="container">
-					<div class="row-fluid">
-						<div class="col-md-6 col-sm-6 text-left">
-							<p>
-								<strong><i class="fa fa-phone"></i></strong> +90 543 123 45 67
-								&nbsp;&nbsp; <strong><i class="fa fa-envelope"></i></strong> <a
-									href="mailto:#">info@yoursite.com</a>
-                            </p>
-                            <a href = "#" th:href="@{/chat}"><i class="far fa-comments icon" >Chat room</i></a>
-						</div>
-						<div class="col-md-6 col-sm-6 hidden-xs text-right">
-							<div class="social">
-								<a class="facebook" href="#" data-tooltip="tooltip"
-									data-placement="bottom" title="Facebook"><i
-									class="fa fa-facebook"></i></a> <a class="twitter" href="#"
-									data-tooltip="tooltip" data-placement="bottom" title="Twitter"><i
-									class="fa fa-twitter"></i></a> <a class="google" href="#"
-									data-tooltip="tooltip" data-placement="bottom"
-									title="Google Plus"><i class="fa fa-google-plus"></i></a> <a
-									class="linkedin" href="#" data-tooltip="tooltip"
-									data-placement="bottom" title="Linkedin"><i
-									class="fa fa-linkedin"></i></a> <a class="pinterest" href="#"
-									data-tooltip="tooltip" data-placement="bottom"
-                                    title="Pinterest"><i class="fa fa-pinterest"></i>
-                                </a>
-                            </div>
-                                <!-- <a href = "#"><i class="fas fa-user-graduate icon">1701040163</i></a> -->
-                                <li class="dropdown yamm-fw  profile"><a href = "#"><i class="fas fa-user-graduate icon">1701040163</i></a>
-                                    <ul class="dropdown-menu menu">
-                                        <li>
-                                            <h5>Vu Van Tung</h5>
-                                            <ul class = "com">
-                                            <li><a href="#" th:href="@{/user/account}">Profile</a></li>
-                                            <li><a th:href="@{/forgotPassword}">Change password</a></li>
-                                            <li><a href="#"th:href="@{/logout}">Logout</a></li>
-                                            </ul>
-                                              
-                                        </li>
-                                    </ul></li>
-                                </a>
-                               </div>
-						    </div>
+                <div class="flex items-center gap-3">
+                    <a th:href="@{/logout}" class="px-3.5 py-1.5 text-xs font-semibold bg-rose-950/60 hover:bg-rose-900/80 border border-rose-800 text-rose-300 rounded-lg transition">
+                        Sign Out
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+        
+        <!-- Student Hero Banner -->
+        <div class="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 border border-slate-700 p-8 rounded-2xl shadow-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+            <div>
+                <span class="px-3 py-1 bg-teal-950 border border-teal-800 text-teal-400 rounded-full text-xs font-bold uppercase tracking-wider">Student Board</span>
+                <h1 class="text-3xl font-extrabold text-white mt-2 tracking-tight">Academic Studies & Progress</h1>
+                <p class="text-sm text-slate-400 mt-1">Review enrolled course materials, download lecture resources, inspect period timetables, and monitor exam deadlines.</p>
+            </div>
+            <a th:href="@{/listCourse}" class="px-5 py-2.5 bg-teal-600 hover:bg-teal-500 text-white font-bold text-xs uppercase tracking-wider rounded-xl transition shadow-lg shadow-teal-500/20 flex items-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.168.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                Browse Course Catalog
+            </a>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <!-- Left 2 Columns: Enrolled Courses & Study Resources -->
+            <div class="lg:col-span-2 space-y-6">
+                
+                <!-- Course Modules & Syllabus Card -->
+                <div class="bg-[#1e293b] border border-slate-800 rounded-2xl shadow-2xl overflow-hidden">
+                    <div class="px-6 py-5 border-b border-slate-800 flex justify-between items-center">
+                        <div>
+                            <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                                <svg class="w-5 h-5 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.168.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                                Enrolled Courses & Study Materials
+                            </h2>
+                            <p class="text-xs text-slate-400 mt-0.5">Access syllabi, lecture notes, and faculty study materials</p>
                         </div>
-					</div>
-				</div>
-			</div>
-			<!-- end topbar -->
+                        <a th:href="@{/listCourse}" class="text-xs font-semibold text-teal-400 hover:text-teal-300 transition">View Catalog &rarr;</a>
+                    </div>
 
-			<nav class="navbar navbar-expand-xl navbar-light bg-light">
-				<a class="navbar-brand" href="#"><img src="../images/Hanu_logo.jpg"
-					alt="" width="60" height="60"></a>
-				<button class="navbar-toggler" type="button" data-toggle="collapse"
-					data-target="#navbarTogglerDemo02"
-					aria-controls="navbarTogglerDemo02" aria-expanded="false"
-					aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-sm text-slate-300">
+                            <thead class="bg-slate-900/60 text-slate-400 text-xs uppercase tracking-wider border-b border-slate-800">
+                                <tr>
+                                    <th class="px-6 py-3.5">Course Code & Name</th>
+                                    <th class="px-6 py-3.5">Credits</th>
+                                    <th class="px-6 py-3.5">Description</th>
+                                    <th class="px-6 py-3.5 text-right">Study Material</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-800/60">
+                                <tr th:each="c : ${courses}" class="hover:bg-slate-800/40 transition">
+                                    <td class="px-6 py-4">
+                                        <div class="flex items-center gap-3">
+                                            <span class="px-2 py-0.5 bg-teal-950 text-teal-400 border border-teal-800 rounded text-xs font-bold" th:text="${c.code}">CS101</span>
+                                            <span class="font-bold text-white text-xs" th:text="${c.name}">Computer Architecture</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 text-xs font-semibold text-slate-300" th:text="${c.credit != null ? c.credit + ' Credits' : '3 Credits'}">3 Credits</td>
+                                    <td class="px-6 py-4 text-xs text-slate-300 max-w-xs truncate" th:text="${c.description != null ? c.description : 'Standard syllabus'}">
+                                        Course outline description...
+                                    </td>
+                                    <td class="px-6 py-4 text-right">
+                                        <a th:href="@{/student/course/{id}(id=${c.id})}" 
+                                           class="px-3.5 py-1.5 bg-teal-600 hover:bg-teal-500 text-white rounded-lg text-xs font-bold transition shadow-sm">
+                                            View Syllabus
+                                        </a>
+                                    </td>
+                                </tr>
 
-				<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-					<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-						<li class="nav-item active"><a class="nav-link"
-							th:href="@{/student/home}">Home <span class="sr-only">(current)</span>
-						</a></li>
-						<li class="nav-item active"><a class="nav-link"
-							th:href="@{/news}">New</a></li>
-						<li class="nav-item active"><a class="nav-link"
-							th:href="@{/contact}">Contact</a></li>
-						<li class="nav-item active"><a class="nav-link"
-							th:href="@{/listCourse}">Student course</a></li>
-						<li class="nav-item active"><a class="nav-link"
-							th:href="@{/cbse/calendar}">Calendar</a></li>
-						<li class="dropdown yamm-fw yamm-half" id = "navbar"><a href="#"
-							data-toggle="dropdown" class="dropdown-toggle-active"><p>Mega
-								Menu</p> <b class="fa fa-angle-down"></b>
-						</a>
-							<ul class="dropdown-menu">
-								<li>
-									<div class="yamm-content clearfix">
-										<div class="row-fluid">
-											<div class="col-md-6 col-sm-6">
-												<h4>Course Pages</h4>
-												<ul>
-													<li><a href="#">Courses Name 01</a></li>
-													<li><a href="#">Courses Name 02</a></li>
-													<li><a href="#">Courses Name 03</a></li>
-													<li><a href="#">Courses Name 04</a></li>
-													<li><a href="#">Courses Name 05</a></li>
-													<li><a href="#">Courses Name 06</a></li>
-													<li><a href="#">Courses Name 07</a></li>
-													<li><a href="#">Courses Name 08</a></li>
-													<li><a href="#">Courses Name 09</a></li>
-												</ul>
-											</div>
-											<div class="col-md-6 col-sm-6">
-												<div class="menu-widget text-center">
-													<div class="image-wrap entry">
-														<img src="upload/course_01.jpg" alt=""
-															class="img-responsive">
-														<div class="magnifier">
-															<a href="#" title=""><i class="flaticon-add"></i></a>
-														</div>
-													</div>
-													<!-- end image-wrap -->
-													<h5>
-														<a href="#">Learning Bootstrap Framework</a>
-													</h5>
-													<small>$22.00</small> <a href="#" class="menu-button">View
-														Course</a>
-												</div>
-												<!-- end widget -->
-											</div>
-										</div>
-									</div>
-								</li>
-							</ul></li>
-					</ul>
-					<form class="form-inline my-2 my-lg-0">
-						<input class="form-control mr-sm-2" type="search"
-							placeholder="Search">
-						<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-					</form>
-				</div>
-			</nav>
-		</header>
-		<section class="section db p120">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
-						<div class="tagline-message page-title text-center">
-							<h3>Ha Noi University</h3>
-							<ul class="breadcrumb">
-								<li><a href="javascript:void(0)">HANU</a></li>
-								<i class="fas fa-blog"></i>Blog
-							</ul>
-						</div>
-					</div>
-					<!-- end col -->
-				</div>
-				<!-- end row -->
-			</div>
-			<!-- end container -->
-		</section>
-		<!-- end section -->
+                                <tr th:if="${#lists.isEmpty(courses)}">
+                                    <td colspan="4" class="px-6 py-8 text-center text-slate-500 italic text-xs">
+                                        No courses in the catalog yet.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
-		<section class="section gb nopadtop">
-			<div class="container">
-				<div class="boxed">
-					<div class="row">
-						<div class="col-md-8">
-							<div class="content blog-list">
-								<div class="blog-wrapper clearfix">
-									<th:block th:each="n : ${news}">
-										<div class="blog-meta">
-											<small><a href="#" th:text="${n.subject}"></a></small>
-											<h3>
-												<a th:href="@{/newSingle/{id}(id=${n.id})}" title=""
-													th:text="${n.title}"></a>
-											</h3>
-											<ul class="list-inline">
-												<li th:text="${n.date}"></li>
-												<li><span>written by</span> <a href="#"
-													th:text="${n.users.username}"></a></li>
-											</ul>
-										</div>
+                <!-- Timetable Quick Card -->
+                <div class="bg-[#1e293b] border border-slate-800 rounded-2xl shadow-2xl p-6 flex items-center justify-between">
+                    <div class="flex items-center gap-4">
+                        <div class="p-3 bg-teal-500/10 border border-teal-500/20 text-teal-400 rounded-xl">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </div>
+                        <div>
+                            <h3 class="text-base font-bold text-white">Class Section Timetable Matrix</h3>
+                            <p class="text-xs text-slate-400 mt-0.5">Check period allocations, room assignments, and subject faculty.</p>
+                        </div>
+                    </div>
+                    <a th:href="@{/academic/timetable/1}" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-teal-400 rounded-xl text-xs font-bold transition">
+                        Open Timetable &rarr;
+                    </a>
+                </div>
 
-										<div class="blog-desc-big">
-											<p class="lead" th:text="${n.summary}"></p>
-											<p th:text="${n.content}"></p>
-											<a th:href="@{/newSingle/{id}(id=${n.id})}"
-												class="btn btn-primary">Read More</a>
-										</div>
-										<!-- end desc -->
-								</div>
-								<!-- end blog -->
-							</div>
-							<!-- end content -->
-							</th:block>
-							<!-- <div class="content blog-list">
-								<div class="blog-wrapper clearfix">
-									<div class="blog-meta">
-										<small><a href="#">Tips & Tricks</a></small>
-										<h3>
-											<a href="blog-single.html" title="">How to choose best
-												color schemes for your web projects</a>
-										</h3>
-										<ul class="list-inline">
-											<li>2 days ago</li>
-											<li><span>written by</span> <a href="#">Edulogy Team</a></li>
-										</ul>
-									</div>
-									end blog-meta
+            </div>
 
-									<div class="blog-media">
-										<a href="blog-single.html" title=""><img
-											src="upload/blog_02.jpg" alt=""
-											class="img-responsive img-rounded"></a>
-									</div>
-									end media
+            <!-- Right Column: Academic Calendar & Student Chat -->
+            <div class="space-y-6">
+                
+                <!-- Upcoming Academic Deadlines -->
+                <div class="bg-[#1e293b] border border-slate-800 rounded-2xl shadow-xl p-6 space-y-4">
+                    <div class="flex justify-between items-center border-b border-slate-800 pb-3">
+                        <h3 class="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
+                            <svg class="w-4 h-4 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                            Key Dates & Deadlines
+                        </h3>
+                        <a th:href="@{/academic/calendar}" class="text-xs font-semibold text-teal-400 hover:text-teal-300">Calendar</a>
+                    </div>
 
-									<div class="blog-desc-big">
-										<p class="lead">If you don't know how to choose best color
-											combinations for your web or graphic designs projects, right
-											place here..</p>
-										<p>Curabitur ut eros orci. Mauris non egestas sem. Fusce
-											mattis tortor sit amet blandit sodales. Nam finibus faucibus
-											ante ut pulvinar. Pellentesque vitae sagittis dolor. Mauris
-											auctor risus eu eros ornare, in pellentesque purus elementum.
-											Etiam efficitur tempor justo. Nullam vel ante sapien.</p>
-										<a href="blog-single.html" class="btn btn-primary">Read
-											More</a>
-									</div>
-									end desc
-								</div>
-								end blog
-							</div>
-							end content
+                    <div class="space-y-3">
+                        <div th:each="ev : ${events}" class="p-3.5 bg-slate-900/60 border border-slate-800 rounded-xl space-y-1">
+                            <div class="flex justify-between items-start">
+                                <span class="text-xs font-bold text-white" th:text="${ev.title}">Semester Exams</span>
+                                <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-violet-950 text-violet-300 border border-violet-800" th:text="${ev.type}">EXAM</span>
+                            </div>
+                            <p class="text-xs text-slate-400" th:text="${ev.description}">Final evaluation schedule</p>
+                            <span class="text-[11px] text-teal-400 font-semibold block pt-1" th:text="${ev.eventDate}">2026-08-25</span>
+                        </div>
 
-							<div class="content blog-list">
-								<div class="blog-wrapper clearfix">
-									<div class="blog-meta">
-										<small><a href="#">Tips & Tricks</a></small>
-										<h3>
-											<a href="blog-single.html" title="">Learn more about
-												beautiful furniture web design combinations</a>
-										</h3>
-										<ul class="list-inline">
-											<li>4 days ago</li>
-											<li><span>written by</span> <a href="#">Edulogy Team</a></li>
-										</ul>
-									</div>
-									end blog-meta
+                        <div th:if="${#lists.isEmpty(events)}" class="text-center py-6 text-slate-500 italic text-xs">
+                            No upcoming deadlines scheduled.
+                        </div>
+                    </div>
+                </div>
 
-									<div class="blog-media">
-										<a href="blog-single.html" title=""><img
-											src="upload/blog_03.jpg" alt=""
-											class="img-responsive img-rounded"></a>
-									</div>
-									end media
+                <!-- Chatroom Widget -->
+                <div class="bg-gradient-to-tr from-slate-900 to-slate-800 border border-slate-800 p-6 rounded-2xl shadow-xl space-y-3">
+                    <h3 class="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
+                        <svg class="w-4 h-4 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+                        Peer Academic Chatroom
+                    </h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">Collaborate with peers, ask questions about course material, and share notes in real-time.</p>
+                    <a th:href="@{/chat}" class="w-full mt-2 py-2.5 bg-teal-600 hover:bg-teal-500 text-white rounded-xl text-xs font-bold transition flex items-center justify-center gap-2 shadow-lg shadow-teal-500/20">
+                        Join Campus Chatroom &rarr;
+                    </a>
+                </div>
 
-									<div class="blog-desc-big">
-										<p class="lead">Today we will teach you how to find
-											professional materials for your furniture website design.</p>
-										<p>Curabitur ut eros orci. Mauris non egestas sem. Fusce
-											mattis tortor sit amet blandit sodales. Nam finibus faucibus
-											ante ut pulvinar. Pellentesque vitae sagittis dolor. Mauris
-											auctor risus eu eros ornare, in pellentesque purus elementum.
-											Etiam efficitur tempor justo. Nullam vel ante sapien.</p>
-										<a href="blog-single.html" class="btn btn-primary">Read
-											More</a>
-									</div>
-									end desc
-								</div>
-								end blog
-							</div>
-							end content
+            </div>
 
-							<div class="content blog-list">
-								<div class="blog-wrapper clearfix">
-									<div class="blog-meta">
-										<small><a href="#">Tips & Tricks</a></small>
-										<h3>
-											<a href="blog-single.html" title="">Don't know where to
-												start? Be relax, we are here to showcase you custom colors.</a>
-										</h3>
-										<ul class="list-inline">
-											<li>4 days ago</li>
-											<li><span>written by</span> <a href="#">Edulogy Team</a></li>
-										</ul>
-									</div>
-									end blog-meta
+        </div>
 
-									<div class="blog-media">
-										<a href="blog-single.html" title=""><img
-											src="upload/blog_04.jpg" alt=""
-											class="img-responsive img-rounded"></a>
-									</div>
-									end media
-
-									<div class="blog-desc-big">
-										<p class="lead">Colors are very important for web design.
-											Read this article to build your own combinations..</p>
-										<p>Curabitur ut eros orci. Mauris non egestas sem. Fusce
-											mattis tortor sit amet blandit sodales. Nam finibus faucibus
-											ante ut pulvinar. Pellentesque vitae sagittis dolor. Mauris
-											auctor risus eu eros ornare, in pellentesque purus elementum.
-											Etiam efficitur tempor justo. Nullam vel ante sapien.</p>
-										<a href="blog-single.html" class="btn btn-primary">Read
-											More</a>
-									</div>
-									end desc
-								</div>
-								end blog
-							</div>
-							end content -->
-
-							<div class="row">
-								<div class="col-md-12">
-									<ul class="pagination">
-										<li class="disabled"><a href="javascript:void(0)">&laquo;</a></li>
-										<li class="active"><a href="javascript:void(0)">1</a></li>
-										<li><a href="javascript:void(0)">2</a></li>
-										<li><a href="javascript:void(0)">3</a></li>
-										<li><a href="javascript:void(0)">...</a></li>
-										<li><a href="javascript:void(0)">&raquo;</a></li>
-									</ul>
-								</div>
-								<!-- end col -->
-							</div>
-							<!-- end row -->
-						</div>
-						<!-- end col -->
-
-						<div class="sidebar col-md-4">
-							<div class="widget clearfix">
-								<div class="banner-widget">
-									<img src="upload/banner.jpeg" alt=""
-										class="img-responsive img-rounded">
-								</div>
-							</div>
-
-							<div class="widget clearfix">
-								<h3 class="widget-title">Popular Posts</h3>
-								<div class="post-widget">
-									<div class="media">
-										<img src="upload/blog_small_01.jpg" alt=""
-											class="img-responsive alignleft img-rounded">
-										<div class="media-body">
-											<h5 class="mt-0">
-												<a href="blog-single.html">Learning English Like a Pro..</a>
-											</h5>
-											<div class="blog-meta">
-												<ul class="list-inline">
-													<li>4 days ago</li>
-													<li><span>by</span> <a href="#">Edulogy Team</a></li>
-												</ul>
-											</div>
-											<!-- end blog-meta -->
-										</div>
-									</div>
-
-									<div class="media">
-										<img src="upload/blog_small_02.jpg" alt=""
-											class="img-responsive alignleft img-rounded">
-										<div class="media-body">
-											<h5 class="mt-0">
-												<a href="blog-single.html">How to create a beautiful
-													website with Bootstrap</a>
-											</h5>
-											<div class="blog-meta">
-												<ul class="list-inline">
-													<li>5 days ago</li>
-													<li><span>by</span> <a href="#">Boby DOE</a></li>
-												</ul>
-											</div>
-											<!-- end blog-meta -->
-										</div>
-									</div>
-
-									<div class="media">
-										<img src="upload/blog_small_03.jpg" alt=""
-											class="img-responsive alignleft img-rounded">
-										<div class="media-body">
-											<h5 class="mt-0">
-												<a href="blog-single.html">Don't forget to update your
-													Google web master tools</a>
-											</h5>
-											<div class="blog-meta">
-												<ul class="list-inline">
-													<li>6 days ago</li>
-													<li><span>by</span> <a href="#">Martin</a></li>
-												</ul>
-											</div>
-											<!-- end blog-meta -->
-										</div>
-									</div>
-								</div>
-								<!-- end post-widget -->
-							</div>
-							<!-- end widget -->
-
-							<div class="widget clearfix">
-								<h3 class="widget-title">Subscribe Our Newsletter</h3>
-								<div class="newsletter-widget">
-									<p>
-										You can opt out of our newsletters at any time. See our <a
-											href="#">privacy policy</a>.
-									</p>
-									<form class="form-inline" role="search">
-										<div class="form-1">
-											<input type="text" class="form-control"
-												placeholder="Enter email here..">
-											<button type="submit" class="btn btn-primary">
-												<i class="fa fa-paper-plane-o"></i>
-											</button>
-										</div>
-									</form>
-								</div>
-								<!-- end newsletter -->
-							</div>
-							<!-- end widget -->
-
-							<div class="widget clearfix">
-								<h3 class="widget-title">Popular Tags</h3>
-								<div class="tags-widget">
-									<ul class="list-inline">
-										<li><a href="#">course</a></li>
-										<li><a href="#">web design</a></li>
-										<li><a href="#">development</a></li>
-										<li><a href="#">language</a></li>
-										<li><a href="#">teacher</a></li>
-										<li><a href="#">speaking</a></li>
-										<li><a href="#">material</a></li>
-										<li><a href="#">css3</a></li>
-										<li><a href="#">html</a></li>
-										<li><a href="#">learning</a></li>
-									</ul>
-								</div>
-								<!-- end list-widget -->
-							</div>
-							<!-- end widget -->
-						</div>
-						<!-- end sidebar -->
-					</div>
-					<!-- end row -->
-				</div>
-				<!-- end boxed -->
-			</div>
-			<!-- end container -->
-		</section>
-
-		<footer class="section footer noover" th:fragment="footer">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-4 col-md-4">
-						<div class="widget clearfix">
-							<h3 class="widget-title">Subscribe Our Newsletter</h3>
-							<div class="newsletter-widget">
-								<p>
-									You can opt out of our newsletters at any time.<br> See
-									our <a href="#">privacy policy</a>.
-								</p>
-								<form class="form-inline" role="search">
-									<div class="form-1">
-										<input type="text" class="form-control"
-											placeholder="Enter email here..">
-										<button type="submit" class="btn btn-primary">
-											<i class="fa fa-paper-plane-o"></i>
-										</button>
-									</div>
-								</form>
-								<img src="images/payments.png" alt="" class="img-responsive">
-							</div>
-							<!-- end newsletter -->
-						</div>
-						<!-- end widget -->
-					</div>
-					<!-- end col -->
-
-					<div class="col-lg-3 col-md-3">
-						<div class="widget clearfix">
-							<h3 class="widget-title">Join us today</h3>
-							<p>Would you like to earn your profits by joining our team?
-								Join us without losing time.</p>
-							<a th:href="@{/becomeTeacher}" class="readmore">Became a Teacher</a>
-						</div>
-						<!-- end widget -->
-					</div>
-					<!-- end col -->
-
-					<div class="col-lg-3 col-md-3">
-						<div class="widget clearfix">
-							<h3 class="widget-title">Popular Tags</h3>
-							<div class="tags-widget">
-								<ul class="list-inline">
-									<li><a href="#">course</a></li>
-									<li><a href="#">web design</a></li>
-									<li><a href="#">development</a></li>
-									<li><a href="#">language</a></li>
-									<li><a href="#">teacher</a></li>
-									<li><a href="#">speaking</a></li>
-									<li><a href="#">material</a></li>
-									<li><a href="#">css3</a></li>
-									<li><a href="#">html</a></li>
-									<li><a href="#">learning</a></li>
-								</ul>
-							</div>
-							<!-- end list-widget -->
-						</div>
-						<!-- end widget -->
-					</div>
-					<!-- end col -->
-
-					<div class="col-lg-2 col-md-2">
-						<div class="widget clearfix">
-							<h3 class="widget-title">Support</h3>
-							<div class="list-widget">
-								<ul>
-									<li><a href="#">Terms of Use</a></li>
-									<li><a href="#">Copyrights</a></li>
-									<li><a href="#">Create a Ticket</a></li>
-									<li><a href="#">Pricing & Plans</a></li>
-									<li><a href="#">Carrier</a></li>
-									<li><a href="#">Trademark</a></li>
-								</ul>
-							</div>
-							<!-- end list-widget -->
-						</div>
-						<!-- end widget -->
-					</div>
-					<!-- end col -->
-				</div>
-				<!-- end row -->
-			</div>
-			<!-- end container -->
-		</footer>
-		<!-- end footer -->
-
-		<div class="copyrights">
-			<div class="container">
-				<div class="clearfix">
-					<div class="pull-left">
-						<div class="cop-logo">
-							
-						</div>
-					</div>
-
-					<div class="pull-right">
-						<div class="footer-links">
-							<ul class="list-inline">
-								<li>Design : TungVu</a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- end container -->
-		</div>
-		<!-- end copy -->
-	</div>
-	<!-- end wrapper -->
-
-	<!-- jQuery Files -->
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-		integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-		crossorigin="anonymous"></script>
-	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-	<script src="js/animate.js"></script>
-	<script src="js/custom.js"></script>
+    </main>
 
 </body>
 </html>

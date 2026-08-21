@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Admin Dashboard - Academia</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Font Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-[#0f172a] text-[#f8fafc] min-h-screen font-sans">
+
+    <!-- Header Navbar -->
+    <header class="bg-[#1e293b] border-b border-slate-700 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                
+                <!-- Logo & Brand -->
+                <div class="flex items-center gap-3">
+                    <div class="p-2 bg-teal-500/10 border border-teal-500/30 text-teal-400 rounded-xl">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <span class="font-bold text-lg tracking-wider text-teal-400">ACADEMIA</span>
+                        <span class="ml-2 px-2 py-0.5 bg-rose-950 text-rose-300 border border-rose-800 rounded text-[10px] font-bold uppercase tracking-wider">System Admin</span>
+                    </div>
+                </div>
+
+                <!-- Navigation items -->
+                <nav class="hidden md:flex items-center gap-1">
+                    <a th:href="@{/admin/dashboard}" class="px-3 py-2 text-sm font-semibold text-teal-400 bg-slate-800/80 rounded-lg">Overview</a>
+                    <a th:href="@{/principal/dashboard}" class="px-3 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition">Governance</a>
+                    <a th:href="@{/admin/approvals}" class="px-3 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition flex items-center gap-1.5">
+                        <span>Approvals</span>
+                        <span th:if="${pendingCount > 0}" th:text="${pendingCount}" class="px-2 py-0.5 bg-amber-500 text-slate-900 rounded-full text-xs font-bold">1</span>
+                    </a>
+                    <a th:href="@{/activities}" class="px-3 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition">Activities</a>
+                    <a th:href="@{/academic/dashboard}" class="px-3 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition">Matrix</a>
+                    <a th:href="@{/manage/course}" class="px-3 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition">Courses</a>
+                    <a th:href="@{/academic/calendar}" class="px-3 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition">Calendar</a>
+                </nav>
+
+                <!-- User actions -->
+                <div class="flex items-center gap-3">
+                    <a th:href="@{/logout}" class="px-3.5 py-1.5 text-xs font-semibold bg-rose-950/60 hover:bg-rose-900/80 border border-rose-800 text-rose-300 rounded-lg transition">
+                        Sign Out
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+        
+        <!-- Welcome Hero -->
+        <div class="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 border border-slate-700 p-8 rounded-2xl shadow-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+            <div>
+                <span class="px-3 py-1 bg-teal-950 border border-teal-800 text-teal-400 rounded-full text-xs font-bold uppercase tracking-wider">Administration Console</span>
+                <h1 class="text-3xl font-extrabold text-white mt-2 tracking-tight">Institutional System Center</h1>
+                <p class="text-sm text-slate-400 mt-1">Manage institutional user approvals, course curricula, academic matrices, and system governance.</p>
+            </div>
+            <a th:href="@{/admin/approvals}" class="px-5 py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs uppercase tracking-wider rounded-xl transition shadow-lg shadow-amber-500/20 flex items-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                Review Pending Approvals (<span th:text="${pendingCount}">0</span>)
+            </a>
+        </div>
+
+        <!-- Metrics Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            
+            <!-- Pending Approvals Card -->
+            <div class="bg-[#1e293b] border border-slate-800 p-6 rounded-2xl shadow-xl flex items-center justify-between">
+                <div>
+                    <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Pending Registrations</p>
+                    <h3 class="text-3xl font-extrabold text-amber-400 mt-1" th:text="${pendingCount}">0</h3>
+                    <span class="text-[11px] text-slate-400 mt-1 block">Requires Administrator Review</span>
+                </div>
+                <div class="p-3.5 bg-amber-500/10 border border-amber-500/30 text-amber-400 rounded-xl">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </div>
+            </div>
+
+            <!-- Total Users Card -->
+            <div class="bg-[#1e293b] border border-slate-800 p-6 rounded-2xl shadow-xl flex items-center justify-between">
+                <div>
+                    <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Total Accounts</p>
+                    <h3 class="text-3xl font-extrabold text-teal-400 mt-1" th:text="${totalUsers}">0</h3>
+                    <span class="text-[11px] text-slate-400 mt-1 block">Students & Faculty Members</span>
+                </div>
+                <div class="p-3.5 bg-teal-500/10 border border-teal-500/30 text-teal-400 rounded-xl">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                </div>
+            </div>
+
+            <!-- Academic Classes -->
+            <div class="bg-[#1e293b] border border-slate-800 p-6 rounded-2xl shadow-xl flex items-center justify-between">
+                <div>
+                    <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Class Cohorts</p>
+                    <h3 class="text-3xl font-extrabold text-indigo-400 mt-1" th:text="${totalClasses}">0</h3>
+                    <span class="text-[11px] text-slate-400 mt-1 block">Institutional Sections</span>
+                </div>
+                <div class="p-3.5 bg-indigo-500/10 border border-indigo-500/30 text-indigo-400 rounded-xl">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                </div>
+            </div>
+
+            <!-- Active Courses -->
+            <div class="bg-[#1e293b] border border-slate-800 p-6 rounded-2xl shadow-xl flex items-center justify-between">
+                <div>
+                    <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Active Curricula</p>
+                    <h3 class="text-3xl font-extrabold text-emerald-400 mt-1" th:text="${totalCourses}">0</h3>
+                    <span class="text-[11px] text-slate-400 mt-1 block">Course Catalog Modules</span>
+                </div>
+                <div class="p-3.5 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 rounded-xl">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.168.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Actionable Item: Pending Approvals Queue -->
+        <div class="bg-[#1e293b] border border-slate-800 rounded-2xl shadow-2xl overflow-hidden">
+            <div class="px-6 py-5 border-b border-slate-800 flex justify-between items-center">
+                <div>
+                    <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                        <svg class="w-5 h-5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        Urgent Action Items: Pending Account Approvals
+                    </h2>
+                    <p class="text-xs text-slate-400 mt-0.5">Review and approve newly registered student and faculty requests</p>
+                </div>
+                <a th:href="@{/admin/approvals}" class="text-xs font-semibold text-teal-400 hover:text-teal-300 transition">View Full Queue &rarr;</a>
+            </div>
+
+            <!-- Table content -->
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-sm text-slate-300">
+                    <thead class="bg-slate-900/60 text-slate-400 text-xs uppercase tracking-wider border-b border-slate-800">
+                        <tr>
+                            <th class="px-6 py-3.5">Applicant / Role</th>
+                            <th class="px-6 py-3.5">Username & Email</th>
+                            <th class="px-6 py-3.5">Department</th>
+                            <th class="px-6 py-3.5">Registration Date</th>
+                            <th class="px-6 py-3.5 text-right">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-800/60">
+                        <tr th:each="user : ${pendingUsers}" class="hover:bg-slate-800/40 transition">
+                            <td class="px-6 py-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-9 h-9 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center font-bold text-teal-400 text-xs uppercase"
+                                         th:text="${#strings.substring(user.username, 0, 1)}">A</div>
+                                    <div>
+                                        <p class="font-bold text-white text-xs" th:text="${user.username}">alex_student</p>
+                                        <span th:if="${user.authorities != null and user.authorities.contains('TEACHER')}" 
+                                              class="px-2 py-0.5 bg-violet-950 text-violet-400 border border-violet-800 rounded text-[10px] font-semibold">Faculty</span>
+                                        <span th:unless="${user.authorities != null and user.authorities.contains('TEACHER')}" 
+                                              class="px-2 py-0.5 bg-teal-950 text-teal-400 border border-teal-800 rounded text-[10px] font-semibold">Student</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4">
+                                <p class="text-xs text-white" th:text="${user.email}">user@academia.edu</p>
+                            </td>
+                            <td class="px-6 py-4 text-xs text-slate-300" th:text="${user.description != null ? user.description : 'General'}">
+                                Computer Science
+                            </td>
+                            <td class="px-6 py-4 text-xs text-slate-400" 
+                                th:text="${user.registrationDate != null ? #temporals.format(user.registrationDate, 'yyyy-MM-dd HH:mm') : 'Recent'}">
+                                2026-08-21
+                            </td>
+                            <td class="px-6 py-4 text-right space-x-2">
+                                <form th:action="@{/admin/approve/{username}(username=${user.username})}" method="post" class="inline">
+                                    <button type="submit" class="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-xs font-bold transition shadow-sm">
+                                        Approve
+                                    </button>
+                                </form>
+                                <form th:action="@{/admin/reject/{username}(username=${user.username})}" method="post" class="inline">
+                                    <button type="submit" class="px-3.5 py-1.5 bg-rose-600 hover:bg-rose-500 text-white rounded-lg text-xs font-bold transition shadow-sm">
+                                        Reject
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+
+                        <!-- Empty state -->
+                        <tr th:if="${#lists.isEmpty(pendingUsers)}">
+                            <td colspan="5" class="px-6 py-12 text-center text-slate-500 italic text-sm">
+                                No pending registrations. All user accounts are currently up to date!
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Governance Operations Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <a th:href="@{/academic/dashboard}" class="bg-[#1e293b] border border-slate-800 p-6 rounded-2xl shadow-xl hover:border-teal-500/40 transition group">
+                <div class="w-10 h-10 rounded-xl bg-teal-500/10 border border-teal-500/30 text-teal-400 flex items-center justify-center mb-4 group-hover:scale-110 transition">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                </div>
+                <h3 class="text-base font-bold text-white">Academic Matrix & Timetables</h3>
+                <p class="text-xs text-slate-400 mt-1">Assign class teachers, configure cohorts, manage weekly period schedules and detect teacher conflicts.</p>
+            </a>
+
+            <a th:href="@{/manage/course}" class="bg-[#1e293b] border border-slate-800 p-6 rounded-2xl shadow-xl hover:border-teal-500/40 transition group">
+                <div class="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/30 text-indigo-400 flex items-center justify-center mb-4 group-hover:scale-110 transition">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.168.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                </div>
+                <h3 class="text-base font-bold text-white">Course Curricula & Modules</h3>
+                <p class="text-xs text-slate-400 mt-1">Create courses, define credit requirements, update syllabi, and attach study materials.</p>
+            </a>
+
+            <a th:href="@{/academic/calendar}" class="bg-[#1e293b] border border-slate-800 p-6 rounded-2xl shadow-xl hover:border-teal-500/40 transition group">
+                <div class="w-10 h-10 rounded-xl bg-violet-500/10 border border-violet-500/30 text-violet-400 flex items-center justify-center mb-4 group-hover:scale-110 transition">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                </div>
+                <h3 class="text-base font-bold text-white">Institutional School Calendar</h3>
+                <p class="text-xs text-slate-400 mt-1">Schedule academic events, semester examinations, holidays, and campus announcements.</p>
+            </a>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#1e293b] border-t border-slate-800 py-6 text-center text-xs text-slate-500 mt-12">
+        <p>&copy; 2026 Academia Platform. System Administration Governance.</p>
+    </footer>
+
+</body>
+</html>

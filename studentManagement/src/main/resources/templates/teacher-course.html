@@ -1,376 +1,166 @@
 <!doctype html>
-
-<html class="no-js " lang="en" xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-<script src="https://kit.fontawesome.com/a076d05399.js"></script>
-<!-- Basic -->
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-<!-- Mobile Meta -->
-<meta name="viewport"
-	content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-<!-- Site Meta -->
-<title>HANU</title>
-<meta name="keywords" content="">
-<meta name="description" content="">
-<meta name="author" content="">
-
-<!-- Site Icons -->
-<link rel="shortcut icon" href="/images/Hanu_logo.jpg"
-	type="image/x-icon" />
-<link rel="apple-touch-icon" href="/images/Hanu_logo.jpg">
-
-<!-- Google Fonts -->
-<link
-	href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700,900"
-	rel="stylesheet">
-<link
-	href="https://fonts.googleapis.com/css?family=Droid+Serif:400,400i,700,700i"
-	rel="stylesheet">
-
-<!-- Custom & Default Styles -->
-<link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="../fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="/css/carousel.css">
-<link rel="stylesheet" href="/css/animate.css">
-<link rel="stylesheet" href="/css/teacher-course.css">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Settings - Academia</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Font Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
 </head>
-<body>
+<body class="bg-[#0f172a] text-[#f8fafc] min-h-screen font-sans">
 
-	<!-- LOADER -->
-	<!-- <div id="preloader">
-        <img class="preloader" src="images/loader.gif" alt="">
-    </div>end loader -->
-	<!-- END LOADER -->
-
-	<div id="wrapper">
-		<!-- BEGIN # MODAL LOGIN -->
-		<div class="modal fade" id="login-modal" tabindex="-1" role="dialog"
-			aria-hidden="true" style="display: none;">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<!-- Begin # DIV Form -->
-					<div id="div-forms">
-						<form id="login-form">
-							<button type="button" class="close" data-dismiss="modal"
-								aria-label="Close">
-								<span class="flaticon-add" aria-hidden="true"></span>
-							</button>
-							<div class="modal-body">
-								<input class="form-control" type="text"
-									placeholder="What you are looking for?" required>
-							</div>
-						</form>
-						<!-- End # Login Form -->
-					</div>
-					<!-- End # DIV Form -->
-				</div>
-			</div>
-		</div>
-		<!-- END # MODAL LOGIN -->
-
-		<header class="header header-normal" th:fragment="header">
-			<div class="topbar clearfix">
-				<div class="container">
-					<div class="row-fluid">
-						<div class="col-md-6 col-sm-6 text-left">
-							<p>
-								<strong><i class="fa fa-phone"></i></strong> +90 543 123 45 67
-								&nbsp;&nbsp; <strong><i class="fa fa-envelope"></i></strong> <a
-									href="mailto:#">info@yoursite.com</a>
-                            </p>
-                            <a href = "#"><i class="far fa-comments icon" >Chat room</i></a>
-						</div>
-						<div class="col-md-6 col-sm-6 hidden-xs text-right">
-							<div class="social">
-								<a class="facebook" href="#" data-tooltip="tooltip"
-									data-placement="bottom" title="Facebook"><i
-									class="fa fa-facebook"></i></a> <a class="twitter" href="#"
-									data-tooltip="tooltip" data-placement="bottom" title="Twitter"><i
-									class="fa fa-twitter"></i></a> <a class="google" href="#"
-									data-tooltip="tooltip" data-placement="bottom"
-									title="Google Plus"><i class="fa fa-google-plus"></i></a> <a
-									class="linkedin" href="#" data-tooltip="tooltip"
-									data-placement="bottom" title="Linkedin"><i
-									class="fa fa-linkedin"></i></a> <a class="pinterest" href="#"
-									data-tooltip="tooltip" data-placement="bottom"
-                                    title="Pinterest"><i class="fa fa-pinterest"></i>
-                                </a>
-                            </div>
-                                <!-- <a href = "#"><i class="fas fa-user-graduate icon">1701040163</i></a> -->
-                                <li class="dropdown yamm-fw  profile"><a href = "#"><i class="fas fa-user-graduate icon">1701040163</i></a>
-                                    <ul class="dropdown-menu menu">
-                                        <li>
-                                            <h5>Vu Van Tung</h5>
-                                            <ul class = "com">
-                                            <li><a href="#" th:href="@{/user/account}">Profile</a></li>
-                                            <li><a th:href="@{/forgotPassword}">Change password</a></li>
-                                            <li><a href="#"th:href="@{/logout}">Logout</a></li>
-                                            </ul>
-                                              
-                                        </li>
-                                    </ul></li>
-                                </a>
-                               </div>
-						    </div>
-                        </div>
-					</div>
-				</div>
-			</div>
-			<!-- end topbar -->
-
-			<nav class="navbar navbar-expand-xl navbar-light bg-light">
-				<a class="navbar-brand" href="#"><img src="../images/Hanu_logo.jpg"
-					alt="" width="60" height="60"></a>
-				<button class="navbar-toggler" type="button" data-toggle="collapse"
-					data-target="#navbarTogglerDemo02"
-					aria-controls="navbarTogglerDemo02" aria-expanded="false"
-					aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-
-				<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-					<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-						<li class="nav-item active"><a href="#" class="nav-link"
-							th:href="@{/home}">Home <span class="sr-only">(current)</span>
-						</a></li>
-						<li class="nav-item"><a href="#" class="nav-link" th:href="@{/news}">New</a></li>
-						<li class="nav-item"><a  href="#" class="nav-link" th:href="@{/contact}">Contact</a></li>
-						<li class="dropdown yamm-fw yamm-half"><a href="#"
-							data-toggle="dropdown" class="dropdown-toggle active">Mega
-								Menu <b class="fa fa-angle-down"></b>
-						</a>
-							<ul class="dropdown-menu">
-								<li>
-									<div class="yamm-content clearfix">
-										<div class="row-fluid">
-											<div class="col-md-6 col-sm-6">
-												<h4>Course Pages</h4>
-												<ul>
-													<li><a href="#">Courses Name 01</a></li>
-													<li><a href="#">Courses Name 02</a></li>
-													<li><a href="#">Courses Name 03</a></li>
-													<li><a href="#">Courses Name 04</a></li>
-													<li><a href="#">Courses Name 05</a></li>
-													<li><a href="#">Courses Name 06</a></li>
-													<li><a href="#">Courses Name 07</a></li>
-													<li><a href="#">Courses Name 08</a></li>
-													<li><a href="#">Courses Name 09</a></li>
-												</ul>
-											</div>
-											<div class="col-md-6 col-sm-6">
-												<div class="menu-widget text-center">
-													<div class="image-wrap entry">
-														<img src="upload/course_01.jpg" alt=""
-															class="img-responsive">
-														<div class="magnifier">
-															<a href="#" title=""><i class="flaticon-add"></i></a>
-														</div>
-													</div>
-													<!-- end image-wrap -->
-													<h5>
-														<a href="#">Learning Bootstrap Framework</a>
-													</h5>
-													<small>$22.00</small> <a href="#" class="menu-button">View
-														Course</a>
-												</div>
-												<!-- end widget -->
-											</div>
-										</div>
-									</div>
-								</li>
-							</ul></li>
-					</ul>
-					<form class="form-inline my-2 my-lg-0">
-						<input class="form-control mr-sm-2" type="search"
-							placeholder="Search">
-						<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-					</form>
-				</div>
-			</nav>
-		</header>
-            <section class="section db p120">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="tagline-message page-title text-center">
-                                <h3>Course</h3>
-                                <ul class="breadcrumb">
-                                    <li><a href="javascript:void(0)">HANU</a></li>
-									<i class="fas fa-book" id = "icon-book"></i>
-									<p>Teacher</p>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- end col -->
-                    </div>
-                    <!-- end row -->
+    <!-- Header Navbar -->
+    <header class="bg-[#1e293b] border-b border-slate-700 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-3">
+                    <svg class="w-6 h-6 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                    </svg>
+                    <span class="font-bold text-lg tracking-wider text-teal-400">ACADEMIA FACULTY PORTAL</span>
                 </div>
-                <!-- end container -->
-            </section>
-            <!-- end section -->
-
-        <div class = "box-container">
-            <div class = "box-material box">
-                <div class = "box-intro box">
-                    <h1 th:text="${c.name}">System And Design</h1>
-					<h5>Description:</h5>
-					<form th:action="@{/updateCourse/{id}(id=${c.id})}" method="post" th:object="${course}">
-					<input type="text" id="description" placeholder= "Type description for course..." th:field="*{description}">
-                    <h5>References:</h5>
-					<input type="text" id="references" placeholder= "Type references for course..." th:field="*{references}">
-					 <a href = "#"><button type = "submit">Add</button></a>
-                </form>
-                </div>
-                <div class = "box-submit box">
-					<h3>Submission Box</h3>
-					<hr>
-					<h5>Create new Assigment</h5>
-					<a th:href="@{/file}"><i class="fas fa-plus-square"></i> Add</a>
-					<hr>
-					<th:block th:each="f : ${files}">
-					<a th:href=${f.url}><b th:text=${f.fileName}>File Name</b></a>
-					</th:block>
+                <div class="flex gap-4">
+                    <a th:href="@{/manage/course}" class="px-4 py-2 text-sm font-medium bg-slate-800 hover:bg-slate-700 border border-slate-600 rounded-lg transition flex items-center gap-2">
+                        <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                        Back to Manager
+                    </a>
                 </div>
             </div>
-           <!--  <div class = "weekly-learn box">
-				<div>
-					<h5>New Week</h5>
-					<input type = "text" class = "title" placeholder="Type here (format: Week x: Title of lecture)"><br>
-					<input type="file"><i class="fas fa-file-pdf"></i>      Lecture<br>
-                    <input type="file"><i class="fas fa-file-word"></i>      Tutorial<br>
-					<a href ="#"><i class="fas fa-plus-square"></i> Add</a>   
-				</div>
-                <hr>
-                
-            </div> -->
-        </div> 
-        <footer class="section footer noover" th:fragment="footer">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-4 col-md-4">
-						<div class="widget clearfix">
-							<h3 class="widget-title">Subscribe Our Newsletter</h3>
-							<div class="newsletter-widget">
-								<p>
-									You can opt out of our newsletters at any time.<br> See
-									our <a href="#">privacy policy</a>.
-								</p>
-								<form class="form-inline" role="search">
-									<div class="form-1">
-										<input type="text" class="form-control"
-											placeholder="Enter email here..">
-										<button type="submit" class="btn btn-primary">
-											<i class="fa fa-paper-plane-o"></i>
-										</button>
-									</div>
-								</form>
-								<img src="images/payments.png" alt="" class="img-responsive">
-							</div>
-							<!-- end newsletter -->
-						</div>
-						<!-- end widget -->
-					</div>
-					<!-- end col -->
+        </div>
+    </header>
 
-					<div class="col-lg-3 col-md-3">
-						<div class="widget clearfix">
-							<h3 class="widget-title">Join us today</h3>
-							<p>Would you like to earn your profits by joining our team?
-								Join us without losing time.</p>
-							<a href="#" class="readmore">Became a Teacher</a>
-						</div>
-						<!-- end widget -->
-					</div>
-					<!-- end col -->
+    <!-- Main Container -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- Course Title Card -->
+        <div class="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 border border-slate-700 p-8 rounded-2xl shadow-xl mb-8">
+            <div class="flex justify-between items-start gap-4">
+                <div>
+                    <span class="px-2.5 py-0.5 bg-teal-950 text-teal-400 border border-teal-900 rounded-full text-xs font-semibold uppercase tracking-wider" th:text="${course.code}">MATH101</span>
+                    <h1 class="text-3xl font-extrabold text-white mt-3 tracking-tight" th:text="${course.name}">Course Administration</h1>
+                </div>
+                <span class="px-3.5 py-1 bg-slate-800 border border-slate-700 text-slate-300 rounded-full text-xs font-semibold" th:text="${course.credit} + ' Credit Hours'">3 Credits</span>
+            </div>
+        </div>
 
-					<div class="col-lg-3 col-md-3">
-						<div class="widget clearfix">
-							<h3 class="widget-title">Popular Tags</h3>
-							<div class="tags-widget">
-								<ul class="list-inline">
-									<li><a href="#">course</a></li>
-									<li><a href="#">web design</a></li>
-									<li><a href="#">development</a></li>
-									<li><a href="#">language</a></li>
-									<li><a href="#">teacher</a></li>
-									<li><a href="#">speaking</a></li>
-									<li><a href="#">material</a></li>
-									<li><a href="#">css3</a></li>
-									<li><a href="#">html</a></li>
-									<li><a href="#">learning</a></li>
-								</ul>
-							</div>
-							<!-- end list-widget -->
-						</div>
-						<!-- end widget -->
-					</div>
-					<!-- end col -->
+        <!-- Success Alerts -->
+        <div th:if="${param.success}" class="mb-6 p-4 bg-emerald-950 border border-emerald-500 text-emerald-200 rounded-xl flex items-center gap-3">
+            <svg class="w-5 h-5 text-emerald-455 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <span>Course settings description updated!</span>
+        </div>
+        <div th:if="${param.uploadSuccess}" class="mb-6 p-4 bg-emerald-950 border border-emerald-500 text-emerald-200 rounded-xl flex items-center gap-3">
+            <svg class="w-5 h-5 text-emerald-455 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <span>Study resource successfully attached to this syllabus!</span>
+        </div>
 
-					<div class="col-lg-2 col-md-2">
-						<div class="widget clearfix">
-							<h3 class="widget-title">Support</h3>
-							<div class="list-widget">
-								<ul>
-									<li><a href="#">Terms of Use</a></li>
-									<li><a href="#">Copyrights</a></li>
-									<li><a href="#">Create a Ticket</a></li>
-									<li><a href="#">Pricing & Plans</a></li>
-									<li><a href="#">Carrier</a></li>
-									<li><a href="#">Trademark</a></li>
-								</ul>
-							</div>
-							<!-- end list-widget -->
-						</div>
-						<!-- end widget -->
-					</div>
-					<!-- end col -->
-				</div>
-				<!-- end row -->
-			</div>
-			<!-- end container -->
-		</footer>
-		<!-- end footer -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <!-- Left: Edit Course Details Form -->
+            <div class="lg:col-span-2 space-y-8">
+                <div class="bg-[#1e293b] border border-slate-800 p-6 rounded-2xl shadow-2xl space-y-6">
+                    <h3 class="text-lg font-bold text-white border-b border-slate-700 pb-3 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                        Curriculum Description
+                    </h3>
 
-		<div class="copyrights">
-			<div class="container">
-				<div class="clearfix">
-					<div class="pull-left">
-						<div class="cop-logo">
-							<a href="#"><img src="images/logo.png" alt=""></a>
-						</div>
-					</div>
+                    <form th:action="@{/updateCourse/{id}(id=${course.id})}" method="post" class="space-y-4">
 
-					<div class="pull-right">
-						<div class="footer-links">
-							<ul class="list-inline">
-								<li>Design : TungVu</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- end container -->
-		</div>
-		<!-- end copy -->
-	</div>
-	<!-- end wrapper -->
+                        <div>
+                            <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Detailed Syllabus & Guidelines</label>
+                            <textarea name="description" rows="6" required
+                                      th:text="${course.description}"
+                                      class="w-full bg-[#0f172a] border border-slate-700 focus:border-teal-500 text-white p-2.5 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-teal-500 transition" 
+                                      placeholder="Provide the course outline and guidelines..."></textarea>
+                        </div>
 
-	<!-- jQuery Files -->
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-		integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-		crossorigin="anonymous"></script>
-	<script src="/vendor/jquery/jquery-3.2.1.min.js"></script>
-	<script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
-	<script src="/js/animate.js"></script>
-	<script src="/js/custom.js"></script>
-	<script src="/js/file.js"></script>
-	
+                        <div class="flex justify-end">
+                            <button type="submit" class="px-6 py-2.5 bg-teal-600 hover:bg-teal-500 text-white rounded-xl text-sm font-semibold transition shadow-lg shadow-teal-555/10 flex items-center gap-1.5">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                Save Details
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Attached Resources List -->
+                <div class="bg-[#1e293b] border border-slate-800 p-6 rounded-2xl shadow-2xl space-y-6">
+                    <h3 class="text-lg font-bold text-white border-b border-slate-700 pb-3 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                        Attached Study Materials
+                    </h3>
+
+                    <div class="space-y-4">
+                        <th:block th:each="file : ${files}">
+                            <div class="bg-[#161e29]/50 border border-slate-850 p-4 rounded-xl flex justify-between items-center hover:border-teal-500/30 transition">
+                                <div class="flex items-center gap-3">
+                                    <span class="text-teal-400 bg-teal-950/50 p-2.5 rounded-lg text-lg flex items-center justify-center">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                                    </span>
+                                    <div>
+                                        <h4 class="font-bold text-white text-sm" th:text="${file.fileName}">Syllabus.pdf</h4>
+                                        <span class="text-[10px] text-slate-500 font-semibold uppercase" th:text="${file.fileType}">PDF</span>
+                                    </div>
+                                </div>
+                                
+                                <a th:href="@{/downloadFile/{fileId}(fileId=${file.id})}" 
+                                   class="px-3.5 py-1.5 text-xs font-semibold bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg transition text-slate-200 flex items-center gap-1">
+                                    <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                                    Download
+                                </a>
+                            </div>
+                        </th:block>
+
+                        <!-- Empty state -->
+                        <div th:if="${#lists.isEmpty(files)}" class="text-center py-6 text-slate-500 italic text-xs">
+                            No files attached to this syllabus yet. Use the upload panel.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Upload Panel -->
+            <div class="space-y-6">
+                <div class="bg-[#1e293b] border border-slate-800 p-6 rounded-2xl shadow-xl space-y-6">
+                    <h3 class="text-lg font-bold text-white border-b border-slate-700 pb-3 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                        Upload Material
+                    </h3>
+
+                    <form th:action="@{/teacher/course/upload}" method="post" enctype="multipart/form-data" class="space-y-4">
+                        <input type="hidden" name="courseId" th:value="${course.id}">
+                        
+                        <div>
+                            <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Select Resource File</label>
+                            <input type="file" name="file" required
+                                   class="w-full text-xs text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-slate-800 file:text-slate-200 file:hover:bg-slate-750 transition cursor-pointer">
+                        </div>
+
+                        <button type="submit" class="w-full bg-teal-600 hover:bg-teal-500 text-white font-semibold py-2.5 rounded-lg text-sm transition flex items-center justify-center gap-1.5">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                            Upload File
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
 </body>
 </html>

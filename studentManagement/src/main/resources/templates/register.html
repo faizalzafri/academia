@@ -1,151 +1,246 @@
-<!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	xmlns:th="http://www.thymeleaf.org"
-	layout:decorate="~{fragments/layout}">
-
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-<!-- Required meta tags-->
-<meta charset="UTF-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="Colorlib Templates">
-<meta name="author" content="Colorlib">
-<meta name="keywords" content="Colorlib Templates">
-
-<!-- Title Page-->
-<title>Register</title>
-
-<!-- Icons font CSS-->
-<link href="../vendor/mdi-font/css/material-design-iconic-font.min.css"
-	rel="stylesheet" media="all">
-<link href="../fonts/font-awesome-4.7.0/css/font-awesome.min.css"
-	rel="stylesheet" media="all">
-<!-- Font special for pages-->
-<link
-	href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
-	rel="stylesheet">
-
-<!-- Vendor CSS-->
-<link href="../vendor/select2/select2.min.css" rel="stylesheet"
-	media="all">
-<link href="../vendor/datepicker/daterangepicker.css" rel="stylesheet"
-	media="all">
-<!-- Main CSS-->
-<link href="../css/register-main.css" rel="stylesheet" media="all">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account - Academia Platform</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Font Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
 </head>
+<body class="bg-[#0f172a] text-[#f8fafc] min-h-screen font-sans flex flex-col justify-between">
 
-<body>
-	<div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins"
-		layout:fragment="content" th:remove="tag">
-		<div class="wrapper wrapper--w680">
-			<div class="card card-4">
-				<div class="card-body">
-					<h2 class="title">Registration Form</h2>
-					<form th:action="@{/register}" th:object="${user}" method="POST">
-						<div class="row row-space">
-							<div class="col-2">
-								<div class="input-group">
-									<label class="label">name</label> <input class="input--style-4"
-										type="text" name="name" th:field="*{name}">
-								</div>
-							</div>
-							<div class="col-2">
-								<div class="input-group">
-									<label class="label">Department</label> <input
-										class="input--style-4" type="text" name="department"
-										th:field="*{department}">
-								</div>
-							</div>
-						</div>
-						<div class="row row-space">
-							<div class="col-2">
-								<div class="input-group">
-									<label class="label">Birthday</label>
-									<div class="input-group-icon">
-										<input class="input--style-4 js-datepicker" type="text"
-											name="birthday" th:field="*{dob}"> <i
-											class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
-									</div>
-								</div>
-							</div>
-							<div class="col-2">
-								<div class="input-group">
-									<label class="label">Gender</label>
-									<div
-										th:each="gender : ${T(edu.hanu.studentManagement.model.Gender).values()}">
-										<div class="p-t-10">
-											<input type="radio" th:field="*{gender}" th:value="${gender}" />
-											<label class="radio-container m-r-45"
-												th:for="${#ids.prev('gender')}" th:text="${gender}">Gender</label>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="row row-space">
-							<div class="col-2">
-								<div class="input-group">
-									<label class="label">Email</label> <input
-										class="input--style-4" type="email" name="email"
-										th:field="*{email}">
-								</div>
-							</div>
-							<div class="col-2">
-								<div class="input-group">
-									<label class="label">Password</label> <input
-										class="input--style-4" type="password" name="password"
-										th:field=*{password}>
-								</div>
-							</div>
-						</div>
-						<div class="row row-space">
-							<div class="col-2">
-								<div class="input-group">
-									<label class="label">Confirm Password</label> <input
-										class="input--style-4" type="password" name="password"
-										th:field=*{confirmPassword}>
-								</div>
-							</div>
-							<div class="col-2">
-								<div class="input-group">
-									<label class="label">Student ID</label> <input
-										class="input--style-4" type="text" name="studentId"
-										th:field=*{studentUsername}>
-								</div>
-							</div>
-							<div class="col-2">
-								<div class="input-group">
-									<label class="label">Student Description</label> <textarea
-										class="input--style-4" name="studentId"
-										th:field=*{description}></textarea>
-								</div>
-							</div>
-						</div>
+    <!-- Header Navbar -->
+    <header class="bg-[#1e293b] border-b border-slate-700 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-3">
+                    <svg class="w-7 h-7 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                    </svg>
+                    <span class="font-bold text-xl tracking-wider text-teal-400">ACADEMIA</span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <span class="text-xs text-slate-400">Already registered?</span>
+                    <a th:href="@{/login}" class="px-4 py-1.5 text-xs font-semibold bg-slate-800 hover:bg-slate-700 border border-slate-600 rounded-lg transition text-slate-200">
+                        Sign In
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
 
-						<div class="p-t-15">
-							<button class="btn btn--radius-2 btn--blue" type="submit">Submit</button>
-							<span>Already registered? <a href="/" th:href="@{/login}">Login</a>
-							</span>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
+    <!-- Main Container -->
+    <main class="max-w-3xl w-full mx-auto px-4 py-10 flex-grow flex items-center justify-center">
+        <div class="w-full bg-[#1e293b] border border-slate-800 rounded-2xl shadow-2xl p-8 sm:p-10 space-y-6">
+            
+            <div class="text-center space-y-2">
+                <h1 class="text-3xl font-extrabold text-white tracking-tight">Institutional Registration</h1>
+                <p class="text-sm text-slate-400">Join the Academia educational network. Registrations require System Admin approval.</p>
+            </div>
 
-	<!-- Jquery JS-->
-	<script src="../vendor/jquery/jquery-3.2.1.min.js"></script>
+            <!-- Role Selector Tabs -->
+            <div class="flex p-1 bg-slate-900/80 border border-slate-700 rounded-xl max-w-md mx-auto">
+                <button type="button" id="tabStudent" onclick="selectRole('STUDENT')" 
+                        class="flex-1 py-2.5 text-xs font-bold rounded-lg transition text-white bg-teal-600 shadow-md">
+                    Student Account
+                </button>
+                <button type="button" id="tabTeacher" onclick="selectRole('TEACHER')" 
+                        class="flex-1 py-2.5 text-xs font-bold rounded-lg transition text-slate-400 hover:text-white">
+                    Faculty / Teacher
+                </button>
+            </div>
 
-	<!-- Vendor JS-->
-	<script src="../vendor/select2/select2.min.js"></script>
-	<script src="../vendor/datepicker/moment.min.js"></script>
-	<script src="../vendor/datepicker/daterangepicker.js"></script>
+            <form th:action="@{/register}" th:object="${registration}" method="post" class="space-y-6" id="regForm">
+                
+                <!-- Hidden input for selected role -->
+                <input type="hidden" id="roleInput" th:field="*{role}" value="STUDENT">
 
-	<!-- Main JS-->
-	<script src="../js/global.js"></script>
+                <!-- Global errors -->
+                <div th:if="${#fields.hasErrors('*')}" class="p-4 bg-rose-950/60 border border-rose-600 text-rose-200 rounded-xl text-xs space-y-1">
+                    <p class="font-bold flex items-center gap-1.5">
+                        <svg class="w-4 h-4 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        Please correct the following errors:
+                    </p>
+                    <ul class="list-disc list-inside space-y-0.5 text-slate-300">
+                        <li th:each="err : ${#fields.errors('*')}" th:text="${err}">Error</li>
+                    </ul>
+                </div>
 
+                <!-- Account Credentials Grid -->
+                <div class="space-y-4">
+                    <h3 class="text-xs font-bold text-teal-400 uppercase tracking-wider border-b border-slate-700 pb-2">1. Account Credentials</h3>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-1.5">Username *</label>
+                            <input type="text" th:field="*{username}" required placeholder="e.g., alex_morgan"
+                                   class="w-full bg-[#0f172a] border border-slate-700 focus:border-teal-500 text-white px-3.5 py-2.5 rounded-lg text-sm focus:outline-none transition">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-1.5">Email Address *</label>
+                            <input type="email" th:field="*{email}" required placeholder="alex@academia.edu"
+                                   class="w-full bg-[#0f172a] border border-slate-700 focus:border-teal-500 text-white px-3.5 py-2.5 rounded-lg text-sm focus:outline-none transition">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-1.5">Password *</label>
+                            <input type="password" th:field="*{password}" required placeholder="••••••••"
+                                   class="w-full bg-[#0f172a] border border-slate-700 focus:border-teal-500 text-white px-3.5 py-2.5 rounded-lg text-sm focus:outline-none transition">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-1.5">Confirm Password *</label>
+                            <input type="password" th:field="*{confirmPassword}" required placeholder="••••••••"
+                                   class="w-full bg-[#0f172a] border border-slate-700 focus:border-teal-500 text-white px-3.5 py-2.5 rounded-lg text-sm focus:outline-none transition">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Personal Information -->
+                <div class="space-y-4">
+                    <h3 class="text-xs font-bold text-teal-400 uppercase tracking-wider border-b border-slate-700 pb-2">2. Personal & Institutional Details</h3>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="sm:col-span-2">
+                            <label class="block text-xs font-semibold text-slate-300 mb-1.5">Full Name *</label>
+                            <input type="text" th:field="*{name}" required placeholder="e.g., Dr. Alex Morgan or Alex Morgan"
+                                   class="w-full bg-[#0f172a] border border-slate-700 focus:border-teal-500 text-white px-3.5 py-2.5 rounded-lg text-sm focus:outline-none transition">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-1.5">Department</label>
+                            <input type="text" th:field="*{department}" placeholder="e.g., Computer Science"
+                                   class="w-full bg-[#0f172a] border border-slate-700 focus:border-teal-500 text-white px-3.5 py-2.5 rounded-lg text-sm focus:outline-none transition">
+                        </div>
+
+                        <!-- STUDENT FIELD: Major -->
+                        <div id="studentMajorDiv">
+                            <label class="block text-xs font-semibold text-slate-300 mb-1.5">Major / Degree</label>
+                            <input type="text" th:field="*{major}" placeholder="e.g., Software Engineering"
+                                   class="w-full bg-[#0f172a] border border-slate-700 focus:border-teal-500 text-white px-3.5 py-2.5 rounded-lg text-sm focus:outline-none transition">
+                        </div>
+
+                        <!-- TEACHER FIELD: Employee ID -->
+                        <div id="teacherEmpDiv" class="hidden">
+                            <label class="block text-xs font-semibold text-slate-300 mb-1.5">Employee / Faculty ID *</label>
+                            <input type="text" th:field="*{employeeId}" placeholder="e.g., FAC-2026-01"
+                                   class="w-full bg-[#0f172a] border border-slate-700 focus:border-teal-500 text-white px-3.5 py-2.5 rounded-lg text-sm focus:outline-none transition">
+                        </div>
+
+                        <!-- TEACHER FIELD: Designation -->
+                        <div id="teacherDesigDiv" class="hidden">
+                            <label class="block text-xs font-semibold text-slate-300 mb-1.5">Designation *</label>
+                            <input type="text" th:field="*{designation}" placeholder="e.g., Associate Professor"
+                                   class="w-full bg-[#0f172a] border border-slate-700 focus:border-teal-500 text-white px-3.5 py-2.5 rounded-lg text-sm focus:outline-none transition">
+                        </div>
+
+                        <!-- TEACHER FIELD: Specialization -->
+                        <div id="teacherSpecDiv" class="hidden">
+                            <label class="block text-xs font-semibold text-slate-300 mb-1.5">Specialization</label>
+                            <input type="text" th:field="*{specialization}" placeholder="e.g., Distributed Systems & AI"
+                                   class="w-full bg-[#0f172a] border border-slate-700 focus:border-teal-500 text-white px-3.5 py-2.5 rounded-lg text-sm focus:outline-none transition">
+                        </div>
+
+                        <!-- STUDENT FIELD: Gender -->
+                        <div id="studentGenderDiv">
+                            <label class="block text-xs font-semibold text-slate-300 mb-1.5">Gender</label>
+                            <select th:field="*{gender}" 
+                                    class="w-full bg-[#0f172a] border border-slate-700 focus:border-teal-500 text-white px-3.5 py-2.5 rounded-lg text-sm focus:outline-none transition">
+                                <option th:value="${T(com.academia.platform.model.Gender).MALE}">Male</option>
+                                <option th:value="${T(com.academia.platform.model.Gender).FEMALE}">Female</option>
+                                <option th:value="${T(com.academia.platform.model.Gender).OTHER}">Other</option>
+                            </select>
+                        </div>
+
+                        <!-- STUDENT FIELD: Date of Birth -->
+                        <div id="studentDobDiv">
+                            <label class="block text-xs font-semibold text-slate-300 mb-1.5">Date of Birth</label>
+                            <input type="date" th:field="*{dateOfBirth}"
+                                   class="w-full bg-[#0f172a] border border-slate-700 focus:border-teal-500 text-white px-3.5 py-2.5 rounded-lg text-sm focus:outline-none transition">
+                        </div>
+
+                        <!-- STUDENT FIELD: Cohort -->
+                        <div id="studentCohortDiv">
+                            <label class="block text-xs font-semibold text-slate-300 mb-1.5">Academic Cohort</label>
+                            <input type="text" th:field="*{cohort}" placeholder="e.g., 2026-2030"
+                                   class="w-full bg-[#0f172a] border border-slate-700 focus:border-teal-500 text-white px-3.5 py-2.5 rounded-lg text-sm focus:outline-none transition">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1.5">Academic Bio / Description</label>
+                        <textarea th:field="*{description}" rows="3" placeholder="Brief summary of academic interests or qualifications..."
+                                  class="w-full bg-[#0f172a] border border-slate-700 focus:border-teal-500 text-white px-3.5 py-2.5 rounded-lg text-sm focus:outline-none transition"></textarea>
+                    </div>
+                </div>
+
+                <div class="pt-4 border-t border-slate-800 flex items-center justify-between">
+                    <p class="text-xs text-amber-400 flex items-center gap-1.5">
+                        <svg class="w-4 h-4 text-amber-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        Account activation requires System Admin review.
+                    </p>
+                    <button type="submit" 
+                            class="px-8 py-3 bg-teal-600 hover:bg-teal-500 text-white rounded-xl text-sm font-bold transition shadow-lg shadow-teal-500/20">
+                        Submit Registration
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#1e293b] border-t border-slate-800 py-6 text-center text-xs text-slate-500">
+        <p>&copy; 2026 Academia Platform. Institutional Academic Portal.</p>
+    </footer>
+
+    <script>
+        function selectRole(role) {
+            document.getElementById('roleInput').value = role;
+            const tabStudent = document.getElementById('tabStudent');
+            const tabTeacher = document.getElementById('tabTeacher');
+            
+            const studentFields = ['studentMajorDiv', 'studentGenderDiv', 'studentDobDiv', 'studentCohortDiv'];
+            const teacherFields = ['teacherEmpDiv', 'teacherDesigDiv', 'teacherSpecDiv'];
+
+            if (role === 'STUDENT') {
+                tabStudent.className = 'flex-1 py-2.5 text-xs font-bold rounded-lg transition text-white bg-teal-600 shadow-md';
+                tabTeacher.className = 'flex-1 py-2.5 text-xs font-bold rounded-lg transition text-slate-400 hover:text-white';
+                
+                studentFields.forEach(id => document.getElementById(id).classList.remove('hidden'));
+                teacherFields.forEach(id => document.getElementById(id).classList.add('hidden'));
+            } else {
+                tabTeacher.className = 'flex-1 py-2.5 text-xs font-bold rounded-lg transition text-white bg-teal-600 shadow-md';
+                tabStudent.className = 'flex-1 py-2.5 text-xs font-bold rounded-lg transition text-slate-400 hover:text-white';
+                
+                studentFields.forEach(id => document.getElementById(id).classList.add('hidden'));
+                teacherFields.forEach(id => document.getElementById(id).classList.remove('hidden'));
+            }
+        }
+
+        // Initialize state on load based on model value
+        window.addEventListener('DOMContentLoaded', () => {
+            const currentRole = document.getElementById('roleInput').value || 'STUDENT';
+            selectRole(currentRole);
+        });
+    </script>
 </body>
-<!-- This templates was made by Colorlib (https://colorlib.com) -->
-
 </html>
-<!-- end document-->

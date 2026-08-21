@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/01-initial-schema.yaml
+  - include:
+      file: db/changelog/02-add-approval-status.yaml
+  - include:
+      file: db/changelog/03-seed-admin-and-reference-data.yaml
+  - include:
+      file: db/changelog/04-academic-year.yaml
+  - include:
+      file: db/changelog/05-student-enrollment.yaml
+  - include:
+      file: db/changelog/06-activities.yaml

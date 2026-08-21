@@ -3,9 +3,9 @@ version: '3.8'
 services:
   postgres:
     image: postgres:16-alpine
-    container_name: student-management-db
+    container_name: academiaDb
     environment:
-      POSTGRES_DB: studentManagementDb
+      POSTGRES_DB: academiaDb
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     ports:
