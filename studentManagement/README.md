@@ -29,7 +29,7 @@ A web-based academic management system built with Spring Boot for managing stude
 
 ```
 Username: admin
-Password: Password123
+Password: Password123!
 ```
 
 ## Tech Stack

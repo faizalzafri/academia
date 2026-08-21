@@ -2,15 +2,15 @@ package com.academia.platform.model;
 
 import java.time.LocalDateTime;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 
 @Entity
 @Table(
@@ -34,7 +34,7 @@ public class ActivityParticipant {
     @Column(length = 50)
     private String role = "Participant"; // e.g. "Participant", "Captain", "Volunteer", "Performer"
 
-    @Column(length = 100)
+    @Column(name = "team_name", length = 100)
     private String teamName; // e.g. "Red House", "Class 10-A Team", "Pom Dance Troupe"
 
     @Column(length = 50)
@@ -43,6 +43,7 @@ public class ActivityParticipant {
     @Column(length = 250)
     private String remarks;
 
+    @Column(name = "registered_at")
     private LocalDateTime registeredAt = LocalDateTime.now();
 
     public ActivityParticipant() {

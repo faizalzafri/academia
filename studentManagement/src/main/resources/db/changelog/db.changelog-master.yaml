@@ -1,13 +1,15 @@
 databaseChangeLog:
   - include:
-      file: db/changelog/01-initial-schema.yaml
+      file: db/changelog/01-initial-schema.sql
   - include:
-      file: db/changelog/02-add-approval-status.yaml
+      file: db/changelog/02-add-approval-status.sql
   - include:
-      file: db/changelog/03-seed-admin-and-reference-data.yaml
+      file: db/changelog/03-seed-admin-and-reference-data.sql
   - include:
-      file: db/changelog/04-academic-year.yaml
+      file: db/changelog/04-academic-year.sql
   - include:
-      file: db/changelog/05-student-enrollment.yaml
+      file: db/changelog/05-student-enrollment.sql
   - include:
-      file: db/changelog/06-activities.yaml
+      file: db/changelog/06-activities.sql
+  - include:
+      file: db/changelog/07-seed-institution-data.sql

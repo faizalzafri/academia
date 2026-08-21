@@ -1,13 +1,13 @@
 package com.academia.platform.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "activity_results")
@@ -21,13 +21,13 @@ public class ActivityResult {
     @JoinColumn(name = "activity_id", nullable = false)
     private Activity activity;
 
-    @Column(nullable = false, length = 100)
+    @Column(name = "event_name", nullable = false, length = 100)
     private String eventName; // e.g. "100m Sprint", "Solo Classical Dance", "Debate Final"
 
-    @Column(nullable = false, length = 100)
+    @Column(name = "winner_name", nullable = false, length = 100)
     private String winnerName;
 
-    @Column(length = 50)
+    @Column(name = "winner_class", length = 50)
     private String winnerClass; // e.g. "Class 10-A"
 
     @Column(nullable = false, length = 50)

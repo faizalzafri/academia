@@ -2,17 +2,17 @@ package com.academia.platform.model;
 
 import java.time.LocalDateTime;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 
 @Entity
 @Table(
@@ -37,13 +37,14 @@ public class StudentEnrollment {
     @JoinColumn(name = "academic_year_id", nullable = false)
     private AcademicYear academicYear;
 
-    @Column(length = 30)
+    @Column(name = "roll_number", length = 30)
     private String rollNumber;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
     private EnrollmentStatus status = EnrollmentStatus.ENROLLED;
 
+    @Column(name = "enrolled_at")
     private LocalDateTime enrolledAt = LocalDateTime.now();
 
     public StudentEnrollment() {

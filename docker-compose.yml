@@ -1,3 +1,4 @@
+name: academia-platform
 version: '3.8'
 
 services:

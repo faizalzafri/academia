@@ -2,11 +2,11 @@ package com.academia.platform.model;
 
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 
 @Entity(name = "student")
 @DiscriminatorValue("student")
@@ -15,7 +15,7 @@ public class Student extends User {
 	private String name;
 	@Enumerated(EnumType.STRING)
 	private Gender gender;
-	@Column(length = 50)
+	@Column(name = "date_of_birth", length = 50)
 	private String dateOfBirth;
 	@Column(length = 30)
 	private String major;
@@ -23,7 +23,7 @@ public class Student extends User {
 	private String department;
 	@Column(length = 30)
 	private String cohort;
-	@Column(length = 30)
+	@Column(name = "academic_advior", length = 50)
 	private String academicAdvior;
 
 	public Student() {

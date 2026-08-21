@@ -1,8 +1,8 @@
 package com.academia.platform.dto;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 import com.academia.platform.annotation.FieldMatch;
 import com.academia.platform.model.Gender;

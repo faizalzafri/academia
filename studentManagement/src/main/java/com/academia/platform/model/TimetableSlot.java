@@ -1,14 +1,15 @@
 package com.academia.platform.model;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "timetable_slots")
@@ -34,12 +35,16 @@ public class TimetableSlot {
     private AcademicYear academicYear;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "day_of_week", nullable = false, length = 20)
     private DayOfWeek dayOfWeek;
 
+    @Column(name = "period_number", nullable = false)
     private int periodNumber;
 
+    @Column(name = "start_time", length = 10)
     private String startTime;
 
+    @Column(name = "end_time", length = 10)
     private String endTime;
 
     public TimetableSlot() {

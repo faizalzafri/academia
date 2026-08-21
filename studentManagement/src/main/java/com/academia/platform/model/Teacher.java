@@ -1,8 +1,8 @@
 package com.academia.platform.model;
 
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
 
 @Entity(name = "teacher")
 @DiscriminatorValue("teacher")
@@ -10,7 +10,7 @@ public class Teacher extends User {
     @Column(name = "teacher_name", length = 50)
     private String name;
 
-    @Column(length = 20)
+    @Column(name = "employee_id", length = 20)
     private String employeeId;
 
     @Column(length = 50)
