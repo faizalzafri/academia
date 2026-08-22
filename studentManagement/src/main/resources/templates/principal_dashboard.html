@@ -2,10 +2,15 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Principal Governance Dashboard - Academia</title>
+    <title th:text="#{app.portal.principal} + ' - ' + #{app.title}">Principal Executive Governance - Academia</title>
+    
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Google Font Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <script>
         tailwind.config = {
             theme: {
@@ -18,36 +23,51 @@
         }
     </script>
 </head>
-<body class="bg-[#0f172a] text-[#f8fafc] min-h-screen font-sans">
+<body class="bg-[#f6f8fc] text-[#202124] min-h-screen font-sans">
 
     <!-- Header Navbar -->
-    <header class="bg-[#1e293b] border-b border-slate-700 sticky top-0 z-50">
+    <header class="bg-white border-b border-[#dadce0] sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 
                 <div class="flex items-center gap-3">
-                    <div class="p-2 bg-indigo-500/10 border border-indigo-500/30 text-indigo-400 rounded-xl">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="w-9 h-9 bg-[#e8f0fe] text-[#1a73e8] rounded-xl flex items-center justify-center border border-[#d2e3fc]">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
                         </svg>
                     </div>
                     <div>
-                        <span class="font-bold text-lg tracking-wider text-indigo-400">ACADEMIA</span>
-                        <span class="ml-2 px-2 py-0.5 bg-indigo-950 text-indigo-300 border border-indigo-800 rounded text-[10px] font-bold uppercase tracking-wider">Principal Office</span>
+                        <span class="font-bold text-lg tracking-wider text-[#1a73e8]">ACADEMIA</span>
+                        <span class="ml-2 px-2 py-0.5 bg-[#e8f0fe] text-[#1a73e8] border border-[#d2e3fc] rounded text-[10px] font-bold uppercase tracking-wider" th:text="#{app.portal.principal}">Principal Office</span>
                     </div>
                 </div>
 
                 <nav class="hidden md:flex items-center gap-1">
-                    <a th:href="@{/principal/dashboard}" class="px-3.5 py-2 text-sm font-semibold text-indigo-400 bg-slate-800/80 rounded-lg">Governance</a>
-                    <a th:href="@{/principal/years}" class="px-3.5 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition">Academic Years</a>
-                    <a th:href="@{/principal/history}" class="px-3.5 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition">Historical Archive</a>
-                    <a th:href="@{/activities}" class="px-3.5 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition">Activities</a>
-                    <a th:href="@{/academic/dashboard}" class="px-3.5 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition">Matrix & Timetable</a>
+                    <a th:href="@{/principal/dashboard}" class="px-3.5 py-2 text-sm font-semibold text-[#1a73e8] bg-[#e8f0fe] rounded-lg" th:text="#{nav.dashboard}">Governance</a>
+                    <a th:href="@{/principal/years}" class="px-3.5 py-2 text-sm font-medium text-[#5f6368] hover:text-[#202124] hover:bg-[#f1f3f4] rounded-lg transition" th:text="#{dash.academicYears}">Academic Years</a>
+                    <a th:href="@{/principal/history}" class="px-3.5 py-2 text-sm font-medium text-[#5f6368] hover:text-[#202124] hover:bg-[#f1f3f4] rounded-lg transition" th:text="#{dash.historicalArchive}">Historical Archive</a>
+                    <a th:href="@{/activities}" class="px-3.5 py-2 text-sm font-medium text-[#5f6368] hover:text-[#202124] hover:bg-[#f1f3f4] rounded-lg transition" th:text="#{nav.activities}">Activities</a>
+                    <a th:href="@{/academic/dashboard}" class="px-3.5 py-2 text-sm font-medium text-[#5f6368] hover:text-[#202124] hover:bg-[#f1f3f4] rounded-lg transition" th:text="#{dash.academicMatrix}">Matrix & Timetable</a>
                 </nav>
 
                 <div class="flex items-center gap-3">
-                    <a th:href="@{/logout}" class="px-3.5 py-1.5 text-xs font-semibold bg-rose-950/60 hover:bg-rose-900/80 border border-rose-800 text-rose-300 rounded-lg transition">
-                        Sign Out
+                    <!-- Language Selector Pill -->
+                    <div class="hidden sm:flex items-center gap-1 bg-[#f1f3f4] border border-[#dadce0] rounded-xl px-2.5 py-1 text-xs font-semibold text-[#5f6368]">
+                        <a th:href="@{/principal/dashboard(lang='en')}" class="px-1.5 py-0.5 rounded hover:bg-white transition" th:classappend="${#locale.language == 'en' ? 'bg-white text-[#1a73e8] font-bold shadow-xs' : ''}">EN</a>
+                        <span class="text-[#dadce0]">&bull;</span>
+                        <a th:href="@{/principal/dashboard(lang='es')}" class="px-1.5 py-0.5 rounded hover:bg-white transition" th:classappend="${#locale.language == 'es' ? 'bg-white text-[#1a73e8] font-bold shadow-xs' : ''}">ES</a>
+                        <span class="text-[#dadce0]">&bull;</span>
+                        <a th:href="@{/principal/dashboard(lang='fr')}" class="px-1.5 py-0.5 rounded hover:bg-white transition" th:classappend="${#locale.language == 'fr' ? 'bg-white text-[#1a73e8] font-bold shadow-xs' : ''}">FR</a>
+                        <span class="text-[#dadce0]">&bull;</span>
+                        <a th:href="@{/principal/dashboard(lang='de')}" class="px-1.5 py-0.5 rounded hover:bg-white transition" th:classappend="${#locale.language == 'de' ? 'bg-white text-[#1a73e8] font-bold shadow-xs' : ''}">DE</a>
+                        <span class="text-[#dadce0]">&bull;</span>
+                        <a th:href="@{/principal/dashboard(lang='hi')}" class="px-1.5 py-0.5 rounded hover:bg-white transition" th:classappend="${#locale.language == 'hi' ? 'bg-white text-[#1a73e8] font-bold shadow-xs' : ''}">HI</a>
+                        <span class="text-[#dadce0]">&bull;</span>
+                        <a th:href="@{/principal/dashboard(lang='ar')}" class="px-1.5 py-0.5 rounded hover:bg-white transition" th:classappend="${#locale.language == 'ar' ? 'bg-white text-[#1a73e8] font-bold shadow-xs' : ''}">AR</a>
+                    </div>
+
+                    <a th:href="@{/logout}" class="px-3.5 py-1.5 text-xs font-semibold bg-[#fce8e6] hover:bg-[#fad2cf] border border-[#fad2cf] text-[#c5221f] rounded-lg transition" th:text="#{nav.logout}">
+                        Sign out
                     </a>
                 </div>
 
@@ -59,25 +79,25 @@
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
         
         <!-- Hero Banner with Active Year Status -->
-        <div class="bg-gradient-to-r from-indigo-950/70 via-slate-900 to-indigo-950/70 border border-indigo-900/60 p-8 rounded-2xl shadow-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+        <div class="bg-white border border-[#dadce0] p-8 rounded-2xl shadow-[0_1px_3px_0_rgba(60,64,67,0.15),0_4px_8px_3px_rgba(60,64,67,0.08)] flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
             <div>
                 <div class="flex items-center gap-3">
-                    <span class="px-3 py-1 bg-emerald-950 border border-emerald-800 text-emerald-400 rounded-full text-xs font-bold uppercase tracking-wider flex items-center gap-1.5">
-                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                        Active Session
+                    <span class="px-3 py-1 bg-[#e6f4ea] border border-[#ceead6] text-[#137333] rounded-full text-xs font-bold uppercase tracking-wider flex items-center gap-1.5">
+                        <span class="w-2 h-2 rounded-full bg-[#1e8e3e] animate-pulse"></span>
+                        <span th:text="#{dash.activeSession}">Active Session</span>
                     </span>
-                    <span class="text-xl font-extrabold text-white" th:text="${activeYear.name}">2026-2027</span>
+                    <span class="text-xl font-extrabold text-[#202124]" th:text="${activeYear.name}">2026-2027</span>
                 </div>
-                <h1 class="text-3xl font-extrabold text-white mt-2 tracking-tight">Institutional Governance & Lifecycle</h1>
-                <p class="text-sm text-slate-400 mt-1">Oversee academic sessions, transition student cohorts, evaluate historical records, and orchestrate extra-curricular programs.</p>
+                <h1 class="text-2xl sm:text-3xl font-bold text-[#202124] mt-2 tracking-tight">Institutional Governance & Lifecycle</h1>
+                <p class="text-sm text-[#5f6368] mt-1">Oversee academic sessions, transition student cohorts, evaluate historical records, and orchestrate extra-curricular programs.</p>
             </div>
             
             <div class="flex items-center gap-3">
-                <a th:href="@{/principal/years}" class="px-4 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs uppercase tracking-wider rounded-xl transition shadow-lg shadow-indigo-500/20">
-                    Manage Sessions &rarr;
+                <a th:href="@{/principal/years}" class="px-4 py-2.5 bg-[#1a73e8] hover:bg-[#174ea6] text-white font-semibold text-xs uppercase tracking-wider rounded-xl transition shadow-sm hover:shadow-md">
+                    <span th:text="#{dash.academicYears}">Manage Sessions</span> &rarr;
                 </a>
-                <a th:href="@{/principal/history}" class="px-4 py-2.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 font-bold text-xs uppercase tracking-wider rounded-xl transition">
-                    Browse Past Archives
+                <a th:href="@{/principal/history}" class="px-4 py-2.5 bg-white hover:bg-[#f1f3f4] border border-[#dadce0] text-[#1a73e8] font-semibold text-xs uppercase tracking-wider rounded-xl transition" th:text="#{dash.historicalArchive}">
+                    Browse Archives
                 </a>
             </div>
         </div>
@@ -85,56 +105,56 @@
         <!-- Metrics Overview Grid -->
         <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
             
-            <div class="bg-[#1e293b] border border-slate-800 p-6 rounded-2xl shadow-xl">
+            <div class="bg-white border border-[#dadce0] p-6 rounded-2xl shadow-sm">
                 <div class="flex justify-between items-start">
                     <div>
-                        <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Active Enrollments</span>
-                        <div class="text-3xl font-extrabold text-white mt-2" th:text="${totalStudents}">120</div>
+                        <span class="text-xs font-semibold text-[#5f6368] uppercase tracking-wider" th:text="#{dash.totalEnrolled}">Active Enrollments</span>
+                        <div class="text-3xl font-extrabold text-[#202124] mt-2" th:text="${totalStudents}">120</div>
                     </div>
-                    <div class="p-3 bg-teal-500/10 text-teal-400 rounded-xl border border-teal-500/20">
+                    <div class="p-3 bg-[#e8f0fe] text-[#1a73e8] rounded-xl border border-[#d2e3fc]">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
                     </div>
                 </div>
-                <div class="mt-4 text-xs text-slate-400">Current active year students</div>
+                <div class="mt-4 text-xs text-[#5f6368]">Current active year students</div>
             </div>
 
-            <div class="bg-[#1e293b] border border-slate-800 p-6 rounded-2xl shadow-xl">
+            <div class="bg-white border border-[#dadce0] p-6 rounded-2xl shadow-sm">
                 <div class="flex justify-between items-start">
                     <div>
-                        <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Faculty & Staff</span>
-                        <div class="text-3xl font-extrabold text-white mt-2" th:text="${totalTeachers}">18</div>
+                        <span class="text-xs font-semibold text-[#5f6368] uppercase tracking-wider">Faculty & Staff</span>
+                        <div class="text-3xl font-extrabold text-[#202124] mt-2" th:text="${totalTeachers}">18</div>
                     </div>
-                    <div class="p-3 bg-indigo-500/10 text-indigo-400 rounded-xl border border-indigo-500/20">
+                    <div class="p-3 bg-[#e8f0fe] text-[#1a73e8] rounded-xl border border-[#d2e3fc]">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path></svg>
                     </div>
                 </div>
-                <div class="mt-4 text-xs text-slate-400">Approved instructors & mentors</div>
+                <div class="mt-4 text-xs text-[#5f6368]">Approved instructors & mentors</div>
             </div>
 
-            <div class="bg-[#1e293b] border border-slate-800 p-6 rounded-2xl shadow-xl">
+            <div class="bg-white border border-[#dadce0] p-6 rounded-2xl shadow-sm">
                 <div class="flex justify-between items-start">
                     <div>
-                        <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Class Sections</span>
-                        <div class="text-3xl font-extrabold text-white mt-2" th:text="${#lists.size(classSections)}">24</div>
+                        <span class="text-xs font-semibold text-[#5f6368] uppercase tracking-wider" th:text="#{dash.academicMatrix}">Class Sections</span>
+                        <div class="text-3xl font-extrabold text-[#202124] mt-2" th:text="${#lists.size(classSections)}">24</div>
                     </div>
-                    <div class="p-3 bg-amber-500/10 text-amber-400 rounded-xl border border-amber-500/20">
+                    <div class="p-3 bg-[#e8f0fe] text-[#1a73e8] rounded-xl border border-[#d2e3fc]">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
                     </div>
                 </div>
-                <div class="mt-4 text-xs text-slate-400">Classrooms (Grades 1 to 12)</div>
+                <div class="mt-4 text-xs text-[#5f6368]">Classrooms (Grades 1 to 12)</div>
             </div>
 
-            <div class="bg-[#1e293b] border border-slate-800 p-6 rounded-2xl shadow-xl">
+            <div class="bg-white border border-[#dadce0] p-6 rounded-2xl shadow-sm">
                 <div class="flex justify-between items-start">
                     <div>
-                        <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Extra-Curriculars</span>
-                        <div class="text-3xl font-extrabold text-white mt-2" th:text="${totalActivities}">6</div>
+                        <span class="text-xs font-semibold text-[#5f6368] uppercase tracking-wider" th:text="#{nav.activities}">Extra-Curriculars</span>
+                        <div class="text-3xl font-extrabold text-[#202124] mt-2" th:text="${totalActivities}">6</div>
                     </div>
-                    <div class="p-3 bg-rose-500/10 text-rose-400 rounded-xl border border-rose-500/20">
+                    <div class="p-3 bg-[#e8f0fe] text-[#1a73e8] rounded-xl border border-[#d2e3fc]">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                     </div>
                 </div>
-                <div class="mt-4 text-xs text-slate-400">Sports, cultural & gala events</div>
+                <div class="mt-4 text-xs text-[#5f6368]">Sports, cultural & gala events</div>
             </div>
 
         </div>
@@ -143,34 +163,34 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
             
             <!-- Left: Academic Session Lifecycle Console -->
-            <div class="bg-[#1e293b] border border-slate-800 rounded-2xl shadow-2xl p-6 space-y-6">
-                <div class="flex justify-between items-center border-b border-slate-800 pb-4">
+            <div class="bg-white border border-[#dadce0] rounded-2xl shadow-sm p-6 space-y-6">
+                <div class="flex justify-between items-center border-b border-[#e0e2e7] pb-4">
                     <div>
-                        <h2 class="text-lg font-bold text-white flex items-center gap-2">
-                            <svg class="w-5 h-5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                            Academic Year Sessions
+                        <h2 class="text-base font-bold text-[#202124] flex items-center gap-2">
+                            <svg class="w-5 h-5 text-[#1a73e8]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                            <span th:text="#{dash.academicYears}">Academic Year Sessions</span>
                         </h2>
-                        <p class="text-xs text-slate-400 mt-0.5">Prepare future sessions, promote student cohorts, and close finished terms.</p>
+                        <p class="text-xs text-[#5f6368] mt-0.5">Prepare future sessions, promote student cohorts, and close finished terms.</p>
                     </div>
-                    <a th:href="@{/principal/years}" class="text-xs font-semibold text-indigo-400 hover:text-indigo-300">All Sessions &rarr;</a>
+                    <a th:href="@{/principal/years}" class="text-xs font-semibold text-[#1a73e8] hover:underline" th:text="#{btn.viewDetails}">All Sessions &rarr;</a>
                 </div>
 
                 <div class="space-y-3">
-                    <div th:each="y : ${allYears}" class="p-4 bg-slate-900/60 border border-slate-800 rounded-xl flex items-center justify-between">
+                    <div th:each="y : ${allYears}" class="p-4 bg-[#f8fafd] border border-[#dadce0] rounded-xl flex items-center justify-between hover:border-[#1a73e8] transition">
                         <div>
                             <div class="flex items-center gap-2">
-                                <span class="font-bold text-white text-sm" th:text="${y.name}">2026-2027</span>
-                                <span th:if="${y.status.name() == 'ACTIVE'}" class="px-2 py-0.5 bg-emerald-950 text-emerald-300 border border-emerald-800 rounded text-[10px] font-bold uppercase">ACTIVE</span>
-                                <span th:if="${y.status.name() == 'PLANNING'}" class="px-2 py-0.5 bg-amber-950 text-amber-300 border border-amber-800 rounded text-[10px] font-bold uppercase">PLANNING</span>
-                                <span th:if="${y.status.name() == 'COMPLETED'}" class="px-2 py-0.5 bg-slate-800 text-slate-400 border border-slate-700 rounded text-[10px] font-bold uppercase">COMPLETED</span>
+                                <span class="font-bold text-[#202124] text-sm" th:text="${y.name}">2026-2027</span>
+                                <span th:if="${y.status.name() == 'ACTIVE'}" class="px-2 py-0.5 bg-[#e6f4ea] text-[#137333] border border-[#ceead6] rounded text-[10px] font-bold uppercase" th:text="#{status.active}">ACTIVE</span>
+                                <span th:if="${y.status.name() == 'PLANNING'}" class="px-2 py-0.5 bg-[#fef7e0] text-[#b06000] border border-[#feefc3] rounded text-[10px] font-bold uppercase" th:text="#{status.planning}">PLANNING</span>
+                                <span th:if="${y.status.name() == 'COMPLETED'}" class="px-2 py-0.5 bg-[#f1f3f4] text-[#5f6368] border border-[#dadce0] rounded text-[10px] font-bold uppercase" th:text="#{status.completed}">COMPLETED</span>
                             </div>
-                            <div class="text-xs text-slate-400 mt-1">
+                            <div class="text-xs text-[#5f6368] mt-1 font-mono">
                                 <span th:text="${y.startDate}">2026-04-01</span> &rarr; <span th:text="${y.endDate}">2027-03-31</span>
                             </div>
                         </div>
 
                         <div class="flex items-center gap-2">
-                            <a th:href="@{/principal/years/{id}/report(id=${y.id})}" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 rounded-lg text-xs font-bold transition">
+                            <a th:href="@{/principal/years/{id}/report(id=${y.id})}" class="px-3 py-1.5 bg-white hover:bg-[#f1f3f4] border border-[#dadce0] text-[#1a73e8] rounded-lg text-xs font-semibold transition">
                                 Session Report
                             </a>
                         </div>
@@ -179,26 +199,26 @@
             </div>
 
             <!-- Right: Extra-Curricular & Special Events Highlight -->
-            <div class="bg-[#1e293b] border border-slate-800 rounded-2xl shadow-2xl p-6 space-y-6">
-                <div class="flex justify-between items-center border-b border-slate-800 pb-4">
+            <div class="bg-white border border-[#dadce0] rounded-2xl shadow-sm p-6 space-y-6">
+                <div class="flex justify-between items-center border-b border-[#e0e2e7] pb-4">
                     <div>
-                        <h2 class="text-lg font-bold text-white flex items-center gap-2">
-                            <svg class="w-5 h-5 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path></svg>
-                            Extra-Curricular Highlights
+                        <h2 class="text-base font-bold text-[#202124] flex items-center gap-2">
+                            <svg class="w-5 h-5 text-[#1a73e8]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path></svg>
+                            <span th:text="#{dash.extraCurricular}">Extra-Curricular Highlights</span>
                         </h2>
-                        <p class="text-xs text-slate-400 mt-0.5">Sports Day, Annual Day, Prom Dance, and House Tournaments.</p>
+                        <p class="text-xs text-[#5f6368] mt-0.5">Sports Day, Annual Day, Prom Dance, and House Tournaments.</p>
                     </div>
-                    <a th:href="@{/activities/manage}" class="text-xs font-semibold text-rose-400 hover:text-rose-300">Create Event &rarr;</a>
+                    <a th:href="@{/activities/manage}" class="text-xs font-semibold text-[#1a73e8] hover:underline" th:text="#{btn.manage}">Create Event &rarr;</a>
                 </div>
 
-                <div class="p-5 bg-gradient-to-r from-rose-950/30 to-slate-900 border border-rose-900/40 rounded-xl space-y-3">
+                <div class="p-5 bg-[#f8fafd] border border-[#dadce0] rounded-xl space-y-3">
                     <div class="flex justify-between items-center">
-                        <span class="text-xs font-bold uppercase text-rose-400 tracking-wider">Institution Co-Curricular Platform</span>
-                        <a th:href="@{/activities}" class="px-3 py-1 bg-rose-600 hover:bg-rose-500 text-white rounded-lg text-xs font-bold transition">
-                            View All Activities
+                        <span class="text-xs font-bold uppercase text-[#1a73e8] tracking-wider">Institution Co-Curricular Platform</span>
+                        <a th:href="@{/activities}" class="px-3 py-1 bg-[#1a73e8] hover:bg-[#174ea6] text-white rounded-lg text-xs font-semibold transition" th:text="#{btn.viewDetails}">
+                            View All
                         </a>
                     </div>
-                    <p class="text-xs text-slate-300 leading-relaxed">
+                    <p class="text-xs text-[#5f6368] leading-relaxed">
                         Students can register for competitive sports, dance performances, debates, and committees. Results, rankings, and participation records are archived permanently in each student's portfolio.
                     </p>
                 </div>

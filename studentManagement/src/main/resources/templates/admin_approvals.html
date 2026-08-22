@@ -9,7 +9,7 @@
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Font Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <script>
         tailwind.config = {
@@ -23,35 +23,35 @@
         }
     </script>
 </head>
-<body class="bg-[#0f172a] text-[#f8fafc] min-h-screen font-sans">
+<body class="bg-[#f6f8fc] text-[#202124] min-h-screen font-sans">
 
     <!-- Header Navbar -->
-    <header class="bg-[#1e293b] border-b border-slate-700 sticky top-0 z-50">
+    <header class="bg-white border-b border-[#dadce0] sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 
                 <div class="flex items-center gap-3">
-                    <div class="p-2 bg-teal-500/10 border border-teal-500/30 text-teal-400 rounded-xl">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="w-9 h-9 bg-[#e8f0fe] text-[#1a73e8] rounded-xl flex items-center justify-center border border-[#d2e3fc]">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
                         </svg>
                     </div>
                     <div>
-                        <span class="font-bold text-lg tracking-wider text-teal-400">ACADEMIA</span>
-                        <span class="ml-2 px-2 py-0.5 bg-rose-950 text-rose-300 border border-rose-800 rounded text-[10px] font-bold uppercase tracking-wider">Approvals Console</span>
+                        <span class="font-bold text-lg tracking-wider text-[#1a73e8]">ACADEMIA</span>
+                        <span class="ml-2 px-2 py-0.5 bg-[#fce8e6] text-[#c5221f] border border-[#fad2cf] rounded text-[10px] font-bold uppercase tracking-wider">Approvals Console</span>
                     </div>
                 </div>
 
                 <nav class="hidden md:flex items-center gap-1">
-                    <a th:href="@{/admin/dashboard}" class="px-3.5 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition">Overview</a>
-                    <a th:href="@{/admin/approvals}" class="px-3.5 py-2 text-sm font-semibold text-teal-400 bg-slate-800/80 rounded-lg">Approvals</a>
-                    <a th:href="@{/academic/dashboard}" class="px-3.5 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition">Academic Matrix</a>
-                    <a th:href="@{/manage/course}" class="px-3.5 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition">Course Manager</a>
+                    <a th:href="@{/admin/dashboard}" class="px-3.5 py-2 text-sm font-medium text-[#5f6368] hover:text-[#202124] hover:bg-[#f1f3f4] rounded-lg transition">Overview</a>
+                    <a th:href="@{/admin/approvals}" class="px-3.5 py-2 text-sm font-semibold text-[#1a73e8] bg-[#e8f0fe] rounded-lg">Approvals</a>
+                    <a th:href="@{/academic/dashboard}" class="px-3.5 py-2 text-sm font-medium text-[#5f6368] hover:text-[#202124] hover:bg-[#f1f3f4] rounded-lg transition">Academic Matrix</a>
+                    <a th:href="@{/manage/course}" class="px-3.5 py-2 text-sm font-medium text-[#5f6368] hover:text-[#202124] hover:bg-[#f1f3f4] rounded-lg transition">Course Manager</a>
                 </nav>
 
                 <div class="flex items-center gap-3">
-                    <a th:href="@{/logout}" class="px-3.5 py-1.5 text-xs font-semibold bg-rose-950/60 hover:bg-rose-900/80 border border-rose-800 text-rose-300 rounded-lg transition">
-                        Sign Out
+                    <a th:href="@{/logout}" class="px-3.5 py-1.5 text-xs font-semibold bg-[#fce8e6] hover:bg-[#fad2cf] border border-[#fad2cf] text-[#c5221f] rounded-lg transition">
+                        Sign out
                     </a>
                 </div>
 
@@ -63,74 +63,74 @@
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
         
         <!-- Alerts -->
-        <div th:if="${successMessage}" class="p-4 bg-emerald-950/80 border border-emerald-500 text-emerald-200 rounded-xl text-xs flex items-center gap-2">
-            <svg class="w-5 h-5 text-emerald-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+        <div th:if="${successMessage}" class="p-4 bg-[#e6f4ea] border border-[#ceead6] text-[#137333] rounded-xl text-xs flex items-center gap-2">
+            <svg class="w-5 h-5 text-[#1e8e3e] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
             <span th:text="${successMessage}">Success message</span>
         </div>
 
-        <div th:if="${infoMessage}" class="p-4 bg-amber-950/80 border border-amber-500 text-amber-200 rounded-xl text-xs flex items-center gap-2">
-            <svg class="w-5 h-5 text-amber-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        <div th:if="${infoMessage}" class="p-4 bg-[#fef7e0] border border-[#feefc3] text-[#b06000] rounded-xl text-xs flex items-center gap-2">
+            <svg class="w-5 h-5 text-[#f29900] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
             <span th:text="${infoMessage}">Info message</span>
         </div>
 
         <!-- Page Header -->
-        <div class="flex justify-between items-center">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white border border-[#dadce0] p-6 rounded-2xl shadow-sm">
             <div>
-                <h1 class="text-2xl font-bold text-white tracking-tight">Pending Registration Requests</h1>
-                <p class="text-xs text-slate-400 mt-1">Review applicant credentials before enabling access to the institutional portal.</p>
+                <h1 class="text-xl sm:text-2xl font-bold text-[#202124] tracking-tight">Pending Registration Requests</h1>
+                <p class="text-xs text-[#5f6368] mt-1">Review applicant credentials before enabling access to the institutional portal.</p>
             </div>
-            <a th:href="@{/admin/dashboard}" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 rounded-xl text-xs font-semibold transition flex items-center gap-1.5">
+            <a th:href="@{/admin/dashboard}" class="px-4 py-2 bg-white hover:bg-[#f1f3f4] border border-[#dadce0] text-[#1a73e8] rounded-xl text-xs font-semibold transition flex items-center gap-1.5">
                 &larr; Back to Admin Overview
             </a>
         </div>
 
         <!-- Full Approvals Table Card -->
-        <div class="bg-[#1e293b] border border-slate-800 rounded-2xl shadow-2xl overflow-hidden">
+        <div class="bg-white border border-[#dadce0] rounded-2xl shadow-sm overflow-hidden">
             <div class="overflow-x-auto">
-                <table class="w-full text-left text-sm text-slate-300">
-                    <thead class="bg-slate-900/60 text-slate-400 text-xs uppercase tracking-wider border-b border-slate-800">
+                <table class="w-full text-left text-sm text-[#202124]">
+                    <thead class="bg-[#f1f3f4] text-[#5f6368] text-xs uppercase tracking-wider border-b border-[#e0e2e7]">
                         <tr>
-                            <th class="px-6 py-4">Account Applicant</th>
-                            <th class="px-6 py-4">Role Requested</th>
-                            <th class="px-6 py-4">Email</th>
-                            <th class="px-6 py-4">Bio / Notes</th>
-                            <th class="px-6 py-4">Submitted Date</th>
-                            <th class="px-6 py-4 text-right">Approval Actions</th>
+                            <th class="px-6 py-4 font-semibold">Account Applicant</th>
+                            <th class="px-6 py-4 font-semibold">Role Requested</th>
+                            <th class="px-6 py-4 font-semibold">Email</th>
+                            <th class="px-6 py-4 font-semibold">Bio / Notes</th>
+                            <th class="px-6 py-4 font-semibold">Submitted Date</th>
+                            <th class="px-6 py-4 text-right font-semibold">Approval Actions</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-slate-800/60">
-                        <tr th:each="user : ${pendingUsers}" class="hover:bg-slate-800/40 transition">
+                    <tbody class="divide-y divide-[#e0e2e7] text-xs">
+                        <tr th:each="user : ${pendingUsers}" class="hover:bg-[#f8fafd] transition">
                             <td class="px-6 py-4">
                                 <div class="flex items-center gap-3">
-                                    <div class="w-9 h-9 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center font-bold text-teal-400 text-xs uppercase"
+                                    <div class="w-9 h-9 rounded-full bg-[#e8f0fe] border border-[#d2e3fc] flex items-center justify-center font-bold text-[#1a73e8] text-xs uppercase"
                                          th:text="${#strings.substring(user.username, 0, 1)}">U</div>
                                     <div>
-                                        <p class="font-bold text-white text-xs" th:text="${user.username}">username</p>
+                                        <p class="font-bold text-[#202124] text-xs" th:text="${user.username}">username</p>
                                     </div>
                                 </div>
                             </td>
                             <td class="px-6 py-4">
                                 <span th:if="${user.authorities != null and user.authorities.contains('TEACHER')}" 
-                                      class="px-2.5 py-1 bg-violet-950 text-violet-300 border border-violet-800 rounded-full text-xs font-bold">Faculty Member</span>
+                                      class="px-2.5 py-1 bg-[#e8f0fe] text-[#1a73e8] border border-[#d2e3fc] rounded-full text-xs font-bold">Faculty Member</span>
                                 <span th:unless="${user.authorities != null and user.authorities.contains('TEACHER')}" 
-                                      class="px-2.5 py-1 bg-teal-950 text-teal-300 border border-teal-800 rounded-full text-xs font-bold">Student</span>
+                                      class="px-2.5 py-1 bg-[#e6f4ea] text-[#137333] border border-[#ceead6] rounded-full text-xs font-bold">Student</span>
                             </td>
-                            <td class="px-6 py-4 text-xs text-white" th:text="${user.email}">user@academia.edu</td>
-                            <td class="px-6 py-4 text-xs text-slate-300 max-w-xs truncate" th:text="${user.description != null ? user.description : 'No bio provided'}">
+                            <td class="px-6 py-4 text-xs text-[#202124]" th:text="${user.email}">user@academia.edu</td>
+                            <td class="px-6 py-4 text-xs text-[#5f6368] max-w-xs truncate" th:text="${user.description != null ? user.description : 'No bio provided'}">
                                 Description
                             </td>
-                            <td class="px-6 py-4 text-xs text-slate-400" 
+                            <td class="px-6 py-4 text-xs text-[#5f6368]" 
                                 th:text="${user.registrationDate != null ? #temporals.format(user.registrationDate, 'yyyy-MM-dd HH:mm') : 'Recent'}">
                                 2026-08-21
                             </td>
                             <td class="px-6 py-4 text-right space-x-2">
                                 <form th:action="@{/admin/approve/{username}(username=${user.username})}" method="post" class="inline">
-                                    <button type="submit" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold transition shadow-sm">
-                                        Approve Account
+                                    <button type="submit" class="px-4 py-2 bg-[#1e8e3e] hover:bg-[#137333] text-white rounded-xl text-xs font-semibold transition shadow-sm">
+                                        Approve
                                     </button>
                                 </form>
                                 <form th:action="@{/admin/reject/{username}(username=${user.username})}" method="post" class="inline">
-                                    <button type="submit" class="px-4 py-2 bg-rose-600 hover:bg-rose-500 text-white rounded-xl text-xs font-bold transition shadow-sm">
+                                    <button type="submit" class="px-4 py-2 bg-[#d93025] hover:bg-[#c5221f] text-white rounded-xl text-xs font-semibold transition shadow-sm">
                                         Reject
                                     </button>
                                 </form>
@@ -139,13 +139,13 @@
 
                         <!-- Empty state -->
                         <tr th:if="${#lists.isEmpty(pendingUsers)}">
-                            <td colspan="6" class="px-6 py-16 text-center text-slate-500 italic text-sm">
+                            <td colspan="6" class="px-6 py-16 text-center text-[#80868b] italic text-sm">
                                 <div class="max-w-sm mx-auto space-y-2">
-                                    <div class="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center mx-auto text-emerald-400">
+                                    <div class="w-12 h-12 rounded-full bg-[#e8f0fe] flex items-center justify-center mx-auto text-[#1a73e8]">
                                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                                     </div>
-                                    <h3 class="text-white font-bold text-base">All Caught Up!</h3>
-                                    <p class="text-xs text-slate-400">There are no pending registrations waiting for administrative review.</p>
+                                    <h3 class="text-[#202124] font-bold text-base">All Caught Up!</h3>
+                                    <p class="text-xs text-[#5f6368]">There are no pending registrations waiting for administrative review.</p>
                                 </div>
                             </td>
                         </tr>

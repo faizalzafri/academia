@@ -5,49 +5,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Activity Portfolio - Academia</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
 </head>
-<body class="bg-[#0f172a] text-[#f8fafc] min-h-screen font-sans">
+<body class="bg-[#f6f8fc] text-[#202124] min-h-screen font-sans">
 
-    <header class="bg-[#1e293b] border-b border-slate-700 sticky top-0 z-50">
+    <header class="bg-white border-b border-[#dadce0] sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center gap-3">
-                    <span class="font-bold text-lg tracking-wider text-rose-400">ACADEMIA</span>
-                    <span class="ml-2 px-2 py-0.5 bg-rose-950 text-rose-300 border border-rose-800 rounded text-[10px] font-bold uppercase tracking-wider">Student Portfolio</span>
+                    <div class="w-9 h-9 bg-[#e8f0fe] text-[#1a73e8] rounded-xl flex items-center justify-center border border-[#d2e3fc]">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path></svg>
+                    </div>
+                    <div>
+                        <span class="font-bold text-lg tracking-wider text-[#1a73e8]">ACADEMIA</span>
+                        <span class="ml-2 px-2 py-0.5 bg-[#e8f0fe] text-[#1a73e8] border border-[#d2e3fc] rounded text-[10px] font-bold uppercase tracking-wider">Student Portfolio</span>
+                    </div>
                 </div>
-                <a th:href="@{/activities}" class="text-xs font-semibold text-slate-300 hover:text-white">Activities Catalog &rarr;</a>
+                <a th:href="@{/activities}" class="text-xs font-semibold text-[#1a73e8] hover:underline">Activities Catalog &rarr;</a>
             </div>
         </div>
     </header>
 
     <main class="max-w-5xl mx-auto px-4 py-8 space-y-6">
         
-        <div>
-            <h1 class="text-2xl font-extrabold text-white">Extra-Curricular Achievements & Record</h1>
-            <p class="text-xs text-slate-400 mt-1">Activities, sports events, cultural performances and recognitions for <strong class="text-rose-400" th:text="${username}">Student</strong>.</p>
+        <div class="bg-white border border-[#dadce0] p-6 rounded-2xl shadow-sm">
+            <h1 class="text-2xl font-bold text-[#202124]">Extra-Curricular Achievements & Record</h1>
+            <p class="text-xs text-[#5f6368] mt-1">Activities, sports events, cultural performances and recognitions for <strong class="text-[#1a73e8]" th:text="${username}">Student</strong>.</p>
         </div>
 
-        <div class="bg-[#1e293b] border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
-            <div th:each="p : ${participations}" class="p-4 bg-slate-900/60 border border-slate-800 rounded-xl flex items-center justify-between">
+        <div class="bg-white border border-[#dadce0] rounded-2xl p-6 shadow-sm space-y-4">
+            <div th:each="p : ${participations}" class="p-4 bg-[#f8fafd] border border-[#dadce0] rounded-xl flex items-center justify-between hover:border-[#1a73e8] transition">
                 <div>
                     <div class="flex items-center gap-2">
-                        <span class="px-2 py-0.5 bg-slate-800 text-rose-300 border border-slate-700 rounded text-[10px] font-bold uppercase" th:text="${p.activity.category}">SPORTS</span>
-                        <h3 class="text-base font-bold text-white" th:text="${p.activity.name}">Sports Meet</h3>
+                        <span class="px-2 py-0.5 bg-[#e8f0fe] text-[#1a73e8] border border-[#d2e3fc] rounded text-[10px] font-bold uppercase" th:text="${p.activity.category}">SPORTS</span>
+                        <h3 class="text-base font-bold text-[#202124]" th:text="${p.activity.name}">Sports Meet</h3>
                     </div>
-                    <p class="text-xs text-slate-400 mt-1">
-                        Role: <span class="text-white font-semibold" th:text="${p.role}">Captain</span> 
+                    <p class="text-xs text-[#5f6368] mt-1">
+                        Role: <span class="text-[#202124] font-semibold" th:text="${p.role}">Captain</span> 
                         <span th:if="${p.teamName != null}" th:text="${' &bull; Team: ' + p.teamName}"> &bull; Team: Red House</span>
                     </p>
                 </div>
 
                 <div class="text-right">
-                    <span th:if="${p.position != null}" class="px-2.5 py-0.5 bg-amber-950 text-amber-300 border border-amber-800 rounded text-xs font-bold" th:text="${p.position}">1st Place</span>
-                    <span class="block text-[11px] text-slate-500 mt-1" th:text="${p.activity.eventDate}">2026-10-15</span>
+                    <span th:if="${p.position != null}" class="px-2.5 py-0.5 bg-[#fef7e0] text-[#b06000] border border-[#feefc3] rounded text-xs font-bold" th:text="${p.position}">1st Place</span>
+                    <span class="block text-[11px] text-[#5f6368] mt-1 font-mono" th:text="${p.activity.eventDate}">2026-10-15</span>
                 </div>
             </div>
 
-            <div th:if="${#lists.isEmpty(participations)}" class="text-center py-8 text-slate-500 italic text-xs">
+            <div th:if="${#lists.isEmpty(participations)}" class="text-center py-8 text-[#80868b] italic text-xs">
                 No recorded extra-curricular activities for this student yet.
             </div>
         </div>

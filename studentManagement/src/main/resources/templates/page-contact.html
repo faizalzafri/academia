@@ -9,7 +9,7 @@
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Font Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <script>
         tailwind.config = {
@@ -23,22 +23,24 @@
         }
     </script>
 </head>
-<body class="bg-[#0f172a] text-[#f8fafc] min-h-screen font-sans">
+<body class="bg-[#f6f8fc] text-[#202124] min-h-screen font-sans">
 
     <!-- Header Navbar -->
-    <header class="bg-[#1e293b] border-b border-slate-700 sticky top-0 z-50">
+    <header class="bg-white border-b border-[#dadce0] sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center gap-3">
-                    <svg class="w-6 h-6 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
-                    </svg>
-                    <span class="font-bold text-lg tracking-wider text-teal-400">ACADEMIA ACADEMY</span>
+                    <div class="w-9 h-9 bg-[#e8f0fe] text-[#1a73e8] rounded-xl flex items-center justify-center border border-[#d2e3fc]">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                        </svg>
+                    </div>
+                    <span class="font-bold text-lg tracking-wider text-[#1a73e8]">ACADEMIA</span>
                 </div>
                 <div class="flex gap-4">
                     <a th:href="${#authorization.expression('hasAuthority(''TEACHER'')') ? '/home' : '/student/home'}" 
-                       class="px-4 py-2 text-sm font-medium bg-slate-800 hover:bg-slate-700 border border-slate-600 rounded-lg transition flex items-center gap-2">
-                        <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                       class="px-3.5 py-2 text-xs font-semibold bg-white hover:bg-[#f1f3f4] border border-[#dadce0] rounded-lg transition text-[#1a73e8] flex items-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
                         Back to Home
                     </a>
                 </div>
@@ -50,9 +52,9 @@
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         
         <!-- Page Title -->
-        <div class="mb-8">
-            <h1 class="text-3xl font-extrabold text-white tracking-tight">Contact Administration</h1>
-            <p class="mt-2 text-slate-400">Reach out to school coordinators, support desk, and regional representatives</p>
+        <div class="bg-white border border-[#dadce0] p-6 rounded-2xl shadow-sm mb-8">
+            <h1 class="text-2xl sm:text-3xl font-bold text-[#202124] tracking-tight">Contact Administration</h1>
+            <p class="mt-1 text-sm text-[#5f6368]">Reach out to school coordinators, support desk, and regional representatives</p>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -61,77 +63,77 @@
             <div class="space-y-6">
                 
                 <!-- Contact info cards -->
-                <div class="bg-[#1e293b] border border-slate-800 p-6 rounded-2xl shadow-xl flex items-center gap-4">
-                    <span class="text-teal-400 bg-teal-950/50 p-4 rounded-xl text-2xl flex items-center justify-center">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
-                    </span>
+                <div class="bg-white border border-[#dadce0] p-6 rounded-2xl shadow-sm flex items-center gap-4">
+                    <div class="w-12 h-12 bg-[#e8f0fe] text-[#1a73e8] border border-[#d2e3fc] rounded-xl flex items-center justify-center">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                    </div>
                     <div>
-                        <h4 class="font-bold text-white text-sm">Call Support</h4>
-                        <p class="text-xs text-slate-400 mt-1">Direct: +90 987 665 55 44</p>
-                        <p class="text-xs text-slate-400">Fax Desk: +90 987 665 55 45</p>
+                        <h4 class="font-bold text-[#202124] text-sm">Call Support</h4>
+                        <p class="text-xs text-[#5f6368] mt-1 font-mono">Direct: +90 987 665 55 44</p>
+                        <p class="text-xs text-[#5f6368] font-mono">Fax Desk: +90 987 665 55 45</p>
                     </div>
                 </div>
 
-                <div class="bg-[#1e293b] border border-slate-800 p-6 rounded-2xl shadow-xl flex items-center gap-4">
-                    <span class="text-teal-400 bg-teal-950/50 p-4 rounded-xl text-2xl flex items-center justify-center">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L22 8m-9 11h-3a2 2 0 01-2-2V8.67l-3.33-2.22A2 2 0 002 8.11v8.88a2 2 0 002 2h16a2 2 0 002-2V8.11a2 2 0 00-1-1.67l-3.33 2.22V17a2 2 0 01-2 2z"></path></svg>
-                    </span>
+                <div class="bg-white border border-[#dadce0] p-6 rounded-2xl shadow-sm flex items-center gap-4">
+                    <div class="w-12 h-12 bg-[#e8f0fe] text-[#1a73e8] border border-[#d2e3fc] rounded-xl flex items-center justify-center">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L22 8m-9 11h-3a2 2 0 01-2-2V8.67l-3.33-2.22A2 2 0 002 8.11v8.88a2 2 0 002 2h16a2 2 0 002-2V8.11a2 2 0 00-1-1.67l-3.33 2.22V17a2 2 0 01-2 2z"></path></svg>
+                    </div>
                     <div>
-                        <h4 class="font-bold text-white text-sm">Mail Support</h4>
-                        <p class="text-xs text-slate-400 mt-1"><a href="mailto:info@yoursite.com" class="text-teal-400 hover:text-teal-300 font-semibold transition">info@yoursite.com</a></p>
+                        <h4 class="font-bold text-[#202124] text-sm">Mail Support</h4>
+                        <p class="text-xs text-[#5f6368] mt-1"><a href="mailto:info@yoursite.com" class="text-[#1a73e8] hover:underline font-semibold transition">info@yoursite.com</a></p>
                     </div>
                 </div>
 
-                <div class="bg-[#1e293b] border border-slate-800 p-6 rounded-2xl shadow-xl flex items-center gap-4">
-                    <span class="text-teal-400 bg-teal-950/50 p-4 rounded-xl text-2xl flex items-center justify-center">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                    </span>
+                <div class="bg-white border border-[#dadce0] p-6 rounded-2xl shadow-sm flex items-center gap-4">
+                    <div class="w-12 h-12 bg-[#e8f0fe] text-[#1a73e8] border border-[#d2e3fc] rounded-xl flex items-center justify-center">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    </div>
                     <div>
-                        <h4 class="font-bold text-white text-sm">Campus Address</h4>
-                        <p class="text-xs text-slate-400 mt-1">Academia Platform Headquarters, Innovation Campus</p>
+                        <h4 class="font-bold text-[#202124] text-sm">Campus Address</h4>
+                        <p class="text-xs text-[#5f6368] mt-1">Academia Platform Headquarters, Innovation Campus</p>
                     </div>
                 </div>
 
             </div>
 
             <!-- Right: Contact Form -->
-            <div class="lg:col-span-2 bg-[#1e293b] border border-slate-800 p-6 rounded-2xl shadow-2xl">
-                <h2 class="text-xl font-bold text-white mb-6 border-b border-slate-700 pb-3 flex items-center gap-2">
-                    <svg class="w-5 h-5 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-2m-4-1v8m0 0l3-3m-3 3L9 8m-5 5h2.586a1 1 0 01.707.293l2.414 2.414a1 1 0 00.707.293h3.172a1 1 0 00.707-.293l2.414-2.414a1 1 0 01.707-.293H20"></path></svg>
+            <div class="lg:col-span-2 bg-white border border-[#dadce0] p-6 rounded-2xl shadow-sm">
+                <h2 class="text-base font-bold text-[#202124] mb-6 border-b border-[#e0e2e7] pb-3 flex items-center gap-2">
+                    <svg class="w-5 h-5 text-[#1a73e8]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-2m-4-1v8m0 0l3-3m-3 3L9 8m-5 5h2.586a1 1 0 01.707.293l2.414 2.414a1 1 0 00.707.293h3.172a1 1 0 00.707-.293l2.414-2.414a1 1 0 01.707-.293H20"></path></svg>
                     Send us a message
                 </h2>
 
                 <form class="space-y-4" onsubmit="event.preventDefault(); alert('Message sent successfully!');">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Your Name</label>
-                            <input type="text" class="w-full bg-[#0f172a] border border-slate-700 focus:border-teal-500 text-white px-4 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-teal-500 transition" placeholder="John Doe" required>
+                            <label class="block text-xs font-bold text-[#5f6368] uppercase tracking-wider mb-2">Your Name</label>
+                            <input type="text" class="w-full bg-white border border-[#dadce0] focus:border-[#1a73e8] text-[#202124] px-4 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#e8f0fe] transition placeholder-[#80868b]" placeholder="John Doe" required>
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Email Address</label>
-                            <input type="email" class="w-full bg-[#0f172a] border border-slate-700 focus:border-teal-500 text-white px-4 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-teal-500 transition" placeholder="john@example.com" required>
+                            <label class="block text-xs font-bold text-[#5f6368] uppercase tracking-wider mb-2">Email Address</label>
+                            <input type="email" class="w-full bg-white border border-[#dadce0] focus:border-[#1a73e8] text-[#202124] px-4 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#e8f0fe] transition placeholder-[#80868b]" placeholder="john@example.com" required>
                         </div>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Phone Number</label>
-                            <input type="text" class="w-full bg-[#0f172a] border border-slate-700 focus:border-teal-500 text-white px-4 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-teal-500 transition" placeholder="+84...">
+                            <label class="block text-xs font-bold text-[#5f6368] uppercase tracking-wider mb-2">Phone Number</label>
+                            <input type="text" class="w-full bg-white border border-[#dadce0] focus:border-[#1a73e8] text-[#202124] px-4 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#e8f0fe] transition placeholder-[#80868b]" placeholder="+1 555 123 4567">
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Subject</label>
-                            <input type="text" class="w-full bg-[#0f172a] border border-slate-700 focus:border-teal-500 text-white px-4 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-teal-500 transition" placeholder="e.g. Admission Inquiry" required>
+                            <label class="block text-xs font-bold text-[#5f6368] uppercase tracking-wider mb-2">Subject</label>
+                            <input type="text" class="w-full bg-white border border-[#dadce0] focus:border-[#1a73e8] text-[#202124] px-4 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#e8f0fe] transition placeholder-[#80868b]" placeholder="e.g. Admission Inquiry" required>
                         </div>
                     </div>
 
                     <div>
-                        <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Message</label>
-                        <textarea rows="4" class="w-full bg-[#0f172a] border border-slate-700 focus:border-teal-500 text-white px-4 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-1 focus:ring-teal-500 transition" placeholder="Type your message..." required></textarea>
+                        <label class="block text-xs font-bold text-[#5f6368] uppercase tracking-wider mb-2">Message</label>
+                        <textarea rows="4" class="w-full bg-white border border-[#dadce0] focus:border-[#1a73e8] text-[#202124] px-4 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#e8f0fe] transition placeholder-[#80868b]" placeholder="Type your message..." required></textarea>
                     </div>
 
-                    <div class="flex justify-end pt-4 border-t border-slate-700">
-                        <button type="submit" class="px-6 py-2.5 bg-teal-600 hover:bg-teal-500 text-white rounded-xl text-sm font-semibold transition shadow-lg shadow-teal-555/10 flex items-center gap-1.5">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+                    <div class="flex justify-end pt-4 border-t border-[#e0e2e7]">
+                        <button type="submit" class="px-6 py-2.5 bg-[#1a73e8] hover:bg-[#174ea6] text-white rounded-xl text-sm font-semibold transition shadow-sm hover:shadow-md flex items-center gap-1.5">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
                             Submit Form
                         </button>
                     </div>

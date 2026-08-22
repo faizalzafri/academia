@@ -9,7 +9,7 @@
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Font Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <script>
         tailwind.config = {
@@ -29,12 +29,12 @@
             display: block;
             width: 100%;
             font-size: 0.875rem;
-            color: #94a3b8;
+            color: #5f6368;
         }
         .file-input::file-selector-button {
-            border: 1px solid #475569;
-            background-color: #1e293b;
-            color: #f8fafc;
+            border: 1px solid #dadce0;
+            background-color: #ffffff;
+            color: #1a73e8;
             padding: 8px 16px;
             border-radius: 8px;
             font-weight: 600;
@@ -43,32 +43,34 @@
             transition: all 0.2s;
         }
         .file-input::file-selector-button:hover {
-            background-color: #334155;
-            border-color: #64748b;
+            background-color: #f1f3f4;
+            border-color: #dadce0;
         }
         .upload-response a {
-            color: #2dd4bf;
+            color: #1a73e8;
             font-weight: 600;
             text-decoration: underline;
         }
     </style>
 </head>
-<body class="bg-[#0f172a] text-[#f8fafc] min-h-screen font-sans">
+<body class="bg-[#f6f8fc] text-[#202124] min-h-screen font-sans">
 
     <!-- Header Navbar -->
-    <header class="bg-[#1e293b] border-b border-slate-700 sticky top-0 z-50">
+    <header class="bg-white border-b border-[#dadce0] sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center gap-3">
-                    <svg class="w-6 h-6 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path>
-                    </svg>
-                    <span class="font-bold text-lg tracking-wider text-teal-400">ACADEMIA ACADEMY</span>
+                    <div class="w-9 h-9 bg-[#e8f0fe] text-[#1a73e8] rounded-xl flex items-center justify-center border border-[#d2e3fc]">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path>
+                        </svg>
+                    </div>
+                    <span class="font-bold text-lg tracking-wider text-[#1a73e8]">ACADEMIA FILE PORTAL</span>
                 </div>
                 <div class="flex gap-4">
                     <a th:href="${#authorization.expression('hasAuthority(''TEACHER'')') ? '/manage/course' : '/listCourse'}" 
-                       class="px-4 py-2 text-sm font-medium bg-slate-800 hover:bg-slate-700 border border-slate-600 rounded-lg transition flex items-center gap-2">
-                        <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                       class="px-3.5 py-2 text-xs font-semibold bg-white hover:bg-[#f1f3f4] border border-[#dadce0] rounded-lg transition text-[#1a73e8] flex items-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
                         Exit Manager
                     </a>
                 </div>
@@ -80,51 +82,51 @@
     <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         
         <!-- Page Title -->
-        <div class="mb-8">
-            <h1 class="text-3xl font-extrabold text-white tracking-tight">File Upload Console</h1>
-            <p class="mt-2 text-slate-400">Submit assignments, share syllabus PDFs, and distribute study resources</p>
+        <div class="bg-white border border-[#dadce0] p-6 rounded-2xl shadow-sm mb-8">
+            <h1 class="text-2xl sm:text-3xl font-bold text-[#202124] tracking-tight">File Upload Console</h1>
+            <p class="mt-1 text-sm text-[#5f6368]">Submit assignments, share syllabus PDFs, and distribute study resources</p>
         </div>
 
-        <noscript class="block mb-6 p-4 bg-rose-950 border border-rose-500 text-rose-200 rounded-xl">
-            <svg class="w-5 h-5 text-rose-455 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+        <noscript class="block mb-6 p-4 bg-[#fce8e6] border border-[#fad2cf] text-[#c5221f] rounded-xl text-xs">
+            <svg class="w-4 h-4 text-[#d93025] inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
             Sorry! Your browser does not support Javascript. File uploads require active script handlers.
         </noscript>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             
             <!-- Card 1: Single File Upload -->
-            <div class="bg-[#1e293b] border border-slate-800 p-6 rounded-2xl shadow-xl space-y-6">
-                <h3 class="text-lg font-bold text-white border-b border-slate-700 pb-3 flex items-center gap-2">
-                    <svg class="w-5 h-5 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+            <div class="bg-white border border-[#dadce0] p-6 rounded-2xl shadow-sm space-y-6">
+                <h3 class="text-base font-bold text-[#202124] border-b border-[#e0e2e7] pb-3 flex items-center gap-2">
+                    <svg class="w-5 h-5 text-[#1a73e8]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
                     Upload Single Material
                 </h3>
 
                 <form id="singleUploadForm" name="singleUploadForm" class="space-y-4">
                     <input id="singleFileUploadInput" type="file" name="file" class="file-input" required />
-                    <button type="submit" class="w-full py-2.5 bg-teal-600 hover:bg-teal-500 text-white font-semibold rounded-xl text-sm transition">Submit File</button>
+                    <button type="submit" class="w-full py-2.5 bg-[#1a73e8] hover:bg-[#174ea6] text-white font-semibold rounded-xl text-sm transition shadow-sm hover:shadow-md">Submit File</button>
                 </form>
 
                 <div class="upload-response space-y-2 text-xs">
-                    <div id="singleFileUploadError" class="text-rose-400 font-semibold"></div>
-                    <div id="singleFileUploadSuccess" class="text-emerald-400 font-semibold"></div>
+                    <div id="singleFileUploadError" class="text-[#c5221f] font-semibold"></div>
+                    <div id="singleFileUploadSuccess" class="text-[#137333] font-semibold"></div>
                 </div>
             </div>
 
             <!-- Card 2: Multiple File Upload -->
-            <div class="bg-[#1e293b] border border-slate-800 p-6 rounded-2xl shadow-xl space-y-6">
-                <h3 class="text-lg font-bold text-white border-b border-slate-700 pb-3 flex items-center gap-2">
-                    <svg class="w-5 h-5 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-1 5v4m0 0l-1-1m1 1l1-1m-7 4h10"></path></svg>
+            <div class="bg-white border border-[#dadce0] p-6 rounded-2xl shadow-sm space-y-6">
+                <h3 class="text-base font-bold text-[#202124] border-b border-[#e0e2e7] pb-3 flex items-center gap-2">
+                    <svg class="w-5 h-5 text-[#1a73e8]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-1 5v4m0 0l-1-1m1 1l1-1m-7 4h10"></path></svg>
                     Upload Multiple Materials
                 </h3>
 
                 <form id="multipleUploadForm" name="multipleUploadForm" class="space-y-4">
                     <input id="multipleFileUploadInput" type="file" name="files" class="file-input" multiple required />
-                    <button type="submit" class="w-full py-2.5 bg-teal-600 hover:bg-teal-500 text-white font-semibold rounded-xl text-sm transition">Submit Files</button>
+                    <button type="submit" class="w-full py-2.5 bg-[#1a73e8] hover:bg-[#174ea6] text-white font-semibold rounded-xl text-sm transition shadow-sm hover:shadow-md">Submit Files</button>
                 </form>
 
                 <div class="upload-response space-y-2 text-xs">
-                    <div id="multipleFileUploadError" class="text-rose-400 font-semibold"></div>
-                    <div id="multipleFileUploadSuccess" class="text-emerald-400 font-semibold"></div>
+                    <div id="multipleFileUploadError" class="text-[#c5221f] font-semibold"></div>
+                    <div id="multipleFileUploadSuccess" class="text-[#137333] font-semibold"></div>
                 </div>
             </div>
 

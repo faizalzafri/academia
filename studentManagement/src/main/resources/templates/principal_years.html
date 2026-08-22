@@ -5,28 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Academic Years Management - Academia</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
 </head>
-<body class="bg-[#0f172a] text-[#f8fafc] min-h-screen font-sans">
+<body class="bg-[#f6f8fc] text-[#202124] min-h-screen font-sans">
 
     <!-- Header Navbar -->
-    <header class="bg-[#1e293b] border-b border-slate-700 sticky top-0 z-50">
+    <header class="bg-white border-b border-[#dadce0] sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center gap-3">
-                    <span class="font-bold text-lg tracking-wider text-indigo-400">ACADEMIA</span>
-                    <span class="ml-2 px-2 py-0.5 bg-indigo-950 text-indigo-300 border border-indigo-800 rounded text-[10px] font-bold uppercase tracking-wider">Session Manager</span>
+                    <div class="w-9 h-9 bg-[#e8f0fe] text-[#1a73e8] rounded-xl flex items-center justify-center border border-[#d2e3fc]">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <span class="font-bold text-lg tracking-wider text-[#1a73e8]">ACADEMIA</span>
+                        <span class="ml-2 px-2 py-0.5 bg-[#e8f0fe] text-[#1a73e8] border border-[#d2e3fc] rounded text-[10px] font-bold uppercase tracking-wider">Session Manager</span>
+                    </div>
                 </div>
 
                 <nav class="hidden md:flex items-center gap-1">
-                    <a th:href="@{/principal/dashboard}" class="px-3.5 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition">Governance</a>
-                    <a th:href="@{/principal/years}" class="px-3.5 py-2 text-sm font-semibold text-indigo-400 bg-slate-800/80 rounded-lg">Academic Years</a>
-                    <a th:href="@{/principal/history}" class="px-3.5 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition">Historical Archive</a>
-                    <a th:href="@{/activities}" class="px-3.5 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition">Activities</a>
+                    <a th:href="@{/principal/dashboard}" class="px-3.5 py-2 text-sm font-medium text-[#5f6368] hover:text-[#202124] hover:bg-[#f1f3f4] rounded-lg transition">Governance</a>
+                    <a th:href="@{/principal/years}" class="px-3.5 py-2 text-sm font-semibold text-[#1a73e8] bg-[#e8f0fe] rounded-lg">Academic Years</a>
+                    <a th:href="@{/principal/history}" class="px-3.5 py-2 text-sm font-medium text-[#5f6368] hover:text-[#202124] hover:bg-[#f1f3f4] rounded-lg transition">Historical Archive</a>
+                    <a th:href="@{/activities}" class="px-3.5 py-2 text-sm font-medium text-[#5f6368] hover:text-[#202124] hover:bg-[#f1f3f4] rounded-lg transition">Activities</a>
                 </nav>
 
-                <a th:href="@{/logout}" class="px-3.5 py-1.5 text-xs font-semibold bg-rose-950/60 hover:bg-rose-900/80 border border-rose-800 text-rose-300 rounded-lg transition">
-                    Sign Out
+                <a th:href="@{/logout}" class="px-3.5 py-1.5 text-xs font-semibold bg-[#fce8e6] hover:bg-[#fad2cf] border border-[#fad2cf] text-[#c5221f] rounded-lg transition">
+                    Sign out
                 </a>
             </div>
         </div>
@@ -34,10 +52,10 @@
 
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
         
-        <div class="flex justify-between items-center">
+        <div class="bg-white border border-[#dadce0] p-6 rounded-2xl shadow-sm flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <div>
-                <h1 class="text-2xl font-extrabold text-white tracking-tight">Academic Year Sessions</h1>
-                <p class="text-xs text-slate-400 mt-1">Create upcoming sessions in planning state, activate them, and bulk promote student cohorts.</p>
+                <h1 class="text-xl sm:text-2xl font-bold text-[#202124] tracking-tight">Academic Year Sessions</h1>
+                <p class="text-xs text-[#5f6368] mt-1">Create upcoming sessions in planning state, activate them, and bulk promote student cohorts.</p>
             </div>
         </div>
 
@@ -45,29 +63,29 @@
             
             <!-- Left 2 Cols: List of Academic Years -->
             <div class="lg:col-span-2 space-y-4">
-                <div th:each="y : ${years}" class="bg-[#1e293b] border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
+                <div th:each="y : ${years}" class="bg-white border border-[#dadce0] rounded-2xl p-6 shadow-sm space-y-4 hover:border-[#1a73e8] transition">
                     <div class="flex justify-between items-start">
                         <div>
                             <div class="flex items-center gap-3">
-                                <h2 class="text-xl font-bold text-white" th:text="${y.name}">2026-2027</h2>
-                                <span th:if="${y.status.name() == 'ACTIVE'}" class="px-2.5 py-0.5 bg-emerald-950 text-emerald-300 border border-emerald-800 rounded text-xs font-bold uppercase tracking-wider">ACTIVE</span>
-                                <span th:if="${y.status.name() == 'PLANNING'}" class="px-2.5 py-0.5 bg-amber-950 text-amber-300 border border-amber-800 rounded text-xs font-bold uppercase tracking-wider">PLANNING</span>
-                                <span th:if="${y.status.name() == 'COMPLETED'}" class="px-2.5 py-0.5 bg-slate-800 text-slate-400 border border-slate-700 rounded text-xs font-bold uppercase tracking-wider">COMPLETED</span>
+                                <h2 class="text-xl font-bold text-[#202124]" th:text="${y.name}">2026-2027</h2>
+                                <span th:if="${y.status.name() == 'ACTIVE'}" class="px-2.5 py-0.5 bg-[#e6f4ea] text-[#137333] border border-[#ceead6] rounded text-xs font-bold uppercase tracking-wider">ACTIVE</span>
+                                <span th:if="${y.status.name() == 'PLANNING'}" class="px-2.5 py-0.5 bg-[#fef7e0] text-[#b06000] border border-[#feefc3] rounded text-xs font-bold uppercase tracking-wider">PLANNING</span>
+                                <span th:if="${y.status.name() == 'COMPLETED'}" class="px-2.5 py-0.5 bg-[#f1f3f4] text-[#5f6368] border border-[#dadce0] rounded text-xs font-bold uppercase tracking-wider">COMPLETED</span>
                             </div>
-                            <p class="text-xs text-slate-400 mt-1">
-                                Duration: <span class="text-slate-200 font-semibold" th:text="${y.startDate}">2026-04-01</span> to <span class="text-slate-200 font-semibold" th:text="${y.endDate}">2027-03-31</span>
+                            <p class="text-xs text-[#5f6368] mt-1 font-mono">
+                                Duration: <span class="text-[#202124] font-semibold" th:text="${y.startDate}">2026-04-01</span> to <span class="text-[#202124] font-semibold" th:text="${y.endDate}">2027-03-31</span>
                             </p>
                         </div>
 
                         <div class="flex items-center gap-2">
-                            <a th:href="@{/principal/years/{id}/report(id=${y.id})}" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-indigo-400 rounded-xl text-xs font-bold transition">
+                            <a th:href="@{/principal/years/{id}/report(id=${y.id})}" class="px-3.5 py-1.5 bg-white hover:bg-[#f1f3f4] border border-[#dadce0] text-[#1a73e8] rounded-xl text-xs font-semibold transition">
                                 Session Report &rarr;
                             </a>
                         </div>
                     </div>
 
-                    <div class="pt-3 border-t border-slate-800 flex items-center justify-between">
-                        <div class="text-[11px] text-slate-500">
+                    <div class="pt-3 border-t border-[#e0e2e7] flex items-center justify-between">
+                        <div class="text-[11px] text-[#5f6368]">
                             Created: <span th:text="${#temporals.format(y.createdAt, 'dd MMM yyyy')}">01 Apr 2026</span>
                             <span th:if="${y.completedAt != null}"> &bull; Completed: <span th:text="${#temporals.format(y.completedAt, 'dd MMM yyyy')}">31 Mar 2027</span></span>
                         </div>
@@ -75,14 +93,14 @@
                         <div class="flex items-center gap-2">
                             <!-- Activate button for planning years -->
                             <form th:if="${y.status.name() == 'PLANNING'}" th:action="@{/principal/years/{id}/activate(id=${y.id})}" method="post">
-                                <button type="submit" class="px-3 py-1 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-xs font-bold transition shadow-sm">
+                                <button type="submit" class="px-3 py-1 bg-[#1e8e3e] hover:bg-[#137333] text-white rounded-lg text-xs font-semibold transition shadow-sm">
                                     Activate Session
                                 </button>
                             </form>
 
                             <!-- Complete button for active year -->
                             <form th:if="${y.status.name() == 'ACTIVE'}" th:action="@{/principal/years/{id}/complete(id=${y.id})}" method="post">
-                                <button type="submit" class="px-3 py-1 bg-rose-900/60 hover:bg-rose-800 border border-rose-700 text-rose-200 rounded-lg text-xs font-bold transition">
+                                <button type="submit" class="px-3 py-1 bg-[#fce8e6] hover:bg-[#fad2cf] border border-[#fad2cf] text-[#c5221f] rounded-lg text-xs font-semibold transition">
                                     Conclude & Close Year
                                 </button>
                             </form>
@@ -95,47 +113,47 @@
             <div class="space-y-6">
                 
                 <!-- Create Academic Year -->
-                <div class="bg-[#1e293b] border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
-                    <h2 class="text-base font-bold text-white flex items-center gap-2">
-                        <svg class="w-5 h-5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                <div class="bg-white border border-[#dadce0] rounded-2xl p-6 shadow-sm space-y-4">
+                    <h2 class="text-base font-bold text-[#202124] flex items-center gap-2">
+                        <svg class="w-5 h-5 text-[#1a73e8]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
                         Plan Next Academic Year
                     </h2>
                     
                     <form th:action="@{/principal/years/create}" method="post" class="space-y-4 text-xs">
                         <div>
-                            <label class="block font-semibold text-slate-300 mb-1">Academic Year Name</label>
+                            <label class="block font-semibold text-[#5f6368] mb-1">Academic Year Name</label>
                             <input type="text" name="name" placeholder="e.g. 2027-2028" required 
-                                   class="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-indigo-500 font-semibold">
+                                   class="w-full px-3 py-2 bg-white border border-[#dadce0] rounded-xl text-[#202124] focus:outline-none focus:ring-2 focus:ring-[#e8f0fe] focus:border-[#1a73e8] font-semibold">
                         </div>
 
                         <div>
-                            <label class="block font-semibold text-slate-300 mb-1">Start Date</label>
+                            <label class="block font-semibold text-[#5f6368] mb-1">Start Date</label>
                             <input type="date" name="startDate" required 
-                                   class="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-indigo-500">
+                                   class="w-full px-3 py-2 bg-white border border-[#dadce0] rounded-xl text-[#202124] focus:outline-none focus:ring-2 focus:ring-[#e8f0fe] focus:border-[#1a73e8]">
                         </div>
 
                         <div>
-                            <label class="block font-semibold text-slate-300 mb-1">End Date</label>
+                            <label class="block font-semibold text-[#5f6368] mb-1">End Date</label>
                             <input type="date" name="endDate" required 
-                                   class="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-indigo-500">
+                                   class="w-full px-3 py-2 bg-white border border-[#dadce0] rounded-xl text-[#202124] focus:outline-none focus:ring-2 focus:ring-[#e8f0fe] focus:border-[#1a73e8]">
                         </div>
 
-                        <button type="submit" class="w-full py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl transition shadow-md shadow-indigo-500/20">
+                        <button type="submit" class="w-full py-2.5 bg-[#1a73e8] hover:bg-[#174ea6] text-white font-semibold rounded-xl transition shadow-sm hover:shadow-md">
                             Create Session in Planning State
                         </button>
                     </form>
                 </div>
 
                 <!-- Cohort Promotion Card -->
-                <div class="bg-gradient-to-tr from-slate-900 to-indigo-950/40 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-3">
-                    <h2 class="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
-                        <svg class="w-4 h-4 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                <div class="bg-white border border-[#dadce0] rounded-2xl p-6 shadow-sm space-y-3">
+                    <h2 class="text-xs font-bold text-[#5f6368] uppercase tracking-wider flex items-center gap-2">
+                        <svg class="w-4 h-4 text-[#1a73e8]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
                         Bulk Cohort Promotion
                     </h2>
-                    <p class="text-xs text-slate-400 leading-relaxed">
+                    <p class="text-xs text-[#5f6368] leading-relaxed">
                         Promote all active students to the next grade class (9 &rarr; 10 &rarr; 11 &rarr; 12) and record Class 12 as graduated alumni for the upcoming session.
                     </p>
-                    <p class="text-[11px] text-amber-400 font-semibold">
+                    <p class="text-[11px] text-[#b06000] font-semibold">
                         &bull; Execute promotion directly inside individual session reports.
                     </p>
                 </div>

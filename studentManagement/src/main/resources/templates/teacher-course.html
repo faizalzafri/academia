@@ -9,7 +9,7 @@
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Font Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <script>
         tailwind.config = {
@@ -23,21 +23,23 @@
         }
     </script>
 </head>
-<body class="bg-[#0f172a] text-[#f8fafc] min-h-screen font-sans">
+<body class="bg-[#f6f8fc] text-[#202124] min-h-screen font-sans">
 
     <!-- Header Navbar -->
-    <header class="bg-[#1e293b] border-b border-slate-700 sticky top-0 z-50">
+    <header class="bg-white border-b border-[#dadce0] sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center gap-3">
-                    <svg class="w-6 h-6 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
-                    </svg>
-                    <span class="font-bold text-lg tracking-wider text-teal-400">ACADEMIA FACULTY PORTAL</span>
+                    <div class="w-9 h-9 bg-[#e8f0fe] text-[#1a73e8] rounded-xl flex items-center justify-center border border-[#d2e3fc]">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                        </svg>
+                    </div>
+                    <span class="font-bold text-lg tracking-wider text-[#1a73e8]">ACADEMIA FACULTY PORTAL</span>
                 </div>
                 <div class="flex gap-4">
-                    <a th:href="@{/manage/course}" class="px-4 py-2 text-sm font-medium bg-slate-800 hover:bg-slate-700 border border-slate-600 rounded-lg transition flex items-center gap-2">
-                        <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                    <a th:href="@{/manage/course}" class="px-3.5 py-2 text-xs font-semibold bg-white hover:bg-[#f1f3f4] border border-[#dadce0] rounded-lg transition text-[#1a73e8] flex items-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
                         Back to Manager
                     </a>
                 </div>
@@ -49,49 +51,53 @@
     <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         
         <!-- Course Title Card -->
-        <div class="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 border border-slate-700 p-8 rounded-2xl shadow-xl mb-8">
+        <div class="bg-white border border-[#dadce0] p-8 rounded-2xl shadow-sm mb-8">
             <div class="flex justify-between items-start gap-4">
                 <div>
-                    <span class="px-2.5 py-0.5 bg-teal-950 text-teal-400 border border-teal-900 rounded-full text-xs font-semibold uppercase tracking-wider" th:text="${course.code}">MATH101</span>
-                    <h1 class="text-3xl font-extrabold text-white mt-3 tracking-tight" th:text="${course.name}">Course Administration</h1>
+                    <span class="px-2.5 py-0.5 bg-[#e8f0fe] text-[#1a73e8] border border-[#d2e3fc] rounded-full text-xs font-semibold uppercase tracking-wider" th:text="${course.code}">MATH101</span>
+                    <h1 class="text-2xl sm:text-3xl font-bold text-[#202124] mt-3 tracking-tight" th:text="${course.name}">Course Administration</h1>
                 </div>
-                <span class="px-3.5 py-1 bg-slate-800 border border-slate-700 text-slate-300 rounded-full text-xs font-semibold" th:text="${course.credit} + ' Credit Hours'">3 Credits</span>
+                <span class="px-3.5 py-1 bg-[#f1f3f4] border border-[#dadce0] text-[#5f6368] rounded-full text-xs font-semibold" th:text="${course.credit} + ' Credit Hours'">3 Credits</span>
             </div>
         </div>
 
         <!-- Success Alerts -->
-        <div th:if="${param.success}" class="mb-6 p-4 bg-emerald-950 border border-emerald-500 text-emerald-200 rounded-xl flex items-center gap-3">
-            <svg class="w-5 h-5 text-emerald-455 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-            <span>Course settings description updated!</span>
+        <div th:if="${param.success}" class="mb-6 p-4 bg-[#e6f4ea] border border-[#ceead6] text-[#137333] rounded-xl flex items-center gap-3 text-xs">
+            <svg class="w-5 h-5 text-[#1e8e3e] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <span class="font-semibold">Course settings description updated!</span>
         </div>
-        <div th:if="${param.uploadSuccess}" class="mb-6 p-4 bg-emerald-950 border border-emerald-500 text-emerald-200 rounded-xl flex items-center gap-3">
-            <svg class="w-5 h-5 text-emerald-455 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-            <span>Study resource successfully attached to this syllabus!</span>
+        <div th:if="${param.uploadSuccess}" class="mb-6 p-4 bg-[#e6f4ea] border border-[#ceead6] text-[#137333] rounded-xl flex items-center gap-3 text-xs">
+            <svg class="w-5 h-5 text-[#1e8e3e] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <span class="font-semibold">Study resource successfully attached to this syllabus!</span>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             
             <!-- Left: Edit Course Details Form -->
             <div class="lg:col-span-2 space-y-8">
-                <div class="bg-[#1e293b] border border-slate-800 p-6 rounded-2xl shadow-2xl space-y-6">
-                    <h3 class="text-lg font-bold text-white border-b border-slate-700 pb-3 flex items-center gap-2">
-                        <svg class="w-5 h-5 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                <div class="bg-white border border-[#dadce0] p-6 rounded-2xl shadow-sm space-y-6">
+                    <h3 class="text-base font-bold text-[#202124] border-b border-[#e0e2e7] pb-3 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-[#1a73e8]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
                         Curriculum Description
                     </h3>
 
                     <form th:action="@{/updateCourse/{id}(id=${course.id})}" method="post" class="space-y-4">
 
                         <div>
-                            <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Detailed Syllabus & Guidelines</label>
+                            <label class="block text-xs font-bold text-[#5f6368] uppercase tracking-wider mb-2">Detailed Syllabus & Guidelines</label>
                             <textarea name="description" rows="6" required
                                       th:text="${course.description}"
-                                      class="w-full bg-[#0f172a] border border-slate-700 focus:border-teal-500 text-white p-2.5 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-teal-500 transition" 
+                                      class="w-full bg-white border border-[#dadce0] focus:border-[#1a73e8] text-[#202124] p-3 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#e8f0fe] transition placeholder-[#80868b]" 
                                       placeholder="Provide the course outline and guidelines..."></textarea>
                         </div>
 
                         <div class="flex justify-end">
-                            <button type="submit" class="px-6 py-2.5 bg-teal-600 hover:bg-teal-500 text-white rounded-xl text-sm font-semibold transition shadow-lg shadow-teal-555/10 flex items-center gap-1.5">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <button type="submit" class="px-6 py-2.5 bg-[#1a73e8] hover:bg-[#174ea6] text-white rounded-xl text-sm font-semibold transition shadow-sm hover:shadow-md flex items-center gap-1.5">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                                 Save Details
                             </button>
                         </div>
@@ -99,35 +105,35 @@
                 </div>
 
                 <!-- Attached Resources List -->
-                <div class="bg-[#1e293b] border border-slate-800 p-6 rounded-2xl shadow-2xl space-y-6">
-                    <h3 class="text-lg font-bold text-white border-b border-slate-700 pb-3 flex items-center gap-2">
-                        <svg class="w-5 h-5 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                <div class="bg-white border border-[#dadce0] p-6 rounded-2xl shadow-sm space-y-6">
+                    <h3 class="text-base font-bold text-[#202124] border-b border-[#e0e2e7] pb-3 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-[#1a73e8]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
                         Attached Study Materials
                     </h3>
 
                     <div class="space-y-4">
                         <th:block th:each="file : ${files}">
-                            <div class="bg-[#161e29]/50 border border-slate-850 p-4 rounded-xl flex justify-between items-center hover:border-teal-500/30 transition">
+                            <div class="bg-[#f8fafd] border border-[#dadce0] p-4 rounded-xl flex justify-between items-center hover:border-[#1a73e8] transition">
                                 <div class="flex items-center gap-3">
-                                    <span class="text-teal-400 bg-teal-950/50 p-2.5 rounded-lg text-lg flex items-center justify-center">
-                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
-                                    </span>
+                                    <div class="w-10 h-10 bg-[#e8f0fe] border border-[#d2e3fc] text-[#1a73e8] rounded-xl flex items-center justify-center">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                                    </div>
                                     <div>
-                                        <h4 class="font-bold text-white text-sm" th:text="${file.fileName}">Syllabus.pdf</h4>
-                                        <span class="text-[10px] text-slate-500 font-semibold uppercase" th:text="${file.fileType}">PDF</span>
+                                        <h4 class="font-bold text-[#202124] text-sm" th:text="${file.fileName}">Syllabus.pdf</h4>
+                                        <span class="text-[10px] text-[#5f6368] font-semibold uppercase" th:text="${file.fileType}">PDF</span>
                                     </div>
                                 </div>
                                 
                                 <a th:href="@{/downloadFile/{fileId}(fileId=${file.id})}" 
-                                   class="px-3.5 py-1.5 text-xs font-semibold bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg transition text-slate-200 flex items-center gap-1">
-                                    <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                                   class="px-3.5 py-1.5 text-xs font-semibold bg-white hover:bg-[#f1f3f4] border border-[#dadce0] rounded-lg transition text-[#1a73e8] flex items-center gap-1">
+                                    <svg class="w-3.5 h-3.5 text-[#1a73e8]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                                     Download
                                 </a>
                             </div>
                         </th:block>
 
                         <!-- Empty state -->
-                        <div th:if="${#lists.isEmpty(files)}" class="text-center py-6 text-slate-500 italic text-xs">
+                        <div th:if="${#lists.isEmpty(files)}" class="text-center py-6 text-[#80868b] italic text-xs">
                             No files attached to this syllabus yet. Use the upload panel.
                         </div>
                     </div>
@@ -136,9 +142,9 @@
 
             <!-- Right: Upload Panel -->
             <div class="space-y-6">
-                <div class="bg-[#1e293b] border border-slate-800 p-6 rounded-2xl shadow-xl space-y-6">
-                    <h3 class="text-lg font-bold text-white border-b border-slate-700 pb-3 flex items-center gap-2">
-                        <svg class="w-5 h-5 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                <div class="bg-white border border-[#dadce0] p-6 rounded-2xl shadow-sm space-y-6">
+                    <h3 class="text-base font-bold text-[#202124] border-b border-[#e0e2e7] pb-3 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-[#1a73e8]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                         Upload Material
                     </h3>
 
@@ -146,13 +152,13 @@
                         <input type="hidden" name="courseId" th:value="${course.id}">
                         
                         <div>
-                            <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Select Resource File</label>
+                            <label class="block text-xs font-bold text-[#5f6368] uppercase tracking-wider mb-2">Select Resource File</label>
                             <input type="file" name="file" required
-                                   class="w-full text-xs text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-slate-800 file:text-slate-200 file:hover:bg-slate-750 transition cursor-pointer">
+                                   class="w-full text-xs text-[#5f6368] file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border file:border-[#dadce0] file:text-xs file:font-semibold file:bg-white file:text-[#1a73e8] file:hover:bg-[#f1f3f4] transition cursor-pointer">
                         </div>
 
-                        <button type="submit" class="w-full bg-teal-600 hover:bg-teal-500 text-white font-semibold py-2.5 rounded-lg text-sm transition flex items-center justify-center gap-1.5">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                        <button type="submit" class="w-full bg-[#1a73e8] hover:bg-[#174ea6] text-white font-semibold py-2.5 rounded-xl text-xs transition flex items-center justify-center gap-1.5 shadow-sm hover:shadow-md">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                             Upload File
                         </button>
                     </form>

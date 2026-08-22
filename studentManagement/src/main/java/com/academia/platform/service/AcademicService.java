@@ -167,8 +167,26 @@ public class AcademicService {
         return students;
     }
 
-    // Returns a map of classSectionId -> List<Student> for the provided class sections
+    // High-performance batch mapping: fetches all session enrollments in 1 query and groups in memory
     public Map<Long, List<Student>> getStudentsMapForClassSections(List<ClassSection> sections) {
+        AcademicYear activeYear = academicYearService.getActiveAcademicYear();
+        if (activeYear != null) {
+            List<StudentEnrollment> allEnrollments = studentEnrollmentRepository.findByAcademicYear(activeYear);
+            Map<Long, List<Student>> grouped = allEnrollments.stream()
+                    .filter(e -> e.getClassSection() != null && e.getStudent() != null)
+                    .collect(Collectors.groupingBy(
+                            e -> e.getClassSection().getId(),
+                            Collectors.mapping(StudentEnrollment::getStudent, Collectors.toList())
+                    ));
+            
+            // Ensure all requested sections have an entry
+            Map<Long, List<Student>> result = new HashMap<>();
+            for (ClassSection cs : sections) {
+                result.put(cs.getId(), grouped.getOrDefault(cs.getId(), List.of()));
+            }
+            return result;
+        }
+
         Map<Long, List<Student>> map = new HashMap<>();
         for (ClassSection cs : sections) {
             map.put(cs.getId(), getStudentsForClassSection(cs.getId()));

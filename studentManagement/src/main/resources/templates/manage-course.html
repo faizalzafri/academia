@@ -9,7 +9,7 @@
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Font Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <script>
         tailwind.config = {
@@ -23,21 +23,23 @@
         }
     </script>
 </head>
-<body class="bg-[#0f172a] text-[#f8fafc] min-h-screen font-sans">
+<body class="bg-[#f6f8fc] text-[#202124] min-h-screen font-sans">
 
     <!-- Header Navbar -->
-    <header class="bg-[#1e293b] border-b border-slate-700 sticky top-0 z-50">
+    <header class="bg-white border-b border-[#dadce0] sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center gap-3">
-                    <svg class="w-6 h-6 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
-                    </svg>
-                    <span class="font-bold text-lg tracking-wider text-teal-400">ACADEMIA FACULTY PORTAL</span>
+                    <div class="w-9 h-9 bg-[#e8f0fe] text-[#1a73e8] rounded-xl flex items-center justify-center border border-[#d2e3fc]">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                        </svg>
+                    </div>
+                    <span class="font-bold text-lg tracking-wider text-[#1a73e8]">ACADEMIA FACULTY PORTAL</span>
                 </div>
                 <div class="flex gap-4">
-                    <a th:href="@{/home}" class="px-4 py-2 text-sm font-medium bg-slate-800 hover:bg-slate-700 border border-slate-600 rounded-lg transition flex items-center gap-2">
-                        <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                    <a th:href="@{/home}" class="px-3.5 py-2 text-xs font-semibold bg-white hover:bg-[#f1f3f4] border border-[#dadce0] rounded-lg transition text-[#1a73e8] flex items-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
                         Back to Home
                     </a>
                 </div>
@@ -49,36 +51,38 @@
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         
         <!-- Page Title -->
-        <div class="mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+        <div class="bg-white border border-[#dadce0] p-6 rounded-2xl shadow-sm mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             <div>
-                <h1 class="text-3xl font-extrabold text-white tracking-tight">Manage Registered Courses</h1>
-                <p class="mt-2 text-slate-400">Add new syllabus listings and update course descriptions</p>
+                <h1 class="text-2xl sm:text-3xl font-bold text-[#202124] tracking-tight">Manage Registered Courses</h1>
+                <p class="mt-1 text-sm text-[#5f6368]">Add new syllabus listings and update course descriptions</p>
             </div>
             
             <div class="flex gap-3">
-                <a th:href="@{/academic/dashboard}" class="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 rounded-xl text-sm font-semibold transition flex items-center gap-2">
-                    <svg class="w-5 h-5 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-                    Academic Dashboard
+                <a th:href="@{/academic/dashboard}" class="px-4 py-2 bg-white hover:bg-[#f1f3f4] border border-[#dadce0] text-[#1a73e8] rounded-xl text-xs font-semibold transition flex items-center gap-2">
+                    <svg class="w-4 h-4 text-[#1a73e8]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                    Academic Matrix
                 </a>
-                <a th:href="@{/chat}" class="px-5 py-2.5 bg-teal-600 hover:bg-teal-500 text-white rounded-xl text-sm font-semibold transition shadow-lg shadow-teal-555/10 flex items-center gap-2">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+                <a th:href="@{/chat}" class="px-4 py-2 bg-[#1a73e8] hover:bg-[#174ea6] text-white rounded-xl text-xs font-semibold transition shadow-sm hover:shadow-md flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
                     Launch Chatroom
                 </a>
             </div>
         </div>
 
         <!-- Success Alert -->
-        <div th:if="${param.success}" class="mb-6 p-4 bg-emerald-950 border border-emerald-500 text-emerald-200 rounded-xl flex items-center gap-3">
-            <svg class="w-5 h-5 text-emerald-455 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-            <span>Course registered successfully!</span>
+        <div th:if="${param.success}" class="mb-6 p-4 bg-[#e6f4ea] border border-[#ceead6] text-[#137333] rounded-xl flex items-center gap-3 text-xs">
+            <svg class="w-5 h-5 text-[#1e8e3e] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <span class="font-semibold">Course registered successfully!</span>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
             
             <!-- Left: Register Course Form -->
-            <div class="bg-[#1e293b] border border-slate-800 p-6 rounded-2xl shadow-2xl h-fit">
-                <h2 class="text-xl font-bold text-white mb-6 border-b border-slate-700 pb-3 flex items-center gap-2">
-                    <svg class="w-5 h-5 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path></svg>
+            <div class="bg-white border border-[#dadce0] p-6 rounded-2xl shadow-sm h-fit space-y-4">
+                <h2 class="text-base font-bold text-[#202124] border-b border-[#e0e2e7] pb-3 flex items-center gap-2">
+                    <svg class="w-5 h-5 text-[#1a73e8]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path></svg>
                     Register New Course
                 </h2>
 
@@ -86,27 +90,27 @@
                     
                     <div class="grid grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Course Code</label>
-                            <input type="text" th:field="*{code}" class="w-full bg-[#0f172a] border border-slate-700 focus:border-teal-500 text-white p-2.5 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-teal-500 transition" placeholder="e.g. FIT201" required>
+                            <label class="block text-xs font-bold text-[#5f6368] uppercase tracking-wider mb-2">Course Code</label>
+                            <input type="text" th:field="*{code}" class="w-full bg-white border border-[#dadce0] focus:border-[#1a73e8] text-[#202124] p-2.5 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#e8f0fe] transition placeholder-[#80868b]" placeholder="e.g. FIT201" required>
                         </div>
                         <div>
-                            <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Credit Hours</label>
-                            <input type="number" th:field="*{credit}" class="w-full bg-[#0f172a] border border-slate-700 focus:border-teal-500 text-white p-2.5 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-teal-500 transition" placeholder="3" required>
+                            <label class="block text-xs font-bold text-[#5f6368] uppercase tracking-wider mb-2">Credit Hours</label>
+                            <input type="number" th:field="*{credit}" class="w-full bg-white border border-[#dadce0] focus:border-[#1a73e8] text-[#202124] p-2.5 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#e8f0fe] transition placeholder-[#80868b]" placeholder="3" required>
                         </div>
                     </div>
 
                     <div>
-                        <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Course Title</label>
-                        <input type="text" th:field="*{name}" class="w-full bg-[#0f172a] border border-slate-700 focus:border-teal-500 text-white p-2.5 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-teal-500 transition" placeholder="e.g. Database Systems" required>
+                        <label class="block text-xs font-bold text-[#5f6368] uppercase tracking-wider mb-2">Course Title</label>
+                        <input type="text" th:field="*{name}" class="w-full bg-white border border-[#dadce0] focus:border-[#1a73e8] text-[#202124] p-2.5 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#e8f0fe] transition placeholder-[#80868b]" placeholder="e.g. Database Systems" required>
                     </div>
 
                     <div>
-                        <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Course Description</label>
-                        <textarea th:field="*{description}" rows="4" class="w-full bg-[#0f172a] border border-slate-700 focus:border-teal-500 text-white p-2.5 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-teal-500 transition" placeholder="Add syllabus details..."></textarea>
+                        <label class="block text-xs font-bold text-[#5f6368] uppercase tracking-wider mb-2">Course Description</label>
+                        <textarea th:field="*{description}" rows="4" class="w-full bg-white border border-[#dadce0] focus:border-[#1a73e8] text-[#202124] p-2.5 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#e8f0fe] transition placeholder-[#80868b]" placeholder="Add syllabus details..."></textarea>
                     </div>
 
-                    <button type="submit" class="w-full bg-teal-600 hover:bg-teal-500 text-white font-semibold py-3 px-4 rounded-lg text-sm transition mt-6 flex items-center justify-center gap-2">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                    <button type="submit" class="w-full bg-[#1a73e8] hover:bg-[#174ea6] text-white font-semibold py-2.5 px-4 rounded-xl text-sm transition mt-6 flex items-center justify-center gap-2 shadow-sm hover:shadow-md">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
                         <span>Publish Course</span>
                     </button>
                 </form>
@@ -114,33 +118,33 @@
 
             <!-- Right: Registered Courses Grid -->
             <div class="lg:col-span-2 space-y-6">
-                <h2 class="text-xl font-bold text-white flex items-center gap-2 mb-4">
-                    <svg class="w-6 h-6 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path></svg>
+                <h2 class="text-base font-bold text-[#202124] flex items-center gap-2 mb-4">
+                    <svg class="w-5 h-5 text-[#1a73e8]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path></svg>
                     Managed Curriculum Listings
                 </h2>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <th:block th:each="c : ${courses}">
-                        <div class="bg-[#1e293b] border border-slate-800 rounded-2xl shadow-xl overflow-hidden hover:border-slate-700 transition flex flex-col justify-between">
+                        <div class="bg-white border border-[#dadce0] rounded-2xl shadow-sm overflow-hidden hover:border-[#1a73e8] transition flex flex-col justify-between">
                             
                             <div class="p-6 space-y-4">
                                 <div class="flex justify-between items-start gap-4">
-                                    <span class="px-2.5 py-0.5 bg-teal-950 text-teal-400 border border-teal-900 rounded-full text-[10px] font-bold uppercase tracking-wider" th:text="${c.code}">CODE</span>
-                                    <span class="text-xs text-slate-500 font-semibold" th:text="${c.credit} + ' Credits'">3 Credits</span>
+                                    <span class="px-2.5 py-0.5 bg-[#e8f0fe] text-[#1a73e8] border border-[#d2e3fc] rounded-full text-[10px] font-bold uppercase tracking-wider" th:text="${c.code}">CODE</span>
+                                    <span class="text-xs text-[#5f6368] font-semibold" th:text="${c.credit} + ' Credits'">3 Credits</span>
                                 </div>
                                 
                                 <div>
-                                    <h3 class="text-lg font-bold text-white tracking-tight" th:text="${c.name}">Mathematics</h3>
-                                    <p class="text-xs text-slate-400 mt-2 leading-relaxed line-clamp-3" th:text="${c.description ?: 'No syllabus description provided for this course section.'}"></p>
+                                    <h3 class="text-base font-bold text-[#202124] tracking-tight" th:text="${c.name}">Mathematics</h3>
+                                    <p class="text-xs text-[#5f6368] mt-2 leading-relaxed line-clamp-3" th:text="${c.description ?: 'No syllabus description provided for this course section.'}"></p>
                                 </div>
                             </div>
 
-                            <div class="p-6 border-t border-slate-800 bg-[#161e29]/30 flex justify-between items-center">
-                                <span class="text-xs text-slate-500 font-semibold">Managed</span>
+                            <div class="p-4 border-t border-[#e0e2e7] bg-[#f8fafd] flex justify-between items-center">
+                                <span class="text-xs text-[#5f6368] font-semibold">Managed</span>
                                 
                                 <a th:href="@{/teacher/course/{id}(id=${c.id})}" 
-                                   class="px-3.5 py-2 text-xs font-semibold bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg transition text-slate-200 flex items-center gap-1">
-                                    <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                                   class="px-3 py-1.5 text-xs font-semibold bg-white hover:bg-[#f1f3f4] border border-[#dadce0] rounded-lg transition text-[#1a73e8] flex items-center gap-1">
+                                    <svg class="w-3.5 h-3.5 text-[#1a73e8]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
                                     Manage Settings
                                 </a>
                             </div>

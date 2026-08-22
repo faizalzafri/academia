@@ -5,26 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:text="${activity.name + ' - Academia'}">Activity Details - Academia</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
 </head>
-<body class="bg-[#0f172a] text-[#f8fafc] min-h-screen font-sans">
+<body class="bg-[#f6f8fc] text-[#202124] min-h-screen font-sans">
 
     <!-- Header Navbar -->
-    <header class="bg-[#1e293b] border-b border-slate-700 sticky top-0 z-50">
+    <header class="bg-white border-b border-[#dadce0] sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center gap-3">
-                    <span class="font-bold text-lg tracking-wider text-rose-400">ACADEMIA</span>
-                    <span class="ml-2 px-2 py-0.5 bg-rose-950 text-rose-300 border border-rose-800 rounded text-[10px] font-bold uppercase tracking-wider">Activity Center</span>
+                    <div class="w-9 h-9 bg-[#e8f0fe] text-[#1a73e8] rounded-xl flex items-center justify-center border border-[#d2e3fc]">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"></path></svg>
+                    </div>
+                    <div>
+                        <span class="font-bold text-lg tracking-wider text-[#1a73e8]">ACADEMIA</span>
+                        <span class="ml-2 px-2 py-0.5 bg-[#e8f0fe] text-[#1a73e8] border border-[#d2e3fc] rounded text-[10px] font-bold uppercase tracking-wider">Activity Center</span>
+                    </div>
                 </div>
 
                 <nav class="hidden md:flex items-center gap-1">
-                    <a th:href="@{/home}" class="px-3.5 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition">Home</a>
-                    <a th:href="@{/activities}" class="px-3.5 py-2 text-sm font-semibold text-rose-400 bg-slate-800/80 rounded-lg">Activities</a>
+                    <a th:href="@{/home}" class="px-3.5 py-2 text-sm font-medium text-[#5f6368] hover:text-[#202124] hover:bg-[#f1f3f4] rounded-lg transition">Home</a>
+                    <a th:href="@{/activities}" class="px-3.5 py-2 text-sm font-semibold text-[#1a73e8] bg-[#e8f0fe] rounded-lg">Activities</a>
                 </nav>
 
-                <a th:href="@{/logout}" class="px-3.5 py-1.5 text-xs font-semibold bg-rose-950/60 hover:bg-rose-900/80 border border-rose-800 text-rose-300 rounded-lg transition">
-                    Sign Out
+                <a th:href="@{/logout}" class="px-3.5 py-1.5 text-xs font-semibold bg-[#fce8e6] hover:bg-[#fad2cf] border border-[#fad2cf] text-[#c5221f] rounded-lg transition">
+                    Sign out
                 </a>
             </div>
         </div>
@@ -33,52 +49,52 @@
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
         
         <div class="flex justify-between items-center">
-            <a th:href="@{/activities}" class="text-xs font-semibold text-slate-400 hover:text-white transition">
+            <a th:href="@{/activities}" class="text-xs font-semibold text-[#1a73e8] hover:underline transition flex items-center gap-1">
                 &larr; Back to Activities
             </a>
-            <span th:text="${activity.status}" class="px-3 py-1 bg-rose-950 text-rose-300 border border-rose-800 rounded-full text-xs font-bold uppercase">Open</span>
+            <span th:text="${activity.status}" class="px-3 py-1 bg-[#e8f0fe] text-[#1a73e8] border border-[#d2e3fc] rounded-full text-xs font-bold uppercase">Open</span>
         </div>
 
         <!-- Activity Overview Card -->
-        <div class="bg-[#1e293b] border border-slate-800 rounded-2xl p-8 shadow-2xl space-y-6">
+        <div class="bg-white border border-[#dadce0] rounded-2xl p-8 shadow-sm space-y-6">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                 <div>
-                    <span class="px-2.5 py-0.5 bg-rose-950 text-rose-300 border border-rose-800 rounded text-xs font-bold uppercase tracking-wider" th:text="${activity.category}">SPORTS</span>
-                    <h1 class="text-3xl font-extrabold text-white mt-2" th:text="${activity.name}">Annual Sports Meet 2026</h1>
+                    <span class="px-2.5 py-0.5 bg-[#e8f0fe] text-[#1a73e8] border border-[#d2e3fc] rounded text-xs font-bold uppercase tracking-wider" th:text="${activity.category}">SPORTS</span>
+                    <h1 class="text-2xl sm:text-3xl font-bold text-[#202124] mt-2" th:text="${activity.name}">Annual Sports Meet 2026</h1>
                 </div>
 
                 <!-- Registration / Quick Action -->
                 <div th:if="${activity.status.name() == 'REGISTRATION_OPEN'}">
                     <form th:action="@{/activities/{id}/register(id=${activity.id})}" method="post" class="flex items-center gap-2">
                         <input type="text" name="teamName" placeholder="House / Team Name (Optional)" 
-                               class="px-3 py-2 bg-slate-900 border border-slate-700 rounded-xl text-xs text-white focus:outline-none focus:border-rose-500">
-                        <button type="submit" class="px-5 py-2 bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs rounded-xl transition shadow-lg shadow-rose-500/20">
+                               class="px-3 py-2 bg-white border border-[#dadce0] rounded-xl text-xs text-[#202124] focus:outline-none focus:ring-2 focus:ring-[#e8f0fe] focus:border-[#1a73e8]">
+                        <button type="submit" class="px-5 py-2 bg-[#1a73e8] hover:bg-[#174ea6] text-white font-semibold text-xs rounded-xl transition shadow-sm hover:shadow-md">
                             Register as Participant
                         </button>
                     </form>
                 </div>
             </div>
 
-            <p class="text-sm text-slate-300 leading-relaxed" th:text="${activity.description}">
+            <p class="text-sm text-[#5f6368] leading-relaxed" th:text="${activity.description}">
                 Full detailed description of the event, rules, schedule, and team requirements.
             </p>
 
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4 border-t border-slate-800 text-xs">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4 border-t border-[#e0e2e7] text-xs">
                 <div>
-                    <span class="text-slate-500 block">Event Date</span>
-                    <span class="font-bold text-white text-sm" th:text="${activity.eventDate}">2026-10-15</span>
+                    <span class="text-[#5f6368] block">Event Date</span>
+                    <span class="font-bold text-[#202124] text-sm font-mono" th:text="${activity.eventDate}">2026-10-15</span>
                 </div>
                 <div>
-                    <span class="text-slate-500 block">Venue / Ground</span>
-                    <span class="font-bold text-white text-sm" th:text="${activity.venue != null ? activity.venue : 'Campus Ground'}">Main Auditorium</span>
+                    <span class="text-[#5f6368] block">Venue / Ground</span>
+                    <span class="font-bold text-[#202124] text-sm" th:text="${activity.venue != null ? activity.venue : 'Campus Ground'}">Main Auditorium</span>
                 </div>
                 <div>
-                    <span class="text-slate-500 block">Staff Coordinator</span>
-                    <span class="font-bold text-indigo-400 text-sm" th:text="${activity.coordinator != null ? activity.coordinator.name : 'Faculty Lead'}">Prof. Sharma</span>
+                    <span class="text-[#5f6368] block">Staff Coordinator</span>
+                    <span class="font-bold text-[#1a73e8] text-sm" th:text="${activity.coordinator != null ? activity.coordinator.name : 'Faculty Lead'}">Prof. Sharma</span>
                 </div>
                 <div>
-                    <span class="text-slate-500 block">Academic Session</span>
-                    <span class="font-bold text-white text-sm" th:text="${activity.academicYear != null ? activity.academicYear.name : 'Current'}">2026-2027</span>
+                    <span class="text-[#5f6368] block">Academic Session</span>
+                    <span class="font-bold text-[#202124] text-sm" th:text="${activity.academicYear != null ? activity.academicYear.name : 'Current'}">2026-2027</span>
                 </div>
             </div>
         </div>
@@ -86,48 +102,48 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
             
             <!-- Left: Results & Winners Podium -->
-            <div class="bg-[#1e293b] border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
-                <div class="flex justify-between items-center border-b border-slate-800 pb-3">
-                    <h2 class="text-base font-bold text-white flex items-center gap-2">
-                        <svg class="w-5 h-5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
+            <div class="bg-white border border-[#dadce0] rounded-2xl p-6 shadow-sm space-y-4">
+                <div class="flex justify-between items-center border-b border-[#e0e2e7] pb-3">
+                    <h2 class="text-base font-bold text-[#202124] flex items-center gap-2">
+                        <svg class="w-5 h-5 text-[#f29900]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
                         Official Winners & Results Podium
                     </h2>
                 </div>
 
                 <div class="space-y-3">
-                    <div th:each="r : ${results}" class="p-3.5 bg-slate-900/60 border border-slate-800 rounded-xl flex items-center justify-between">
+                    <div th:each="r : ${results}" class="p-3.5 bg-[#f8fafd] border border-[#dadce0] rounded-xl flex items-center justify-between">
                         <div>
-                            <span class="text-xs font-bold text-white block" th:text="${r.eventName}">100m Sprint</span>
-                            <span class="text-xs text-indigo-400 font-semibold" th:text="${r.winnerName}">Winner Name</span>
-                            <span th:if="${r.winnerClass != null}" class="text-[11px] text-slate-500" th:text="${' &bull; ' + r.winnerClass}"> &bull; Class 10-A</span>
+                            <span class="text-xs font-bold text-[#202124] block" th:text="${r.eventName}">100m Sprint</span>
+                            <span class="text-xs text-[#1a73e8] font-semibold" th:text="${r.winnerName}">Winner Name</span>
+                            <span th:if="${r.winnerClass != null}" class="text-[11px] text-[#5f6368]" th:text="${' &bull; ' + r.winnerClass}"> &bull; Class 10-A</span>
                         </div>
                         <div class="text-right">
-                            <span class="px-2.5 py-0.5 bg-amber-950 text-amber-300 border border-amber-800 rounded text-xs font-bold" th:text="${r.position}">1st Place</span>
-                            <span th:if="${r.score != null}" class="block text-[11px] text-slate-400 mt-0.5" th:text="${r.score}">10.42s</span>
+                            <span class="px-2.5 py-0.5 bg-[#fef7e0] text-[#b06000] border border-[#feefc3] rounded text-xs font-bold" th:text="${r.position}">1st Place</span>
+                            <span th:if="${r.score != null}" class="block text-[11px] text-[#5f6368] mt-0.5" th:text="${r.score}">10.42s</span>
                         </div>
                     </div>
 
-                    <div th:if="${#lists.isEmpty(results)}" class="text-center py-6 text-slate-500 italic text-xs">
+                    <div th:if="${#lists.isEmpty(results)}" class="text-center py-6 text-[#80868b] italic text-xs">
                         No official results recorded yet.
                     </div>
                 </div>
 
                 <!-- Record Result Form for Teachers/Admins -->
                 <div th:if="${currentUser != null and currentUser.authorities != null and (currentUser.authorities.contains('TEACHER') or currentUser.authorities.contains('PRINCIPAL') or currentUser.authorities.contains('SYSTEM_ADMIN'))}" 
-                     class="pt-4 border-t border-slate-800 space-y-3">
-                    <h3 class="text-xs font-bold uppercase text-slate-400">Record Sub-Event Result</h3>
+                     class="pt-4 border-t border-[#e0e2e7] space-y-3">
+                    <h3 class="text-xs font-bold uppercase text-[#5f6368]">Record Sub-Event Result</h3>
                     <form th:action="@{/activities/{id}/result(id=${activity.id})}" method="post" class="grid grid-cols-2 gap-2 text-xs">
                         <input type="text" name="eventName" placeholder="Sub-event (e.g. 100m Sprint)" required 
-                               class="px-3 py-2 bg-slate-900 border border-slate-700 rounded-xl text-white">
+                               class="px-3 py-2 bg-white border border-[#dadce0] rounded-xl text-[#202124] focus:outline-none focus:ring-2 focus:ring-[#e8f0fe] focus:border-[#1a73e8]">
                         <input type="text" name="winnerName" placeholder="Winner / Team Name" required 
-                               class="px-3 py-2 bg-slate-900 border border-slate-700 rounded-xl text-white">
+                               class="px-3 py-2 bg-white border border-[#dadce0] rounded-xl text-[#202124] focus:outline-none focus:ring-2 focus:ring-[#e8f0fe] focus:border-[#1a73e8]">
                         <input type="text" name="winnerClass" placeholder="Class / Section (e.g. Class 10-A)" 
-                               class="px-3 py-2 bg-slate-900 border border-slate-700 rounded-xl text-white">
+                               class="px-3 py-2 bg-white border border-[#dadce0] rounded-xl text-[#202124] focus:outline-none focus:ring-2 focus:ring-[#e8f0fe] focus:border-[#1a73e8]">
                         <input type="text" name="position" placeholder="Position (e.g. 1st Place, Gold)" required 
-                               class="px-3 py-2 bg-slate-900 border border-slate-700 rounded-xl text-white">
+                               class="px-3 py-2 bg-white border border-[#dadce0] rounded-xl text-[#202124] focus:outline-none focus:ring-2 focus:ring-[#e8f0fe] focus:border-[#1a73e8]">
                         <input type="text" name="score" placeholder="Score / Timing (Optional)" 
-                               class="col-span-2 px-3 py-2 bg-slate-900 border border-slate-700 rounded-xl text-white">
-                        <button type="submit" class="col-span-2 py-2 bg-amber-600 hover:bg-amber-500 text-white font-bold rounded-xl transition">
+                               class="col-span-2 px-3 py-2 bg-white border border-[#dadce0] rounded-xl text-[#202124] focus:outline-none focus:ring-2 focus:ring-[#e8f0fe] focus:border-[#1a73e8]">
+                        <button type="submit" class="col-span-2 py-2 bg-[#1a73e8] hover:bg-[#174ea6] text-white font-semibold rounded-xl transition shadow-sm">
                             Record Result Entry
                         </button>
                     </form>
@@ -135,24 +151,24 @@
             </div>
 
             <!-- Right: Registered Participants Directory -->
-            <div class="bg-[#1e293b] border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
-                <div class="flex justify-between items-center border-b border-slate-800 pb-3">
-                    <h2 class="text-base font-bold text-white flex items-center gap-2">
-                        <svg class="w-5 h-5 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+            <div class="bg-white border border-[#dadce0] rounded-2xl p-6 shadow-sm space-y-4">
+                <div class="flex justify-between items-center border-b border-[#e0e2e7] pb-3">
+                    <h2 class="text-base font-bold text-[#202124] flex items-center gap-2">
+                        <svg class="w-5 h-5 text-[#1a73e8]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
                         Participant Roster (<span th:text="${#lists.size(participants)}">0</span>)
                     </h2>
                 </div>
 
                 <div class="space-y-2 max-h-96 overflow-y-auto">
-                    <div th:each="p : ${participants}" class="p-3 bg-slate-900/60 border border-slate-800 rounded-xl flex items-center justify-between text-xs">
+                    <div th:each="p : ${participants}" class="p-3 bg-[#f8fafd] border border-[#dadce0] rounded-xl flex items-center justify-between text-xs">
                         <div>
-                            <span class="font-bold text-white block" th:text="${p.student.name != null ? p.student.name : p.student.username}">Student</span>
-                            <span th:if="${p.teamName != null}" class="text-slate-400 font-semibold" th:text="${'Team: ' + p.teamName}">Team: Red House</span>
+                            <span class="font-bold text-[#202124] block" th:text="${p.student.name != null ? p.student.name : p.student.username}">Student</span>
+                            <span th:if="${p.teamName != null}" class="text-[#5f6368] font-semibold" th:text="${'Team: ' + p.teamName}">Team: Red House</span>
                         </div>
-                        <span class="px-2 py-0.5 bg-slate-800 text-rose-300 border border-slate-700 rounded font-semibold text-[11px]" th:text="${p.role}">Participant</span>
+                        <span class="px-2 py-0.5 bg-white text-[#1a73e8] border border-[#dadce0] rounded font-semibold text-[11px]" th:text="${p.role}">Participant</span>
                     </div>
 
-                    <div th:if="${#lists.isEmpty(participants)}" class="text-center py-6 text-slate-500 italic text-xs">
+                    <div th:if="${#lists.isEmpty(participants)}" class="text-center py-6 text-[#80868b] italic text-xs">
                         No participants registered yet.
                     </div>
                 </div>

@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Task Center - Academia</title>
+    <title th:text="#{app.portal.student} + ' - ' + #{app.title}">Student Task Center - Academia</title>
     
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Font Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <script>
         tailwind.config = {
@@ -23,38 +23,53 @@
         }
     </script>
 </head>
-<body class="bg-[#0f172a] text-[#f8fafc] min-h-screen font-sans">
+<body class="bg-[#f6f8fc] text-[#202124] min-h-screen font-sans">
 
     <!-- Header Navbar -->
-    <header class="bg-[#1e293b] border-b border-slate-700 sticky top-0 z-50">
+    <header class="bg-white border-b border-[#dadce0] sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 
                 <div class="flex items-center gap-3">
-                    <div class="p-2 bg-teal-500/10 border border-teal-500/30 text-teal-400 rounded-xl">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="w-9 h-9 bg-[#e8f0fe] text-[#1a73e8] rounded-xl flex items-center justify-center border border-[#d2e3fc]">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"></path>
                         </svg>
                     </div>
                     <div>
-                        <span class="font-bold text-lg tracking-wider text-teal-400">ACADEMIA</span>
-                        <span class="ml-2 px-2 py-0.5 bg-teal-950 text-teal-300 border border-teal-800 rounded text-[10px] font-bold uppercase tracking-wider">Student Portal</span>
+                        <span class="font-bold text-lg tracking-wider text-[#1a73e8]">ACADEMIA</span>
+                        <span class="ml-2 px-2 py-0.5 bg-[#e6f4ea] text-[#137333] border border-[#ceead6] rounded text-[10px] font-bold uppercase tracking-wider" th:text="#{app.portal.student}">Student Portal</span>
                     </div>
                 </div>
 
                 <nav class="hidden md:flex items-center gap-1">
-                    <a th:href="@{/home}" class="px-3 py-2 text-sm font-semibold text-teal-400 bg-slate-800/80 rounded-lg">Dashboard</a>
-                    <a th:href="@{/activities}" class="px-3 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition">Activities</a>
-                    <a th:href="@{/listCourse}" class="px-3 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition">Courses</a>
-                    <a th:href="@{/academic/timetable/1}" class="px-3 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition">Timetable</a>
-                    <a th:href="@{/academic/calendar}" class="px-3 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition">Calendar</a>
-                    <a th:href="@{/chat}" class="px-3 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition">Chat</a>
-                    <a th:href="@{/user/account}" class="px-3 py-2 text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg transition">Profile</a>
+                    <a th:href="@{/home}" class="px-3.5 py-2 text-sm font-semibold text-[#1a73e8] bg-[#e8f0fe] rounded-lg" th:text="#{nav.dashboard}">Dashboard</a>
+                    <a th:href="@{/activities}" class="px-3.5 py-2 text-sm font-medium text-[#5f6368] hover:text-[#202124] hover:bg-[#f1f3f4] rounded-lg transition" th:text="#{nav.activities}">Activities</a>
+                    <a th:href="@{/listCourse}" class="px-3.5 py-2 text-sm font-medium text-[#5f6368] hover:text-[#202124] hover:bg-[#f1f3f4] rounded-lg transition" th:text="#{nav.courses}">Courses</a>
+                    <a th:href="@{/academic/timetable/1}" class="px-3.5 py-2 text-sm font-medium text-[#5f6368] hover:text-[#202124] hover:bg-[#f1f3f4] rounded-lg transition" th:text="#{nav.timetable}">Timetable</a>
+                    <a th:href="@{/academic/calendar}" class="px-3.5 py-2 text-sm font-medium text-[#5f6368] hover:text-[#202124] hover:bg-[#f1f3f4] rounded-lg transition" th:text="#{nav.calendar}">Calendar</a>
+                    <a th:href="@{/chat}" class="px-3.5 py-2 text-sm font-medium text-[#5f6368] hover:text-[#202124] hover:bg-[#f1f3f4] rounded-lg transition" th:text="#{nav.chat}">Chat</a>
+                    <a th:href="@{/user/account}" class="px-3.5 py-2 text-sm font-medium text-[#5f6368] hover:text-[#202124] hover:bg-[#f1f3f4] rounded-lg transition">Profile</a>
                 </nav>
 
                 <div class="flex items-center gap-3">
-                    <a th:href="@{/logout}" class="px-3.5 py-1.5 text-xs font-semibold bg-rose-950/60 hover:bg-rose-900/80 border border-rose-800 text-rose-300 rounded-lg transition">
-                        Sign Out
+                    <!-- Language Selector Pill -->
+                    <div class="hidden sm:flex items-center gap-1 bg-[#f1f3f4] border border-[#dadce0] rounded-xl px-2.5 py-1 text-xs font-semibold text-[#5f6368]">
+                        <a th:href="@{/home(lang='en')}" class="px-1.5 py-0.5 rounded hover:bg-white transition" th:classappend="${#locale.language == 'en' ? 'bg-white text-[#1a73e8] font-bold shadow-xs' : ''}">EN</a>
+                        <span class="text-[#dadce0]">&bull;</span>
+                        <a th:href="@{/home(lang='es')}" class="px-1.5 py-0.5 rounded hover:bg-white transition" th:classappend="${#locale.language == 'es' ? 'bg-white text-[#1a73e8] font-bold shadow-xs' : ''}">ES</a>
+                        <span class="text-[#dadce0]">&bull;</span>
+                        <a th:href="@{/home(lang='fr')}" class="px-1.5 py-0.5 rounded hover:bg-white transition" th:classappend="${#locale.language == 'fr' ? 'bg-white text-[#1a73e8] font-bold shadow-xs' : ''}">FR</a>
+                        <span class="text-[#dadce0]">&bull;</span>
+                        <a th:href="@{/home(lang='de')}" class="px-1.5 py-0.5 rounded hover:bg-white transition" th:classappend="${#locale.language == 'de' ? 'bg-white text-[#1a73e8] font-bold shadow-xs' : ''}">DE</a>
+                        <span class="text-[#dadce0]">&bull;</span>
+                        <a th:href="@{/home(lang='hi')}" class="px-1.5 py-0.5 rounded hover:bg-white transition" th:classappend="${#locale.language == 'hi' ? 'bg-white text-[#1a73e8] font-bold shadow-xs' : ''}">HI</a>
+                        <span class="text-[#dadce0]">&bull;</span>
+                        <a th:href="@{/home(lang='ar')}" class="px-1.5 py-0.5 rounded hover:bg-white transition" th:classappend="${#locale.language == 'ar' ? 'bg-white text-[#1a73e8] font-bold shadow-xs' : ''}">AR</a>
+                    </div>
+
+                    <a th:href="@{/logout}" class="px-3.5 py-1.5 text-xs font-semibold bg-[#fce8e6] hover:bg-[#fad2cf] border border-[#fad2cf] text-[#c5221f] rounded-lg transition" th:text="#{nav.logout}">
+                        Sign out
                     </a>
                 </div>
 
@@ -66,15 +81,15 @@
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
         
         <!-- Student Hero Banner -->
-        <div class="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 border border-slate-700 p-8 rounded-2xl shadow-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+        <div class="bg-white border border-[#dadce0] p-8 rounded-2xl shadow-[0_1px_3px_0_rgba(60,64,67,0.15),0_4px_8px_3px_rgba(60,64,67,0.08)] flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             <div>
-                <span class="px-3 py-1 bg-teal-950 border border-teal-800 text-teal-400 rounded-full text-xs font-bold uppercase tracking-wider">Student Board</span>
-                <h1 class="text-3xl font-extrabold text-white mt-2 tracking-tight">Academic Studies & Progress</h1>
-                <p class="text-sm text-slate-400 mt-1">Review enrolled course materials, download lecture resources, inspect period timetables, and monitor exam deadlines.</p>
+                <span class="px-3 py-1 bg-[#e8f0fe] border border-[#d2e3fc] text-[#1a73e8] rounded-full text-xs font-bold uppercase tracking-wider" th:text="#{dash.student}">Student Board</span>
+                <h1 class="text-2xl sm:text-3xl font-bold text-[#202124] mt-2 tracking-tight">Academic Studies & Progress</h1>
+                <p class="text-sm text-[#5f6368] mt-1">Review enrolled course materials, download lecture resources, inspect period timetables, and monitor exam deadlines.</p>
             </div>
-            <a th:href="@{/listCourse}" class="px-5 py-2.5 bg-teal-600 hover:bg-teal-500 text-white font-bold text-xs uppercase tracking-wider rounded-xl transition shadow-lg shadow-teal-500/20 flex items-center gap-2">
+            <a th:href="@{/listCourse}" class="px-5 py-2.5 bg-[#1a73e8] hover:bg-[#174ea6] text-white font-semibold text-xs uppercase tracking-wider rounded-xl transition shadow-sm hover:shadow-md flex items-center gap-2">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.168.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
-                Browse Course Catalog
+                <span th:text="#{dash.courseCatalog}">Browse Course Catalog</span>
             </a>
         </div>
 
@@ -84,50 +99,50 @@
             <div class="lg:col-span-2 space-y-6">
                 
                 <!-- Course Modules & Syllabus Card -->
-                <div class="bg-[#1e293b] border border-slate-800 rounded-2xl shadow-2xl overflow-hidden">
-                    <div class="px-6 py-5 border-b border-slate-800 flex justify-between items-center">
+                <div class="bg-white border border-[#dadce0] rounded-2xl shadow-sm overflow-hidden">
+                    <div class="px-6 py-5 border-b border-[#e0e2e7] flex justify-between items-center bg-[#f8fafd]">
                         <div>
-                            <h2 class="text-lg font-bold text-white flex items-center gap-2">
-                                <svg class="w-5 h-5 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.168.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                            <h2 class="text-base font-bold text-[#202124] flex items-center gap-2">
+                                <svg class="w-5 h-5 text-[#1a73e8]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.168.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
                                 Enrolled Courses & Study Materials
                             </h2>
-                            <p class="text-xs text-slate-400 mt-0.5">Access syllabi, lecture notes, and faculty study materials</p>
+                            <p class="text-xs text-[#5f6368] mt-0.5">Access syllabi, lecture notes, and faculty study materials</p>
                         </div>
-                        <a th:href="@{/listCourse}" class="text-xs font-semibold text-teal-400 hover:text-teal-300 transition">View Catalog &rarr;</a>
+                        <a th:href="@{/listCourse}" class="text-xs font-semibold text-[#1a73e8] hover:underline" th:text="#{btn.viewDetails}">View Catalog &rarr;</a>
                     </div>
 
                     <div class="overflow-x-auto">
-                        <table class="w-full text-left text-sm text-slate-300">
-                            <thead class="bg-slate-900/60 text-slate-400 text-xs uppercase tracking-wider border-b border-slate-800">
+                        <table class="w-full text-left text-sm text-[#202124]">
+                            <thead class="bg-[#f1f3f4] text-[#5f6368] text-xs uppercase tracking-wider border-b border-[#e0e2e7]">
                                 <tr>
-                                    <th class="px-6 py-3.5">Course Code & Name</th>
-                                    <th class="px-6 py-3.5">Credits</th>
-                                    <th class="px-6 py-3.5">Description</th>
-                                    <th class="px-6 py-3.5 text-right">Study Material</th>
+                                    <th class="px-6 py-3.5 font-semibold">Course Code & Name</th>
+                                    <th class="px-6 py-3.5 font-semibold">Credits</th>
+                                    <th class="px-6 py-3.5 font-semibold">Description</th>
+                                    <th class="px-6 py-3.5 text-right font-semibold">Study Material</th>
                                 </tr>
                             </thead>
-                            <tbody class="divide-y divide-slate-800/60">
-                                <tr th:each="c : ${courses}" class="hover:bg-slate-800/40 transition">
+                            <tbody class="divide-y divide-[#e0e2e7] text-xs">
+                                <tr th:each="c : ${courses}" class="hover:bg-[#f8fafd] transition">
                                     <td class="px-6 py-4">
                                         <div class="flex items-center gap-3">
-                                            <span class="px-2 py-0.5 bg-teal-950 text-teal-400 border border-teal-800 rounded text-xs font-bold" th:text="${c.code}">CS101</span>
-                                            <span class="font-bold text-white text-xs" th:text="${c.name}">Computer Architecture</span>
+                                            <span class="px-2 py-0.5 bg-[#e8f0fe] text-[#1a73e8] border border-[#d2e3fc] rounded text-xs font-bold" th:text="${c.code}">CS101</span>
+                                            <span class="font-bold text-[#202124]" th:text="${c.name}">Computer Architecture</span>
                                         </div>
                                     </td>
-                                    <td class="px-6 py-4 text-xs font-semibold text-slate-300" th:text="${c.credit != null ? c.credit + ' Credits' : '3 Credits'}">3 Credits</td>
-                                    <td class="px-6 py-4 text-xs text-slate-300 max-w-xs truncate" th:text="${c.description != null ? c.description : 'Standard syllabus'}">
+                                    <td class="px-6 py-4 font-semibold text-[#5f6368]" th:text="${c.credit != null ? c.credit + ' Credits' : '3 Credits'}">3 Credits</td>
+                                    <td class="px-6 py-4 text-[#5f6368] max-w-xs truncate" th:text="${c.description != null ? c.description : 'Standard syllabus'}">
                                         Course outline description...
                                     </td>
                                     <td class="px-6 py-4 text-right">
                                         <a th:href="@{/student/course/{id}(id=${c.id})}" 
-                                           class="px-3.5 py-1.5 bg-teal-600 hover:bg-teal-500 text-white rounded-lg text-xs font-bold transition shadow-sm">
+                                           class="px-3.5 py-1.5 bg-[#1a73e8] hover:bg-[#174ea6] text-white rounded-lg text-xs font-semibold transition shadow-sm" th:text="#{btn.viewDetails}">
                                             View Syllabus
                                         </a>
                                     </td>
                                 </tr>
 
                                 <tr th:if="${#lists.isEmpty(courses)}">
-                                    <td colspan="4" class="px-6 py-8 text-center text-slate-500 italic text-xs">
+                                    <td colspan="4" class="px-6 py-8 text-center text-[#80868b] italic text-xs">
                                         No courses in the catalog yet.
                                     </td>
                                 </tr>
@@ -137,17 +152,17 @@
                 </div>
 
                 <!-- Timetable Quick Card -->
-                <div class="bg-[#1e293b] border border-slate-800 rounded-2xl shadow-2xl p-6 flex items-center justify-between">
+                <div class="bg-white border border-[#dadce0] rounded-2xl shadow-sm p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                     <div class="flex items-center gap-4">
-                        <div class="p-3 bg-teal-500/10 border border-teal-500/20 text-teal-400 rounded-xl">
-                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <div class="w-12 h-12 bg-[#e8f0fe] text-[#1a73e8] rounded-xl flex items-center justify-center border border-[#d2e3fc]">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                         </div>
                         <div>
-                            <h3 class="text-base font-bold text-white">Class Section Timetable Matrix</h3>
-                            <p class="text-xs text-slate-400 mt-0.5">Check period allocations, room assignments, and subject faculty.</p>
+                            <h3 class="text-base font-bold text-[#202124]" th:text="#{nav.timetable}">Class Section Timetable Matrix</h3>
+                            <p class="text-xs text-[#5f6368] mt-0.5">Check period allocations, room assignments, and subject faculty.</p>
                         </div>
                     </div>
-                    <a th:href="@{/academic/timetable/1}" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-teal-400 rounded-xl text-xs font-bold transition">
+                    <a th:href="@{/academic/timetable/1}" class="px-4 py-2 bg-white hover:bg-[#f1f3f4] border border-[#dadce0] text-[#1a73e8] rounded-xl text-xs font-semibold transition" th:text="#{btn.viewDetails}">
                         Open Timetable &rarr;
                     </a>
                 </div>
@@ -158,40 +173,40 @@
             <div class="space-y-6">
                 
                 <!-- Upcoming Academic Deadlines -->
-                <div class="bg-[#1e293b] border border-slate-800 rounded-2xl shadow-xl p-6 space-y-4">
-                    <div class="flex justify-between items-center border-b border-slate-800 pb-3">
-                        <h3 class="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
-                            <svg class="w-4 h-4 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                            Key Dates & Deadlines
+                <div class="bg-white border border-[#dadce0] rounded-2xl shadow-sm p-6 space-y-4">
+                    <div class="flex justify-between items-center border-b border-[#e0e2e7] pb-3">
+                        <h3 class="text-xs font-bold text-[#5f6368] uppercase tracking-wider flex items-center gap-2">
+                            <svg class="w-4 h-4 text-[#1a73e8]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                            <span th:text="#{nav.calendar}">Key Dates & Deadlines</span>
                         </h3>
-                        <a th:href="@{/academic/calendar}" class="text-xs font-semibold text-teal-400 hover:text-teal-300">Calendar</a>
+                        <a th:href="@{/academic/calendar}" class="text-xs font-semibold text-[#1a73e8] hover:underline" th:text="#{btn.viewDetails}">Calendar</a>
                     </div>
 
                     <div class="space-y-3">
-                        <div th:each="ev : ${events}" class="p-3.5 bg-slate-900/60 border border-slate-800 rounded-xl space-y-1">
+                        <div th:each="ev : ${events}" class="p-3.5 bg-[#f8fafd] border border-[#dadce0] rounded-xl space-y-1">
                             <div class="flex justify-between items-start">
-                                <span class="text-xs font-bold text-white" th:text="${ev.title}">Semester Exams</span>
-                                <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-violet-950 text-violet-300 border border-violet-800" th:text="${ev.type}">EXAM</span>
+                                <span class="text-xs font-bold text-[#202124]" th:text="${ev.title}">Semester Exams</span>
+                                <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-[#e8f0fe] text-[#1a73e8] border border-[#d2e3fc]" th:text="${ev.type}">EXAM</span>
                             </div>
-                            <p class="text-xs text-slate-400" th:text="${ev.description}">Final evaluation schedule</p>
-                            <span class="text-[11px] text-teal-400 font-semibold block pt-1" th:text="${ev.eventDate}">2026-08-25</span>
+                            <p class="text-xs text-[#5f6368]" th:text="${ev.description}">Final evaluation schedule</p>
+                            <span class="text-[11px] text-[#1a73e8] font-semibold block pt-1 font-mono" th:text="${ev.eventDate}">2026-08-25</span>
                         </div>
 
-                        <div th:if="${#lists.isEmpty(events)}" class="text-center py-6 text-slate-500 italic text-xs">
+                        <div th:if="${#lists.isEmpty(events)}" class="text-center py-6 text-[#80868b] italic text-xs">
                             No upcoming deadlines scheduled.
                         </div>
                     </div>
                 </div>
 
                 <!-- Chatroom Widget -->
-                <div class="bg-gradient-to-tr from-slate-900 to-slate-800 border border-slate-800 p-6 rounded-2xl shadow-xl space-y-3">
-                    <h3 class="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
-                        <svg class="w-4 h-4 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
-                        Peer Academic Chatroom
+                <div class="bg-white border border-[#dadce0] p-6 rounded-2xl shadow-sm space-y-3">
+                    <h3 class="text-xs font-bold text-[#5f6368] uppercase tracking-wider flex items-center gap-2">
+                        <svg class="w-4 h-4 text-[#1a73e8]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+                        <span th:text="#{nav.chat}">Peer Academic Chatroom</span>
                     </h3>
-                    <p class="text-xs text-slate-400 leading-relaxed">Collaborate with peers, ask questions about course material, and share notes in real-time.</p>
-                    <a th:href="@{/chat}" class="w-full mt-2 py-2.5 bg-teal-600 hover:bg-teal-500 text-white rounded-xl text-xs font-bold transition flex items-center justify-center gap-2 shadow-lg shadow-teal-500/20">
-                        Join Campus Chatroom &rarr;
+                    <p class="text-xs text-[#5f6368] leading-relaxed">Collaborate with peers, ask questions about course material, and share notes in real-time.</p>
+                    <a th:href="@{/chat}" class="w-full mt-2 py-2.5 bg-[#1a73e8] hover:bg-[#174ea6] text-white rounded-xl text-xs font-semibold transition flex items-center justify-center gap-2 shadow-sm hover:shadow-md">
+                        <span th:text="#{nav.chat}">Join Campus Chatroom</span> &rarr;
                     </a>
                 </div>
 

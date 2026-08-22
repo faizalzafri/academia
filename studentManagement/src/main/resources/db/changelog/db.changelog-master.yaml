@@ -15,3 +15,5 @@ databaseChangeLog:
       file: db/changelog/07-seed-institution-data.sql
   - include:
       file: db/changelog/08-seed-historical-data.sql
+  - include:
+      file: db/changelog/09-performance-indexes.sql
