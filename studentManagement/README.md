@@ -196,6 +196,6 @@ Key settings in `src/main/resources/application.properties`:
 
 ---
 
-## License & Institutional Notice
+## License
 
-Developed for institutional academic management and governance. All rights reserved &copy; 2026 Academia Platform.
+This project is open-source and licensed under the **[MIT License](LICENSE)**. Feel free to use, modify, and distribute it for personal, academic, or commercial projects.
