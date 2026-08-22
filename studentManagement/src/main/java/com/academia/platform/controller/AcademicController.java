@@ -24,13 +24,27 @@ public class AcademicController {
     @Autowired
     private AcademicService academicService;
 
-    // Directs to main academic management dashboard
+    // Directs to main academic management dashboard with search and cohort filters
     @GetMapping("/dashboard")
-    public String showDashboard(Model model) {
-        model.addAttribute("classSections", academicService.getAllClassSections());
+    public String showDashboard(
+            @RequestParam(value = "classId", required = false) Long classId,
+            @RequestParam(value = "sectionId", required = false) Long sectionId,
+            @RequestParam(value = "keyword", required = false) String keyword,
+            Model model) {
+        
+        java.util.List<ClassSection> filteredSections = academicService.searchClassSections(classId, sectionId, keyword);
+        model.addAttribute("classSections", filteredSections);
+        model.addAttribute("allClasses", academicService.getAllClasses());
+        model.addAttribute("allSections", academicService.getAllSections());
         model.addAttribute("teachers", academicService.getAllTeachers());
-        model.addAttribute("students", academicService.getAllStudents());
+        model.addAttribute("students", academicService.getAllStudents()); // general list fallback
         model.addAttribute("subjects", academicService.getAllSubjects());
+        model.addAttribute("selectedClassId", classId);
+        model.addAttribute("selectedSectionId", sectionId);
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("studentsBySection", academicService.getStudentsMapForClassSections(filteredSections));
+        model.addAttribute("totalClassCount", academicService.getAllClassSections().size());
+        
         return "academic_dashboard";
     }
 

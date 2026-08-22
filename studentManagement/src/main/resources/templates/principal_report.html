@@ -3,9 +3,20 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Academic Year Report - Academia</title>
+    <title>Academic Session Audit Report - Academia</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
 </head>
 <body class="bg-[#0f172a] text-[#f8fafc] min-h-screen font-sans">
 
@@ -34,87 +45,226 @@
 
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
         
+        <!-- Header Banner -->
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             <div>
                 <div class="flex items-center gap-3">
                     <h1 class="text-3xl font-extrabold text-white" th:text="${summary.year.name}">2026-2027</h1>
-                    <span th:text="${summary.year.status}" class="px-3 py-0.5 bg-indigo-950 text-indigo-300 border border-indigo-800 rounded-full text-xs font-bold uppercase">ACTIVE</span>
+                    <span th:text="${summary.year.status}"
+                          th:class="${summary.year.status.name() == 'ACTIVE' ? 'px-3 py-0.5 bg-emerald-950 text-emerald-300 border border-emerald-800 rounded-full text-xs font-bold uppercase' : 'px-3 py-0.5 bg-slate-800 text-slate-400 border border-slate-700 rounded-full text-xs font-bold uppercase'}">
+                        ACTIVE
+                    </span>
                 </div>
                 <p class="text-xs text-slate-400 mt-1">
-                    Session Period: <span th:text="${summary.year.startDate}">2026-04-01</span> &rarr; <span th:text="${summary.year.endDate}">2027-03-31</span>
+                    Academic Session Timeline: <span th:text="${summary.year.startDate}">2026-04-01</span> &rarr; <span th:text="${summary.year.endDate}">2027-03-31</span>
                 </p>
             </div>
 
-            <a th:href="@{/principal/years}" class="text-xs font-semibold text-slate-400 hover:text-white transition">
-                &larr; Back to Sessions
-            </a>
+            <div class="flex items-center gap-3">
+                <a th:href="@{/principal/years}" class="px-3 py-2 text-xs font-semibold bg-slate-800 hover:bg-slate-700 border border-slate-600 rounded-lg text-slate-300 hover:text-white transition flex items-center gap-1.5">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                    Back to Sessions
+                </a>
+            </div>
         </div>
 
         <!-- Metrics Cards -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <div class="bg-[#1e293b] border border-slate-800 p-5 rounded-2xl">
-                <span class="text-xs text-slate-400 uppercase font-semibold">Total Enrollments</span>
-                <div class="text-2xl font-extrabold text-white mt-1" th:text="${summary.totalEnrollments}">45</div>
+            <div class="bg-[#1e293b] border border-slate-800 p-5 rounded-2xl shadow-lg">
+                <span class="text-xs text-slate-400 uppercase font-semibold">Total Session Enrollments</span>
+                <div class="text-2xl font-extrabold text-white mt-1" th:text="${summary.totalEnrollments}">1080</div>
             </div>
-            <div class="bg-[#1e293b] border border-slate-800 p-5 rounded-2xl">
+            <div class="bg-[#1e293b] border border-slate-800 p-5 rounded-2xl shadow-lg">
                 <span class="text-xs text-slate-400 uppercase font-semibold">Active In Class</span>
-                <div class="text-2xl font-extrabold text-emerald-400 mt-1" th:text="${summary.activeStudents}">40</div>
+                <div class="text-2xl font-extrabold text-emerald-400 mt-1" th:text="${summary.activeStudents}">1080</div>
             </div>
-            <div class="bg-[#1e293b] border border-slate-800 p-5 rounded-2xl">
+            <div class="bg-[#1e293b] border border-slate-800 p-5 rounded-2xl shadow-lg">
                 <span class="text-xs text-slate-400 uppercase font-semibold">Promoted</span>
                 <div class="text-2xl font-extrabold text-indigo-400 mt-1" th:text="${summary.promotedStudents}">0</div>
             </div>
-            <div class="bg-[#1e293b] border border-slate-800 p-5 rounded-2xl">
+            <div class="bg-[#1e293b] border border-slate-800 p-5 rounded-2xl shadow-lg">
                 <span class="text-xs text-slate-400 uppercase font-semibold">Graduated Alumni</span>
                 <div class="text-2xl font-extrabold text-amber-400 mt-1" th:text="${summary.graduatedStudents}">0</div>
             </div>
         </div>
 
-        <!-- Student Enrollment Directory -->
-        <div class="bg-[#1e293b] border border-slate-800 rounded-2xl shadow-2xl overflow-hidden">
-            <div class="px-6 py-5 border-b border-slate-800 flex justify-between items-center">
-                <h2 class="text-lg font-bold text-white">Student Enrollment Roster</h2>
-                <span class="text-xs text-slate-400" th:text="${#lists.size(enrollments) + ' Enrolled Students'}">40 Enrolled Students</span>
+        <!-- Filter & Search Toolbar -->
+        <div class="bg-[#1e293b] border border-slate-800 rounded-2xl p-5 shadow-xl">
+            <form th:action="@{/principal/years/{id}/report(id=${summary.year.id})}" method="get" class="grid grid-cols-1 sm:grid-cols-12 gap-4 items-end">
+                
+                <!-- Class Section Filter Dropdown -->
+                <div class="sm:col-span-5">
+                    <label class="block text-xs font-semibold text-slate-300 mb-1.5">Filter by Class & Section</label>
+                    <select name="classSectionId" class="w-full bg-[#0f172a] border border-slate-700 focus:border-indigo-500 text-white rounded-lg px-3.5 py-2 text-xs focus:outline-none transition">
+                        <option value="">-- All Classes & Sections (36 Cohorts) --</option>
+                        <option th:each="cs : ${allClassSections}" th:value="${cs.id}" 
+                                th:text="${cs.displayName}"
+                                th:selected="${selectedClassSectionId != null && selectedClassSectionId == cs.id}">Class 10 - A</option>
+                    </select>
+                </div>
+
+                <!-- Student Roll/Name Search Input -->
+                <div class="sm:col-span-4">
+                    <label class="block text-xs font-semibold text-slate-300 mb-1.5">Search Student / Roll No</label>
+                    <input type="text" name="searchKeyword" th:value="${searchKeyword}" placeholder="Roll No (e.g. C10A-01) or Student Name..."
+                           class="w-full bg-[#0f172a] border border-slate-700 focus:border-indigo-500 text-white rounded-lg px-3.5 py-2 text-xs focus:outline-none transition">
+                </div>
+
+                <!-- Actions -->
+                <div class="sm:col-span-3 flex gap-2">
+                    <button type="submit" class="flex-1 bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2 px-4 rounded-lg text-xs transition flex items-center justify-center gap-1.5 shadow-md shadow-indigo-600/20">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        Filter Cohort
+                    </button>
+                    <a th:href="@{/principal/years/{id}/report(id=${summary.year.id})}" class="bg-slate-800 hover:bg-slate-700 border border-slate-600 text-slate-300 font-semibold py-2 px-3 rounded-lg text-xs transition flex items-center justify-center" title="Reset Filters">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                    </a>
+                </div>
+            </form>
+        </div>
+
+        <!-- Section Action Controls -->
+        <div class="flex justify-between items-center px-1">
+            <div class="flex items-center gap-2">
+                <span class="text-sm font-bold text-white uppercase tracking-wider">Class Level Rosters</span>
+                <span class="px-2 py-0.5 bg-slate-800 text-slate-300 border border-slate-700 rounded text-xs"
+                      th:text="${#lists.size(classSummaries) + ' Classes Displayed'}">36 Classes Displayed</span>
             </div>
+            <div class="flex gap-2">
+                <button type="button" onclick="expandAllRosters()" class="px-2.5 py-1 text-xs bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 rounded transition">
+                    Expand All
+                </button>
+                <button type="button" onclick="collapseAllRosters()" class="px-2.5 py-1 text-xs bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 rounded transition">
+                    Collapse All
+                </button>
+            </div>
+        </div>
 
-            <div class="overflow-x-auto">
-                <table class="w-full text-left text-sm text-slate-300">
-                    <thead class="bg-slate-900/60 text-slate-400 text-xs uppercase tracking-wider border-b border-slate-800">
-                        <tr>
-                            <th class="px-6 py-3.5">Roll No</th>
-                            <th class="px-6 py-3.5">Student Username & Name</th>
-                            <th class="px-6 py-3.5">Assigned Class Section</th>
-                            <th class="px-6 py-3.5">Status</th>
-                            <th class="px-6 py-3.5">Enrolled Date</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-slate-800/60 text-xs">
-                        <tr th:each="e : ${enrollments}" class="hover:bg-slate-800/40 transition">
-                            <td class="px-6 py-4 font-mono font-bold text-indigo-400" th:text="${e.rollNumber != null ? e.rollNumber : 'N/A'}">R-101</td>
-                            <td class="px-6 py-4">
-                                <div class="font-bold text-white" th:text="${e.student.name != null ? e.student.name : e.student.username}">Student Name</div>
-                                <div class="text-[11px] text-slate-500" th:text="${e.student.email}">student@academia.edu</div>
-                            </td>
-                            <td class="px-6 py-4 font-semibold text-slate-200" th:text="${e.classSection.displayName}">Class 10 - A</td>
-                            <td class="px-6 py-4">
-                                <span th:if="${e.status.name() == 'ENROLLED'}" class="px-2 py-0.5 bg-emerald-950 text-emerald-300 border border-emerald-800 rounded font-bold">ENROLLED</span>
-                                <span th:if="${e.status.name() == 'PROMOTED'}" class="px-2 py-0.5 bg-indigo-950 text-indigo-300 border border-indigo-800 rounded font-bold">PROMOTED</span>
-                                <span th:if="${e.status.name() == 'GRADUATED'}" class="px-2 py-0.5 bg-amber-950 text-amber-300 border border-amber-800 rounded font-bold">GRADUATED</span>
-                            </td>
-                            <td class="px-6 py-4 text-slate-400" th:text="${#temporals.format(e.enrolledAt, 'dd MMM yyyy')}">01 Apr 2026</td>
-                        </tr>
+        <!-- Class-by-Class Enrollment Rosters List -->
+        <div class="space-y-6">
+            <th:block th:each="cItem : ${classSummaries}">
+                <div class="bg-[#1e293b] border border-slate-800 rounded-2xl shadow-xl overflow-hidden">
+                    
+                    <!-- Class Header & Quick Stats (Clickable Accordion) -->
+                    <div th:onclick="'toggleRoster(' + ${cItem.classSection.id} + ')'"
+                         class="px-6 py-4 bg-slate-900/60 border-b border-slate-800 cursor-pointer hover:bg-slate-900/80 transition flex flex-col md:flex-row md:items-center justify-between gap-4 select-none">
+                        
+                        <div class="flex items-center gap-4">
+                            <div class="p-2.5 bg-indigo-950/80 border border-indigo-800/80 rounded-xl text-indigo-400">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                            </div>
+                            <div>
+                                <h3 class="text-base font-bold text-white flex items-center gap-2">
+                                    <span th:text="${cItem.classSection.displayName}">Class 10 - A</span>
+                                </h3>
+                                <div class="flex flex-wrap items-center gap-3 text-xs text-slate-400 mt-1">
+                                    <span>
+                                        Teacher: 
+                                        <strong th:text="${cItem.classSection.classTeacher != null ? cItem.classSection.classTeacher.name : 'Unassigned'}" 
+                                                class="text-slate-200">Teacher</strong>
+                                    </span>
+                                    <span>•</span>
+                                    <span>
+                                        Captain: 
+                                        <strong th:text="${cItem.classSection.classCaptain != null ? cItem.classSection.classCaptain.name : 'None'}" 
+                                                class="text-amber-200">Captain</strong>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
 
-                        <tr th:if="${#lists.isEmpty(enrollments)}">
-                            <td colspan="5" class="px-6 py-8 text-center text-slate-500 italic">
-                                No students enrolled under this academic session yet.
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                        <!-- Class Student Stats & Toggle Icon -->
+                        <div class="flex items-center gap-4">
+                            <div class="flex items-center gap-2 text-xs">
+                                <span class="px-2.5 py-1 bg-slate-800 border border-slate-700 text-slate-200 font-bold rounded-lg"
+                                      th:text="${cItem.totalCount + ' Enrolled'}">30 Enrolled</span>
+                                <span class="px-2.5 py-1 bg-emerald-950/70 border border-emerald-800/80 text-emerald-300 font-semibold rounded-lg"
+                                      th:text="${cItem.enrolledCount + ' Active'}">30 Active</span>
+                                <span th:if="${cItem.promotedCount > 0}" class="px-2.5 py-1 bg-indigo-950/70 border border-indigo-800/80 text-indigo-300 font-semibold rounded-lg"
+                                      th:text="${cItem.promotedCount + ' Promoted'}">0 Promoted</span>
+                                <span th:if="${cItem.graduatedCount > 0}" class="px-2.5 py-1 bg-amber-950/70 border border-amber-800/80 text-amber-300 font-semibold rounded-lg"
+                                      th:text="${cItem.graduatedCount + ' Graduated'}">0 Graduated</span>
+                            </div>
+
+                            <svg th:id="'chevron-' + ${cItem.classSection.id}" class="w-5 h-5 text-slate-400 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Collapsible Student Roster Table for this Class Section -->
+                    <div th:id="'roster-' + ${cItem.classSection.id}" class="roster-content">
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left text-xs text-slate-300">
+                                <thead class="bg-[#141b26] text-slate-400 uppercase tracking-wider border-b border-slate-800">
+                                    <tr>
+                                        <th class="px-6 py-3 font-semibold">Roll No</th>
+                                        <th class="px-6 py-3 font-semibold">Student Name & Username</th>
+                                        <th class="px-6 py-3 font-semibold">Contact Email</th>
+                                        <th class="px-6 py-3 font-semibold">Status</th>
+                                        <th class="px-6 py-3 font-semibold">Enrollment Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-800/50">
+                                    <tr th:each="e : ${cItem.enrollments}" class="hover:bg-slate-800/40 transition">
+                                        <td class="px-6 py-3.5 font-mono font-bold text-indigo-400" th:text="${e.rollNumber != null ? e.rollNumber : 'N/A'}">C10A-01</td>
+                                        <td class="px-6 py-3.5">
+                                            <div class="font-bold text-white" th:text="${e.student.name != null ? e.student.name : e.student.username}">Student Name</div>
+                                            <div class="text-[10px] text-slate-500 font-mono" th:text="'@' + ${e.student.username}">@student1</div>
+                                        </td>
+                                        <td class="px-6 py-3.5 text-slate-400" th:text="${e.student.email}">student@academia.edu</td>
+                                        <td class="px-6 py-3.5">
+                                            <span th:if="${e.status.name() == 'ENROLLED'}" class="px-2 py-0.5 bg-emerald-950 text-emerald-300 border border-emerald-800 rounded font-bold text-[10px]">ENROLLED</span>
+                                            <span th:if="${e.status.name() == 'PROMOTED'}" class="px-2 py-0.5 bg-indigo-950 text-indigo-300 border border-indigo-800 rounded font-bold text-[10px]">PROMOTED</span>
+                                            <span th:if="${e.status.name() == 'GRADUATED'}" class="px-2 py-0.5 bg-amber-950 text-amber-300 border border-amber-800 rounded font-bold text-[10px]">GRADUATED</span>
+                                        </td>
+                                        <td class="px-6 py-3.5 text-slate-400" th:text="${#temporals.format(e.enrolledAt, 'dd MMM yyyy')}">01 Apr 2026</td>
+                                    </tr>
+
+                                    <tr th:if="${#lists.isEmpty(cItem.enrollments)}">
+                                        <td colspan="5" class="px-6 py-6 text-center text-slate-500 italic">
+                                            No student enrollments found matching criteria for this class section.
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </th:block>
+
+            <div th:if="${#lists.isEmpty(classSummaries)}" class="bg-[#1e293b] border border-slate-800 rounded-2xl p-12 text-center text-slate-400">
+                <p class="font-semibold text-sm text-slate-300">No class sections found matching your selection.</p>
+                <a th:href="@{/principal/years/{id}/report(id=${summary.year.id})}" class="text-xs text-indigo-400 hover:underline mt-2 inline-block">Reset Filter</a>
             </div>
         </div>
 
     </main>
 
+    <script>
+        function toggleRoster(id) {
+            const roster = document.getElementById('roster-' + id);
+            const chevron = document.getElementById('chevron-' + id);
+            if (roster) {
+                if (roster.classList.contains('hidden')) {
+                    roster.classList.remove('hidden');
+                    if (chevron) chevron.style.transform = 'rotate(0deg)';
+                } else {
+                    roster.classList.add('hidden');
+                    if (chevron) chevron.style.transform = 'rotate(-90deg)';
+                }
+            }
+        }
+
+        function expandAllRosters() {
+            document.querySelectorAll('.roster-content').forEach(el => el.classList.remove('hidden'));
+            document.querySelectorAll('[id^="chevron-"]').forEach(el => el.style.transform = 'rotate(0deg)');
+        }
+
+        function collapseAllRosters() {
+            document.querySelectorAll('.roster-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('[id^="chevron-"]').forEach(el => el.style.transform = 'rotate(-90deg)');
+        }
+    </script>
 </body>
 </html>

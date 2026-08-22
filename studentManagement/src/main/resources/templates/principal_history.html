@@ -3,9 +3,20 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Historical Archive Browser - Academia</title>
+    <title>Historical Academic Archive - Academia</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
 </head>
 <body class="bg-[#0f172a] text-[#f8fafc] min-h-screen font-sans">
 
@@ -34,66 +45,122 @@
 
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
         
+        <!-- Header Overview -->
         <div class="bg-[#1e293b] border border-slate-800 p-6 rounded-2xl shadow-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             <div>
                 <h1 class="text-2xl font-extrabold text-white">Historical Academic Archive</h1>
-                <p class="text-xs text-slate-400 mt-1">Audit previous years' classrooms, enrolled students, assigned teachers, and graduation statuses in read-only mode.</p>
+                <p class="text-xs text-slate-400 mt-1">Audit previous academic sessions, enrolled student cohorts, class sections, and graduation outcomes in immutable read-only mode.</p>
             </div>
 
-            <!-- Year Selector Dropdown -->
-            <form th:action="@{/principal/history}" method="get" class="flex items-center gap-3">
-                <label class="text-xs font-semibold text-slate-300">Select Academic Session:</label>
-                <select name="yearId" onchange="this.form.submit()" 
-                        class="px-3.5 py-2 bg-slate-900 border border-slate-700 rounded-xl text-xs font-bold text-indigo-400 focus:outline-none focus:border-indigo-500">
-                    <option th:each="y : ${allYears}" 
-                            th:value="${y.id}" 
-                            th:text="${y.name + ' (' + y.status + ')'}" 
-                            th:selected="${y.id == selectedYear.id}">2026-2027</option>
-                </select>
+            <div class="flex items-center gap-2">
+                <span class="px-3 py-1 bg-indigo-950 text-indigo-300 border border-indigo-800 rounded-lg text-xs font-bold font-mono"
+                      th:text="'Session: ' + ${selectedYear.name}">Session: 2024-2025</span>
+                <span th:text="${selectedYear.status}"
+                      th:class="${selectedYear.status.name() == 'ACTIVE' ? 'px-2.5 py-1 bg-emerald-950 text-emerald-300 border border-emerald-800 rounded-lg text-xs font-bold' : 'px-2.5 py-1 bg-slate-800 text-slate-400 border border-slate-700 rounded-lg text-xs font-bold'}">
+                    COMPLETED
+                </span>
+            </div>
+        </div>
+
+        <!-- Filter & Search Toolbar Card -->
+        <div class="bg-[#1e293b] border border-slate-800 rounded-2xl p-5 shadow-xl">
+            <form th:action="@{/principal/history}" method="get" class="grid grid-cols-1 sm:grid-cols-12 gap-4 items-end">
+                
+                <!-- Academic Year Selector -->
+                <div class="sm:col-span-3">
+                    <label class="block text-xs font-semibold text-slate-300 mb-1.5">Academic Session</label>
+                    <select name="yearId" onchange="this.form.submit()"
+                            class="w-full bg-[#0f172a] border border-slate-700 focus:border-indigo-500 text-indigo-400 font-bold rounded-lg px-3 py-2 text-xs focus:outline-none transition">
+                        <option th:each="y : ${allYears}" 
+                                th:value="${y.id}" 
+                                th:text="${y.name + ' (' + y.status + ')'}" 
+                                th:selected="${y.id == selectedYear.id}">2024-2025 (COMPLETED)</option>
+                    </select>
+                </div>
+
+                <!-- Class Section Filter -->
+                <div class="sm:col-span-4">
+                    <label class="block text-xs font-semibold text-slate-300 mb-1.5">Filter by Class Section</label>
+                    <select name="classSectionId" 
+                            class="w-full bg-[#0f172a] border border-slate-700 focus:border-indigo-500 text-white rounded-lg px-3 py-2 text-xs focus:outline-none transition">
+                        <option value="">-- All Class Cohorts (36 Sections) --</option>
+                        <option th:each="sec : ${sections}" 
+                                th:value="${sec.id}" 
+                                th:text="${sec.displayName}"
+                                th:selected="${selectedClassSectionId != null && selectedClassSectionId == sec.id}">Class 10 - A</option>
+                    </select>
+                </div>
+
+                <!-- Search Student / Roll No -->
+                <div class="sm:col-span-3">
+                    <label class="block text-xs font-semibold text-slate-300 mb-1.5">Search Student / Roll No</label>
+                    <input type="text" name="searchKeyword" th:value="${searchKeyword}" placeholder="e.g. C10A-01 or Student Name..."
+                           class="w-full bg-[#0f172a] border border-slate-700 focus:border-indigo-500 text-white rounded-lg px-3 py-2 text-xs focus:outline-none transition">
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="sm:col-span-2 flex gap-2">
+                    <button type="submit" class="flex-1 bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2 px-3 rounded-lg text-xs transition flex items-center justify-center gap-1 shadow-md shadow-indigo-600/20">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        Filter
+                    </button>
+                    <a th:href="@{/principal/history(yearId=${selectedYear.id})}" class="bg-slate-800 hover:bg-slate-700 border border-slate-600 text-slate-300 font-semibold py-2 px-2.5 rounded-lg text-xs transition flex items-center justify-center" title="Reset Filters">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                    </a>
+                </div>
             </form>
         </div>
 
-        <!-- Read-Only Banner -->
-        <div class="p-4 bg-amber-950/40 border border-amber-900/60 rounded-xl flex items-center gap-3 text-amber-300 text-xs">
-            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
-            <span>You are viewing historical archive data for <strong th:text="${selectedYear.name}">2026-2027</strong>. Past records are immutable and preserved for compliance.</span>
+        <!-- Read-Only Notice -->
+        <div class="p-3.5 bg-amber-950/30 border border-amber-800/50 rounded-xl flex items-center gap-3 text-amber-300 text-xs">
+            <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+            <span>Viewing historical student records for session <strong th:text="${selectedYear.name}">2024-2025</strong>. These archived records are immutable for audit trails.</span>
         </div>
 
-        <!-- Enrollments Table for selected year -->
+        <!-- Enrollments Table for Selected Year -->
         <div class="bg-[#1e293b] border border-slate-800 rounded-2xl shadow-2xl overflow-hidden">
-            <div class="px-6 py-5 border-b border-slate-800 flex justify-between items-center">
-                <h2 class="text-base font-bold text-white">Enrolled Students in <span th:text="${selectedYear.name}">2026-2027</span></h2>
-                <span class="text-xs text-slate-400" th:text="${#lists.size(enrollments) + ' Historical Records'}">0 Records</span>
+            <div class="px-6 py-4 border-b border-slate-800 flex justify-between items-center bg-slate-900/40">
+                <div class="flex items-center gap-3">
+                    <h2 class="text-base font-bold text-white">Student Enrollment Records</h2>
+                    <span class="px-2.5 py-0.5 bg-indigo-950 text-indigo-300 border border-indigo-800/80 rounded-full text-xs font-semibold"
+                          th:text="${#lists.size(enrollments)} + ' of ' + ${totalEnrollmentsCount} + ' Records'">1080 of 1080 Records</span>
+                </div>
+                <span class="text-xs text-slate-400 font-mono" th:text="'Session: ' + ${selectedYear.name}">Session: 2024-2025</span>
             </div>
 
             <div class="overflow-x-auto">
                 <table class="w-full text-left text-sm text-slate-300">
                     <thead class="bg-slate-900/60 text-slate-400 text-xs uppercase tracking-wider border-b border-slate-800">
                         <tr>
-                            <th class="px-6 py-3.5">Roll Number</th>
-                            <th class="px-6 py-3.5">Student Username & Name</th>
-                            <th class="px-6 py-3.5">Classroom & Section</th>
-                            <th class="px-6 py-3.5">Outcome Status</th>
+                            <th class="px-6 py-3.5 font-semibold">Roll Number</th>
+                            <th class="px-6 py-3.5 font-semibold">Student Name & Username</th>
+                            <th class="px-6 py-3.5 font-semibold">Classroom & Section</th>
+                            <th class="px-6 py-3.5 font-semibold">Contact Email</th>
+                            <th class="px-6 py-3.5 font-semibold">Academic Outcome</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-slate-800/60 text-xs">
                         <tr th:each="e : ${enrollments}" class="hover:bg-slate-800/40 transition">
-                            <td class="px-6 py-4 font-mono font-bold text-indigo-400" th:text="${e.rollNumber != null ? e.rollNumber : 'N/A'}">R-101</td>
-                            <td class="px-6 py-4">
+                            <td class="px-6 py-3.5 font-mono font-bold text-indigo-400" th:text="${e.rollNumber != null ? e.rollNumber : 'N/A'}">C10A-01</td>
+                            <td class="px-6 py-3.5">
                                 <div class="font-bold text-white" th:text="${e.student.name != null ? e.student.name : e.student.username}">Student Name</div>
-                                <div class="text-[11px] text-slate-500" th:text="${e.student.email}">student@academia.edu</div>
+                                <div class="text-[10px] text-slate-500 font-mono" th:text="'@' + ${e.student.username}">@student1</div>
                             </td>
-                            <td class="px-6 py-4 font-semibold text-slate-200" th:text="${e.classSection.displayName}">Class 10 - A</td>
-                            <td class="px-6 py-4">
-                                <span th:if="${e.status.name() == 'ENROLLED'}" class="px-2 py-0.5 bg-emerald-950 text-emerald-300 border border-emerald-800 rounded font-bold">ENROLLED</span>
-                                <span th:if="${e.status.name() == 'PROMOTED'}" class="px-2 py-0.5 bg-indigo-950 text-indigo-300 border border-indigo-800 rounded font-bold">PROMOTED</span>
-                                <span th:if="${e.status.name() == 'GRADUATED'}" class="px-2 py-0.5 bg-amber-950 text-amber-300 border border-amber-800 rounded font-bold">GRADUATED ALUMNI</span>
+                            <td class="px-6 py-3.5 font-semibold text-slate-200">
+                                <span class="px-2 py-0.5 bg-slate-800 border border-slate-700 rounded text-teal-300 font-mono text-[11px]"
+                                      th:text="${e.classSection.displayName}">Class 10 - A</span>
+                            </td>
+                            <td class="px-6 py-3.5 text-slate-400" th:text="${e.student.email}">student@academia.edu</td>
+                            <td class="px-6 py-3.5">
+                                <span th:if="${e.status.name() == 'ENROLLED'}" class="px-2 py-0.5 bg-emerald-950 text-emerald-300 border border-emerald-800 rounded font-bold text-[10px]">ENROLLED</span>
+                                <span th:if="${e.status.name() == 'PROMOTED'}" class="px-2 py-0.5 bg-indigo-950 text-indigo-300 border border-indigo-800 rounded font-bold text-[10px]">PROMOTED</span>
+                                <span th:if="${e.status.name() == 'GRADUATED'}" class="px-2 py-0.5 bg-amber-950 text-amber-300 border border-amber-800 rounded font-bold text-[10px]">GRADUATED ALUMNI</span>
                             </td>
                         </tr>
 
                         <tr th:if="${#lists.isEmpty(enrollments)}">
-                            <td colspan="4" class="px-6 py-8 text-center text-slate-500 italic">
-                                No student enrollment records found for session <span th:text="${selectedYear.name}">2026-2027</span>.
+                            <td colspan="5" class="px-6 py-8 text-center text-slate-500 italic">
+                                No historical enrollment records found matching the criteria for session <span th:text="${selectedYear.name}">2024-2025</span>.
                             </td>
                         </tr>
                     </tbody>

@@ -28,6 +28,12 @@ import com.academia.platform.repository.TimetableSlotRepository;
 import com.academia.platform.model.SchoolCalendarEvent;
 import com.academia.platform.model.EventType;
 import com.academia.platform.repository.SchoolCalendarEventRepository;
+import com.academia.platform.model.StudentEnrollment;
+import com.academia.platform.repository.StudentEnrollmentRepository;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -56,6 +62,9 @@ public class AcademicService {
 
     @Autowired
     private StudentRepository studentRepository;
+
+    @Autowired
+    private StudentEnrollmentRepository studentEnrollmentRepository;
 
     @Autowired
     private AcademicYearService academicYearService;
@@ -101,7 +110,22 @@ public class AcademicService {
     }
 
     public List<ClassSection> getAllClassSections() {
+        AcademicYear activeYear = academicYearService.getActiveAcademicYear();
+        if (activeYear != null) {
+            List<ClassSection> sections = classSectionRepository.findByAcademicYear(activeYear);
+            if (!sections.isEmpty()) {
+                return sections;
+            }
+        }
         return classSectionRepository.findAll();
+    }
+
+    public List<SchoolClass> getAllClasses() {
+        return schoolClassRepository.findAll();
+    }
+
+    public List<Section> getAllSections() {
+        return sectionRepository.findAll();
     }
 
     public Optional<ClassSection> getClassSectionById(Long id) {
@@ -118,6 +142,65 @@ public class AcademicService {
 
     public List<Student> getAllStudents() {
         return studentRepository.findAll();
+    }
+
+    // Fetches ONLY students enrolled in a specific class section for the current academic session
+    public List<Student> getStudentsForClassSection(Long classSectionId) {
+        ClassSection cs = classSectionRepository.findById(classSectionId).orElse(null);
+        if (cs == null) {
+            return List.of();
+        }
+        AcademicYear activeYear = cs.getAcademicYear() != null ? cs.getAcademicYear() : academicYearService.getActiveAcademicYear();
+        List<StudentEnrollment> enrollments = (activeYear != null)
+                ? studentEnrollmentRepository.findByClassSectionAndAcademicYear(cs, activeYear)
+                : studentEnrollmentRepository.findByClassSection(cs);
+
+        List<Student> students = enrollments.stream()
+                .map(StudentEnrollment::getStudent)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+
+        // Fallback to all students if no enrollments exist yet for a newly created section
+        if (students.isEmpty()) {
+            students = studentRepository.findAll();
+        }
+        return students;
+    }
+
+    // Returns a map of classSectionId -> List<Student> for the provided class sections
+    public Map<Long, List<Student>> getStudentsMapForClassSections(List<ClassSection> sections) {
+        Map<Long, List<Student>> map = new HashMap<>();
+        for (ClassSection cs : sections) {
+            map.put(cs.getId(), getStudentsForClassSection(cs.getId()));
+        }
+        return map;
+    }
+
+    // Filters and searches class sections based on class, section, or search keyword
+    public List<ClassSection> searchClassSections(Long classId, Long sectionId, String keyword) {
+        List<ClassSection> all = getAllClassSections();
+        return all.stream()
+                .filter(cs -> {
+                    if (classId != null && (cs.getSchoolClass() == null || !classId.equals(cs.getSchoolClass().getId()))) {
+                        return false;
+                    }
+                    if (sectionId != null && (cs.getSection() == null || !sectionId.equals(cs.getSection().getId()))) {
+                        return false;
+                    }
+                    if (keyword != null && !keyword.trim().isEmpty()) {
+                        String term = keyword.trim().toLowerCase();
+                        String className = cs.getSchoolClass() != null ? cs.getSchoolClass().getClassName().toLowerCase() : "";
+                        String secName = cs.getSection() != null ? cs.getSection().getSectionName().toLowerCase() : "";
+                        String teacherName = cs.getClassTeacher() != null && cs.getClassTeacher().getName() != null ? cs.getClassTeacher().getName().toLowerCase() : "";
+                        String captainName = cs.getClassCaptain() != null && cs.getClassCaptain().getName() != null ? cs.getClassCaptain().getName().toLowerCase() : "";
+                        String sportsCaptainName = cs.getSportsCaptain() != null && cs.getSportsCaptain().getName() != null ? cs.getSportsCaptain().getName().toLowerCase() : "";
+
+                        return className.contains(term) || secName.contains(term) || teacherName.contains(term)
+                                || captainName.contains(term) || sportsCaptainName.contains(term);
+                    }
+                    return true;
+                })
+                .collect(Collectors.toList());
     }
 
     // Assigns class teacher and captains to a class section
