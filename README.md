@@ -1,3 +1,5 @@
+[![Java CI with Maven](https://github.com/faizalzafri/academia/actions/workflows/maven.yml/badge.svg?branch=main)](https://github.com/faizalzafri/academia/actions/workflows/maven.yml)
+
 # Academia Platform
 
 A modern, institutional-grade Academic Management & Governance System built with **Spring Boot**, **PostgreSQL**, **Liquibase**, and **Thymeleaf**. Designed with a clean, high-productivity bright UI theme, comprehensive Internationalisation (**i18n**) across 6 languages (including RTL), and rigorous academic lifecycle management.
