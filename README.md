@@ -1,8 +1,23 @@
-[![Java CI with Maven](https://github.com/faizalzafri/academia/actions/workflows/maven.yml/badge.svg?branch=main)](https://github.com/faizalzafri/academia/actions/workflows/maven.yml)
+<div align="center">
 
 # Academia Platform
 
-A modern, institutional-grade Academic Management & Governance System built with **Spring Boot**, **PostgreSQL**, **Liquibase**, and **Thymeleaf**. Designed with a clean, high-productivity bright UI theme, comprehensive Internationalisation (**i18n**) across 6 languages (including RTL), and rigorous academic lifecycle management.
+[![Java CI with Maven](https://img.shields.io/github/actions/workflow/status/faizalzafri/academia/maven.yml?branch=main&label=CI%20Build&logo=githubactions&logoColor=white&style=for-the-badge)](https://github.com/faizalzafri/academia/actions/workflows/maven.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
+![Java](https://img.shields.io/badge/Java-17%2B-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.4.3-6DB33F?style=for-the-badge&logo=springboot&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-14%2B-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
+![Liquibase](https://img.shields.io/badge/Liquibase-4.x-2962FF?style=for-the-badge&logo=liquibase&logoColor=white)
+![Thymeleaf](https://img.shields.io/badge/Thymeleaf-3.1-005F0E?style=for-the-badge&logo=thymeleaf&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.x-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
+![Tests](https://img.shields.io/badge/Tests-30%2F30_Passing-brightgreen?style=for-the-badge&logo=junit5&logoColor=white)
+![i18n](https://img.shields.io/badge/i18n-6_Locales_%7C_RTL-4285F4?style=for-the-badge&logo=googletranslate&logoColor=white)
+
+<p align="center">
+  A modern, institutional-grade Academic Management & Governance System built with <b>Spring Boot</b>, <b>PostgreSQL</b>, <b>Liquibase</b>, and <b>Thymeleaf</b>. Designed with a clean, high-productivity bright UI theme, comprehensive Internationalisation (<b>i18n</b>) across 6 languages (including RTL), and rigorous academic lifecycle management.
+</p>
+
+</div>
 
 ---
 
@@ -100,7 +115,7 @@ Principal:  principal / Password123!
 
 | Layer | Technology |
 |-------|-----------|
-| **Framework** | Spring Boot 3.4.3 / Java 17 |
+| **Framework** | Spring Boot 3.4.3 / Java 17+ |
 | **Database** | PostgreSQL 14+ (H2 in-memory for testing) |
 | **ORM & Data** | Spring Data JPA / Hibernate |
 | **Schema Migration** | Liquibase (SQL-based changesets) |
@@ -116,26 +131,31 @@ Principal:  principal / Password123!
 ## Project Structure
 
 ```
-studentManagement/
-├── src/main/java/com/academia/platform/
-│   ├── config/          # Security, WebSocket, WebMvc (i18n), Liquibase config
-│   ├── controller/      # REST & MVC controllers (Auth, Academic, Activity, Principal, etc.)
-│   ├── dto/             # Data Transfer Objects
-│   ├── model/           # JPA entities (User, Student, Teacher, Course, SchoolClass, etc.)
-│   ├── repository/      # Spring Data JPA repositories
-│   ├── service/         # Business logic services
-│   ├── validator/       # Custom validators
-│   └── listener/        # Event listeners
-│
-├── src/main/resources/
-│   ├── db/changelog/    # Liquibase SQL migration scripts
-│   ├── messages*.properties # i18n Resource bundles (en, es, fr, de, hi, ar)
-│   ├── templates/       # Thymeleaf HTML views
-│   ├── static/          # CSS, JS, and static assets
-│   └── application.properties
+academia/
+├── academia-service/
+│   ├── src/main/java/com/academia/platform/
+│   │   ├── config/          # Security, WebSocket, WebMvc (i18n), Liquibase config
+│   │   ├── controller/      # REST & MVC controllers (Auth, Academic, Activity, Principal, etc.)
+│   │   ├── dto/             # Data Transfer Objects
+│   │   ├── model/           # JPA entities (User, Student, Teacher, Course, SchoolClass, etc.)
+│   │   ├── repository/      # Spring Data JPA repositories
+│   │   ├── service/         # Business logic services
+│   │   ├── validator/       # Custom validators
+│   │   └── listener/        # Event listeners
+│   │
+│   ├── src/main/resources/
+│   │   ├── db/changelog/    # Liquibase SQL migration scripts
+│   │   ├── messages*.properties # i18n Resource bundles (en, es, fr, de, hi, ar)
+│   │   ├── templates/       # Thymeleaf HTML views
+│   │   ├── static/          # CSS, JS, and static assets
+│   │   └── application.properties
+│   │
+│   └── pom.xml
 │
 ├── docs/
-│   └── screenshots/     # Visual documentation and walkthrough screenshots
+│   └── screenshots/         # Visual documentation and walkthrough screenshots
+├── docker-compose.yml       # Local PostgreSQL container configuration
+├── LICENSE                  # MIT License
 └── pom.xml
 ```
 
@@ -145,18 +165,20 @@ studentManagement/
 
 ### Prerequisites
 
-- **Java 17+** (`JAVA_HOME` pointing to JDK 17)
+- **Java 17+** (`JAVA_HOME` pointing to JDK 17 or higher)
 - **PostgreSQL 14+** running locally on port `5432` with database `academiadb`
-- **Maven 3.8+** (or use `./mvnw` / `mvnw.cmd`)
+- **Maven 3.8+** (or use included `./mvnw` / `mvnw.cmd` inside `academia-service/`)
 
 ---
 
 ## Maven Commands
 
+Execute the following commands from the `academia-service/` directory:
+
 ### Build & Run
 
 ```bash
-# Compile the project
+# Compile the service
 ./mvnw clean compile
 
 # Run the application locally
